@@ -1,5 +1,5 @@
 <template >
-    <div class="bg-info mt-10 h-100" >
+    <div class="bg-info mt-10 " >
         <div class="pt-16 d-flex justify-center">
             <button style="background: none; border: none; padding: 0;" @click="navigateTo('/')">
                 <img src="../assets/images/Logo2.png" class="mt-15" style="width: 15vw; height: auto; cursor: pointer;">
@@ -25,7 +25,7 @@
             <img src="../assets/images/AlcoolRule.png" class="mt-5" style="width: 60vw; height: auto;">
         </div>
 
-        <div class="pt-16 text-center">
+        <div class="py-16 text-center">
             <h2 class="">L'ABUS D'ALCOOL EST DANGEREUX POUR LA SANTÉ. À CONSOMMER AVEC MODÉRATION.</h2>
             <h4 class="pt-10" >
                 Conformément à la loi " Informatique et Libertés du 06.01.1978 modifiée, ainsi qu'au règlement européen relatif à la protection des <br>
@@ -39,7 +39,7 @@
 
 </template>
     
-    <script setup>
+<script setup lang="ts">
     
     import { useRouter } from 'vue-router';
     import { ref } from 'vue';
@@ -51,4 +51,4 @@
     }
     
     
-    </script>
+</script>

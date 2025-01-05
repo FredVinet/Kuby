@@ -1,14 +1,35 @@
 <template>  
-    <v-container>
-      <h3>Catalogue</h3>
+      <TitleComponent :title="title" :msg="msg"/>
+      
+      <ListArticleCatalogue />
+
+      <!-- <div class="d-flex justify-center mx-5">
+        <ArticleCatalogue />
+        <ArticleCatalogue />
+        <ArticleCatalogue />
+        <ArticleCatalogue />
+        <ArticleCatalogue />
+      </div>
+
+      <div class="d-flex justify-center mx-5">
+        <ArticleCatalogue />
+        <ArticleCatalogue />
+        <ArticleCatalogue />
+        <ArticleCatalogue />
+        <ArticleCatalogue />
+      </div> -->
+
+</template>
   
-    </v-container>
-  </template>
+<script setup lang="ts">
   
-  <script setup lang="ts">
-  
+  import ArticleCatalogue from '@/components/card/ArticleCatalogue.vue';
+  import ListArticleCatalogue from '@/components/list/ListArticleCatalogue.vue';
+  import TitleComponent from '@/components/title/TitleComponent.vue'
   import { ref } from 'vue';
   
+  const title = ref("Notre catalogue");
+  const msg = ref("Découvrez l’ensemble de nos vins ");
   
   
-  </script>
+</script>

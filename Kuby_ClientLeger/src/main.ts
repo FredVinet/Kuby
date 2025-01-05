@@ -27,7 +27,7 @@ const vuetify = createVuetify({
           secondary: '#40a1a1', 
           accent: '#eae3de',  
           error: '#FF5252',    
-          info: '##100e0e', //Noir Footer
+          info: '#100E0E', //Noir Footer
           success: '#4CAF50',  
           warning: '#700b15',  //Rouge
         },
