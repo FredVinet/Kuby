@@ -3,22 +3,6 @@
       
       <ListArticleCatalogue />
 
-      <!-- <div class="d-flex justify-center mx-5">
-        <ArticleCatalogue />
-        <ArticleCatalogue />
-        <ArticleCatalogue />
-        <ArticleCatalogue />
-        <ArticleCatalogue />
-      </div>
-
-      <div class="d-flex justify-center mx-5">
-        <ArticleCatalogue />
-        <ArticleCatalogue />
-        <ArticleCatalogue />
-        <ArticleCatalogue />
-        <ArticleCatalogue />
-      </div> -->
-
 </template>
   
 <script setup lang="ts">

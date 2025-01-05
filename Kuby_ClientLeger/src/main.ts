@@ -24,7 +24,7 @@ const vuetify = createVuetify({
       light: {
         colors: {
           primary: '#d1a671', // Dorée
-          secondary: '#40a1a1', 
+          secondary: '#F0E3D3', //Dorée fond main 
           accent: '#eae3de',  
           error: '#FF5252',    
           info: '#100E0E', //Noir Footer
