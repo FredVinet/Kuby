@@ -16,4 +16,27 @@ public class WineService {
     public List<Wine> getAllWines() {
         return null;
     }
+
+    public List<Wine> getWineByWineFamilyId(long wineFamilyId) {
+        return null;
+    }
+
+    public List<Wine> getWineByVarietyId(int varietyId) {
+        return null;
+    }
+
+    public List<Wine> getWineByTerroirId(int terroirId) {
+        return null;
+    }
+
+    public List<Wine> getWineBySupplierId(int wineId) {
+        return null;
+    }
+
+    public Wine updateWine(int wineId, Wine wine) {
+        return null;
+    }
+
+    public void deleteWine(int wineId) {
+    }
 }
