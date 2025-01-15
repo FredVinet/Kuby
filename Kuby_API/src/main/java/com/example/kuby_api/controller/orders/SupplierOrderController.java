@@ -24,10 +24,10 @@ public class SupplierOrderController {
         }
     }
 
-    @GetMapping("/supplierOrder/{id}")
-    public ResponseEntity<SupplierOrder> getSupplierOrderById(@PathVariable int id) {
+    @GetMapping("/supplierOrder/{supplierId}")
+    public ResponseEntity<SupplierOrder> getSupplierOrderById(@PathVariable int supplierId) {
         try {
-            return ResponseEntity.ok(supplierOrderService.getSupplierOrderById(id));
+            return ResponseEntity.ok(supplierOrderService.getSupplierOrderById(supplierId));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.notFound().build();
@@ -35,38 +35,38 @@ public class SupplierOrderController {
     }
 
     @GetMapping("/supplierOrder/ByStatus/{statusId}")
-    public ResponseEntity<List<SupplierOrder>> getSupplierOrderByStatus(@PathVariable int id) {
+    public ResponseEntity<List<SupplierOrder>> getSupplierOrderByStatus(@PathVariable int statusId) {
         try {
-            return ResponseEntity.ok(supplierOrderService.getOrdersByStatus(id));
+            return ResponseEntity.ok(supplierOrderService.getOrdersByStatus(statusId));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.notFound().build();
         }
     }
 
-    @PostMapping("/supplierOrder")
-    public ResponseEntity<SupplierOrder> createSupplierOrder(@RequestBody SupplierOrder supplierOrder) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(supplierOrderService.createSupplierOrder(supplierOrder));
+    @PostMapping("/supplierOrder/{supplierId}")
+    public ResponseEntity<SupplierOrder> createSupplierOrder(@PathVariable int supplierId, @RequestBody SupplierOrder supplierOrder) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(supplierOrderService.createSupplierOrder(supplierId, supplierOrder));
     }
 
-    @PutMapping("/supplierOrder/{id}")
-    public ResponseEntity<SupplierOrder> updateSupplierOrder(@PathVariable int id, @RequestBody SupplierOrder supplierOrder) {
-        if (supplierOrder.getId() != id) {
+    @PutMapping("/supplierOrder/{supplierOrderId}")
+    public ResponseEntity<SupplierOrder> updateSupplierOrder(@PathVariable int supplierOrderId, @RequestBody SupplierOrder supplierOrder) {
+        if (supplierOrder.getId() != supplierOrderId) {
             return ResponseEntity.badRequest().build();
         }
 
         try {
-            return ResponseEntity.ok(supplierOrderService.updateSupplierOrder(id, supplierOrder));
+            return ResponseEntity.ok(supplierOrderService.updateSupplierOrder(supplierOrderId, supplierOrder));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.notFound().build();
         }
     }
 
-    @DeleteMapping("/supplierOrder/{id}")
-    public ResponseEntity<Void> deleteSupplierOrder(@PathVariable int id) {
+    @DeleteMapping("/supplierOrder/{isupplierOrderIdd}")
+    public ResponseEntity<Void> deleteSupplierOrder(@PathVariable int supplierOrderId) {
         try {
-            supplierOrderService.deleteSupplierOrder(id);
+            supplierOrderService.deleteSupplierOrder(supplierOrderId);
             return ResponseEntity.ok().build();
         } catch (Exception e) {
             e.printStackTrace();

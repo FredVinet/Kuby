@@ -9,7 +9,7 @@ import java.util.List;
 @Data
 @Service
 public class WineService {
-    public Wine getWineById(int wineId) {
+    public Wine getWineById(long wineId) {
         return null;
     }
 
@@ -21,22 +21,22 @@ public class WineService {
         return null;
     }
 
-    public List<Wine> getWineByVarietyId(int varietyId) {
+    public List<Wine> getWineByVarietyId(long varietyId) {
         return null;
     }
 
-    public List<Wine> getWineByTerroirId(int terroirId) {
+    public List<Wine> getWineByTerroirId(long terroirId) {
         return null;
     }
 
-    public List<Wine> getWineBySupplierId(int wineId) {
+    public List<Wine> getWineBySupplierId(long wineId) {
         return null;
     }
 
-    public Wine updateWine(int wineId, Wine wine) {
+    public Wine updateWine(long wineId, Wine wine) {
         return null;
     }
 
-    public void deleteWine(int wineId) {
+    public void deleteWine(long wineId) {
     }
 }

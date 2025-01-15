@@ -15,7 +15,7 @@ public class CustomerService {
         return null;
     }
 
-    public Customer getCustomerById(int id) {
+    public Customer getCustomerById(long id) {
         return null;
     }
 
@@ -23,7 +23,7 @@ public class CustomerService {
         return null;
     }
 
-    public Customer updateCustomer(int id, Customer customer) {
+    public Customer updateCustomer(long id, Customer customer) {
         return null;
 
         //if (!customerRepository.existsById(id)) {
@@ -32,24 +32,24 @@ public class CustomerService {
         // return customerRepository.save(customer);
     }
     
-    public void deleteCustomerById(int id) {
+    public void deleteCustomerById(long id) {
         
     }
 
     // Customer address
-    public List<Address> getCustomerAddresses(int id) {
+    public List<Address> getCustomerAddresses(long id) {
         return null;
     }
     
-    public Address createCustomerAddress(int id, Address address) {
+    public Address createCustomerAddress(long id, Address address) {
         return null;
     }
 
-    public Address updateAdresse(int id, Address address) {
+    public Address updateAdresse(long id, Address address) {
         return null;
     }
 
 
-    public void deleteAddressCustomer(int id) {
+    public void deleteAddressCustomer(long id) {
     }
 }

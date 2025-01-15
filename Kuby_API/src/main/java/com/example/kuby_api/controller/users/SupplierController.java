@@ -22,10 +22,10 @@ public class SupplierController {
         return ResponseEntity.ok(supplierService.getAllSuppliers());
     }
 
-    @GetMapping("/supplier/{id}")
-    public ResponseEntity<Supplier> getSupplierById(@PathVariable int id) {
+    @GetMapping("/supplier/{supplierId}")
+    public ResponseEntity<Supplier> getSupplierById(@PathVariable int supplierId) {
         try {
-            return ResponseEntity.ok(supplierService.getSupplierById(id));
+            return ResponseEntity.ok(supplierService.getSupplierById(supplierId));
         } catch (ResponseStatusException e) {
             return ResponseEntity.notFound().build();
         }
@@ -36,23 +36,23 @@ public class SupplierController {
         return ResponseEntity.status(HttpStatus.CREATED).body(supplierService.createSupplier(supplier));
     }
 
-    @PutMapping("/supplier/{id}")
-    public ResponseEntity<Supplier> updateSupplier(@PathVariable int id, @RequestBody Supplier supplier) {
-        if (supplier.getId() != id) {
+    @PutMapping("/supplier/{supplierId}")
+    public ResponseEntity<Supplier> updateSupplier(@PathVariable int supplierId, @RequestBody Supplier supplier) {
+        if (supplier.getId() != supplierId) {
             return ResponseEntity.badRequest().build();
         }
 
         try {
-            return ResponseEntity.ok(supplierService.updateSupplier(id, supplier));
+            return ResponseEntity.ok(supplierService.updateSupplier(supplierId, supplier));
         } catch (ResponseStatusException e) {
             return ResponseEntity.notFound().build();
         }
     }
 
-    @DeleteMapping("/supplier/{id}")
-    public ResponseEntity<Void> deleteSupplier(@PathVariable int id) {
+    @DeleteMapping("/supplier/{supplierId}")
+    public ResponseEntity<Void> deleteSupplier(@PathVariable int supplierId) {
         try {
-            supplierService.deleteSupplierById(id);
+            supplierService.deleteSupplierById(supplierId);
             return ResponseEntity.ok().build();
         } catch (ResponseStatusException e) {
             return ResponseEntity.notFound().build();
@@ -60,44 +60,44 @@ public class SupplierController {
     }
 
     // Supplier address
-    @GetMapping("/supplier/addresses/{id}")
-    public ResponseEntity<List<Address>> getSupplierAddresses(@PathVariable int id) {
+    @GetMapping("/supplier/addresses/{supplierId}")
+    public ResponseEntity<List<Address>> getSupplierAddresses(@PathVariable int supplierId) {
         try {
-            return ResponseEntity.ok(supplierService.getSupplierAddresses(id));
+            return ResponseEntity.ok(supplierService.getSupplierAddresses(supplierId));
         } catch (ResponseStatusException e) {
             return ResponseEntity.notFound().build();
         }
     }
 
-    @PostMapping("/supplier/addresses/{id}")
+    @PostMapping("/supplier/addresses/{supplierId}")
     public ResponseEntity<Address> createSupplierAddress(
-            @PathVariable int id,
+            @PathVariable int supplierId,
             @RequestBody Address address
     ) {
         try {
-            return ResponseEntity.status(HttpStatus.CREATED).body(supplierService.createSupplierAddress(id, address));
+            return ResponseEntity.status(HttpStatus.CREATED).body(supplierService.createSupplierAddress(supplierId, address));
         } catch (ResponseStatusException e) {
             return ResponseEntity.notFound().build();
         }
     }
 
-    @PutMapping("/supplier/addresses/{id}")
-    public ResponseEntity<Address> updateSupplierAddress(@PathVariable int id, @RequestBody Address address) {
-        if (address.getId() != id) {
+    @PutMapping("/supplier/addresses/{supplierAddressId}")
+    public ResponseEntity<Address> updateSupplierAddress(@PathVariable int supplierAddressId, @RequestBody Address address) {
+        if (address.getId() != supplierAddressId) {
             return ResponseEntity.notFound().build();
         }
 
         try {
-            return ResponseEntity.ok(supplierService.updateAddress(id, address));
+            return ResponseEntity.ok(supplierService.updateAddress(supplierAddressId, address));
         } catch (ResponseStatusException e) {
             return ResponseEntity.notFound().build();
         }
     }
 
-    @DeleteMapping("/supplier/addresses/{id}")
-    public ResponseEntity<Void> deleteSupplierAddress(@PathVariable int id) {
+    @DeleteMapping("/supplier/addresses/{supplierAddressId}")
+    public ResponseEntity<Void> deleteSupplierAddress(@PathVariable int supplierAddressId) {
         try {
-            supplierService.deleteAddressSupplier(id);
+            supplierService.deleteAddressSupplier(supplierAddressId);
             return ResponseEntity.ok().build();
         } catch (ResponseStatusException e) {
             return ResponseEntity.notFound().build();

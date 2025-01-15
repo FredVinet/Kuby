@@ -17,18 +17,18 @@ public class CustomerOrderService {
         return null;
     }
 
-    public List<CustomerOrder> GetOrderByStatus(int id) {
+    public List<CustomerOrder> GetOrderByStatus(long id) {
         return null;
     }
 
-    public CustomerOrder createCustomerOrder(int id, CustomerOrder customerOrder) {
+    public CustomerOrder createCustomerOrder(long id, CustomerOrder customerOrder) {
         return null;
     }
 
-    public CustomerOrder updateCustomerOrder(int id, CustomerOrder customerOrder) {
+    public CustomerOrder updateCustomerOrder(long id, CustomerOrder customerOrder) {
         return null;
     }
 
-    public void deleteCustomerOrder(int id) {
+    public void deleteCustomerOrder(long id) {
     }
 }

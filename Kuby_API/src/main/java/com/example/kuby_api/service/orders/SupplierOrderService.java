@@ -9,27 +9,27 @@ import java.util.List;
 @Data
 @Service
 public class SupplierOrderService {
-    public List<SupplierOrder> getAllOrdersBySupplier(int supplierId) {
+    public List<SupplierOrder> getAllOrdersBySupplier(long supplierId) {
         return null;
     }
 
-    public SupplierOrder getSupplierOrderById(int id) {
+    public SupplierOrder getSupplierOrderById(long id) {
         return null;
     }
 
-    public List<SupplierOrder> getOrdersByStatus(int id) {
+    public List<SupplierOrder> getOrdersByStatus(long id) {
         return null;
     }
 
-    public SupplierOrder createSupplierOrder(SupplierOrder supplierOrder) {
+    public SupplierOrder createSupplierOrder(long supplierId, SupplierOrder supplierOrder) {
         return null;
     }
 
-    public SupplierOrder updateSupplierOrder(int id, SupplierOrder supplierOrder) {
+    public SupplierOrder updateSupplierOrder(long id, SupplierOrder supplierOrder) {
         return null;
     }
 
-    public void deleteSupplierOrder(int id) {
+    public void deleteSupplierOrder(long id) {
 
     }
 }

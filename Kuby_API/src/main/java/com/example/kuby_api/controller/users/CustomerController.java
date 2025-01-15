@@ -29,11 +29,11 @@ public class CustomerController {
         //return ResponseEntity.ok(customerService.getAllCustomers());
     }
 
-    @GetMapping("/customer/{id}")
-    public ResponseEntity<Customer> getCustomerById(@PathVariable Long id) {
+    @GetMapping("/customer/{customerId}")
+    public ResponseEntity<Customer> getCustomerById(@PathVariable Long customerId) {
         Customer customer = new Customer();
-        customer.setId(id);
-        customer.setName("pouet");
+        customer.setId(customerId);
+        customer.setName("soso");
         return ResponseEntity.ok(customer);
 //        try {
 //            return ResponseEntity.ok(customerService.getCustomerById(id));
@@ -48,23 +48,23 @@ public class CustomerController {
         //return ResponseEntity.status(HttpStatus.CREATED).body(customerService.createCustomer(customer));
     }
 
-    @PutMapping("/customer/{id}")
-    public ResponseEntity<Customer> updateCustomer(@PathVariable int id, @RequestBody Customer customer) {
-        if (customer.getId() != id) {
+    @PutMapping("/customer/{customerId}")
+    public ResponseEntity<Customer> updateCustomer(@PathVariable int customerId, @RequestBody Customer customer) {
+        if (customer.getId() != customerId) {
             return ResponseEntity.badRequest().build();
         }
 
         try {
-            return ResponseEntity.ok(customerService.updateCustomer(id, customer));
+            return ResponseEntity.ok(customerService.updateCustomer(customerId, customer));
         } catch (ResponseStatusException e) {
             return ResponseEntity.notFound().build();
         }
     }
 
-    @DeleteMapping("/customer/{id}")
-    public ResponseEntity<Void> deleteCustomer(@PathVariable int id) {
+    @DeleteMapping("/customer/{customerId}")
+    public ResponseEntity<Void> deleteCustomer(@PathVariable int customerId) {
         try {
-           customerService.deleteCustomerById(id);
+           customerService.deleteCustomerById(customerId);
            return ResponseEntity.ok().build();
         } catch (ResponseStatusException e) {
             return ResponseEntity.notFound().build();
@@ -72,44 +72,44 @@ public class CustomerController {
     }
 
     // Customer address
-    @GetMapping("/customer/addresses/{id}")
-    public ResponseEntity<List<Address>> getCustomerAddresses(@PathVariable int id) {
+    @GetMapping("/customer/addresses/{customerId}")
+    public ResponseEntity<List<Address>> getCustomerAddresses(@PathVariable int customerId) {
         try {
-            return ResponseEntity.ok(customerService.getCustomerAddresses(id));
+            return ResponseEntity.ok(customerService.getCustomerAddresses(customerId));
         } catch (ResponseStatusException e) {
             return ResponseEntity.notFound().build();
         }
     }
 
-    @PostMapping("/customer/addresses/{id}")
+    @PostMapping("/customer/addresses/{customerId}")
     public ResponseEntity<Address> createCustomerAddress(
-            @PathVariable int id,
+            @PathVariable int customerId,
             @RequestBody Address address
     ) {
         try {
-            return ResponseEntity.status(HttpStatus.CREATED).body(customerService.createCustomerAddress(id, address));
+            return ResponseEntity.status(HttpStatus.CREATED).body(customerService.createCustomerAddress(customerId, address));
         } catch (ResponseStatusException e) {
             return ResponseEntity.notFound().build();
         }
     }
 
-    @PutMapping("/customer/addresses/{id}")
-    public ResponseEntity<Address> updateCustomerAddress(@PathVariable int id, @RequestBody Address address) {
-        if (address.getId() != id){
+    @PutMapping("/customer/addresses/{customerAddressId}")
+    public ResponseEntity<Address> updateCustomerAddress(@PathVariable int customerAddressId, @RequestBody Address address) {
+        if (address.getId() != customerAddressId){
             return ResponseEntity.notFound().build();
         }
 
         try {
-            return ResponseEntity.ok(customerService.updateAdresse(id, address));
+            return ResponseEntity.ok(customerService.updateAdresse(customerAddressId, address));
         }catch (ResponseStatusException e) {
             return ResponseEntity.notFound().build();
         }
     }
 
-    @DeleteMapping("/customer/addresses/{id}")
-    public ResponseEntity<Void> deleteCustomerAddress(@PathVariable int id) {
+    @DeleteMapping("/customer/addresses/{customerAddressId}")
+    public ResponseEntity<Void> deleteCustomerAddress(@PathVariable int customerAddressId) {
         try {
-            customerService.deleteAddressCustomer(id);
+            customerService.deleteAddressCustomer(customerAddressId);
             return ResponseEntity.ok().build();
         }catch (ResponseStatusException e) {
             return ResponseEntity.notFound().build();

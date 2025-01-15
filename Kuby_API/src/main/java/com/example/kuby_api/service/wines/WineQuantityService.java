@@ -6,23 +6,23 @@ import org.springframework.stereotype.Service;
 @Data
 @Service
 public class WineQuantityService {
-    public Long getWineQuantityById(int wineId) {
+    public Long getWineQuantityById(long wineId) {
         return null;
     }
 
-    public Long getWineQuantityByWineFamilyId(int wineFamilyId) {
+    public Long getWineQuantityByWineFamilyId(long wineFamilyId) {
         return null;
     }
 
-    public Long getWineQuantityByVarietyId(int varietyId) {
+    public Long getWineQuantityByVarietyId(long varietyId) {
         return null;
     }
 
-    public Long getWineQuantityByTerroirId(int terroirId) {
+    public Long getWineQuantityByTerroirId(long terroirId) {
         return null;
     }
 
-    public Long updateWineQuantity(int wineId, Long quantity) {
+    public Long updateWineQuantity(long wineId, Long quantity) {
         return null;
     }
 }

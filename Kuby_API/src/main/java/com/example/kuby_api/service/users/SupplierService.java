@@ -14,7 +14,7 @@ public class SupplierService {
         return null;
     }
 
-    public Supplier getSupplierById(int id) {
+    public Supplier getSupplierById(long id) {
         return null;
     }
 
@@ -22,26 +22,26 @@ public class SupplierService {
         return null;
     }
 
-    public Supplier updateSupplier(int id, Supplier supplier) {
+    public Supplier updateSupplier(long id, Supplier supplier) {
         return null;
     }
 
-    public void deleteSupplierById(int id) {
+    public void deleteSupplierById(long id) {
     }
 
-    public List<Address> getSupplierAddresses(int id) {
+    public List<Address> getSupplierAddresses(long id) {
         return null;
     }
 
-    public Address createSupplierAddress(int id, Address address) {
+    public Address createSupplierAddress(long id, Address address) {
         return null;
     }
 
-    public Address updateAddress(int id, Address address) {
+    public Address updateAddress(long id, Address address) {
         return null;
     }
 
-    public void deleteAddressSupplier(int id) {
+    public void deleteAddressSupplier(long id) {
 
     }
 }
