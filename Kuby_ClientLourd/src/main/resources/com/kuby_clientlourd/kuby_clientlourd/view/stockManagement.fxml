@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<?import java.net.URL?>
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.kuby_clientlourd.kuby_clientlourd.controller.MainController">
+    <!-- Titre -->
+    <top>
+        <Label text="Gestion du stock"
+               style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-alignment: center;"
+               BorderPane.alignment="CENTER"/>
+    </top>
+
+    <!-- Contenu principal -->
+    <center>
+        <StackPane style="-fx-border-radius: 5; -fx-background-radius: 5;">
+            <VBox spacing="20" style="-fx-padding: 20;">
+                <!-- Barre de recherche et tri -->
+                <HBox spacing="20" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 5; -fx-padding: 15; -fx-border-width: 1; -fx-background-radius: 5;">
+
+                        <!-- Les boutons en haut -->
+                        <HBox spacing="15">
+                            <Label text="Filtre : " style="-fx-font-weight: bold; -fx-font-size: 18;"/>
+                            <Button text="Famille" style="-fx-background-color: #D7C4B8; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8; -fx-border-radius: 5; -fx-background-radius: 5;"/>
+                            <Button text="Varieté" style="-fx-background-color: #D7C4B8; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8; -fx-border-radius: 5; -fx-background-radius: 5;"/>
+                            <Button text="Année" style="-fx-background-color: #D7C4B8; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8; -fx-border-radius: 5; -fx-background-radius: 5;"/>
+                            <Button text="Fournisseur" style="-fx-background-color: #D7C4B8; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8; -fx-border-radius: 5; -fx-background-radius: 5;"/>
+
+                            <Label text="Barre de recherche : " style="-fx-font-weight: bold; -fx-font-size: 18;"/>
+                            <StackPane style="-fx-background-color: #D7C4B8; -fx-padding: 5; -fx-background-radius: 5;">
+                                <!-- Superpose TextField et bouton -->
+                                <TextField promptText="Rechercher un vin..." style="-fx-background-color: transparent; -fx-padding: 5; -fx-padding-right: 30;"/> <!-- Espace pour le bouton -->
+                                <Button text="🔍" style="-fx-background-color: transparent; -fx-font-size: 14; -fx-padding: 0; -fx-alignment: CENTER_RIGHT;" StackPane.alignment="CENTER_RIGHT"/>
+                            </StackPane>
+                            <Label text="Trier par : " style="-fx-font-weight: bold; -fx-font-size: 18;"/>
+                            <ComboBox style="-fx-background-color: #D7C4B8; -fx-padding: 5;"/>
+                        </HBox>
+
+                </HBox>
+
+                <!-- Tableau -->
+                <TableView fx:id="clientTable" styleClass="table" prefHeight="400">
+                    <columns>
+                        <TableColumn styleClass="table-column-header" text="ID" prefWidth="50"/>
+                        <TableColumn styleClass="table-column-header" text="Nom" prefWidth="150"/>
+                        <TableColumn styleClass="table-column-header" text="Varieté" prefWidth="150"/>
+                        <TableColumn styleClass="table-column-header" text="Famille" prefWidth="150"/>
+                        <TableColumn styleClass="table-column-header" text="Année" prefWidth="150"/>
+                        <TableColumn styleClass="table-column-header" text="Prix" prefWidth="100"/>
+                        <TableColumn styleClass="table-column-header" text="Fournisseur" prefWidth="150"/>
+                        <TableColumn styleClass="table-column-header" text="Quantité" prefWidth="100"/>
+                    </columns>
+                </TableView>
+            </VBox>
+        </StackPane>
+    </center>
+
+    <!-- Bouton d'ajout en bas -->
+    <bottom>
+        <HBox spacing="30" alignment="CENTER" style="-fx-padding: 15;">
+            <Button text="Ajout produit"
+                    style="-fx-background-color: #A55750; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10; -fx-border-radius: 5; -fx-background-radius: 5;"/>
+            <Button text="Gestion inventaire"
+                    style="-fx-background-color: #A55750; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10; -fx-border-radius: 5; -fx-background-radius: 5;"/>
+        </HBox>
+    </bottom>
+</BorderPane>
