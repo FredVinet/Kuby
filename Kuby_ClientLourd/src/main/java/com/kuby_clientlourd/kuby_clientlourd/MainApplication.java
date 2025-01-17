@@ -25,7 +25,7 @@ public class MainApplication extends Application {
 
         root.setLeft(sidebar);
 
-        Scene scene = new Scene(root, 1400, 800);
+        Scene scene = new Scene(root, 1400, 700);
         scene.getStylesheets().add(getClass().getResource("/com/kuby_clientlourd/kuby_clientlourd/css/style.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.setTitle("Kuby Application");
