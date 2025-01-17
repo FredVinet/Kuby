@@ -1,4 +1,5 @@
 <template>
+
     <div v-for="n in Math.ceil(products.length / 5)" :key="'group-' + n" class="d-flex justify-center mx-5">
         <ArticleCatalogue
             v-for="(product, index) in products.slice((n - 1) * 5, n * 5)"
