@@ -1,8 +1,6 @@
 package com.example.kuby_api.model.Wines;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
@@ -10,13 +8,8 @@ import lombok.Data;
 @Table(name = "WineTerroir")
 public class WineTerroir {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
-    }
+    private String name;
+    private String country;
 }

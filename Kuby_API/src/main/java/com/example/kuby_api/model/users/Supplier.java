@@ -1,8 +1,6 @@
 package com.example.kuby_api.model.users;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
@@ -10,13 +8,11 @@ import lombok.Data;
 @Table(name = "Supplier")
 public class Supplier {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
-    }
+    private Long addressId;
+    private String name;
+    private String firstName;
+    private String mail;
+    private Integer phone;
 }
