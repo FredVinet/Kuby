@@ -44,4 +44,8 @@ public class SupplierService {
     public void deleteAddressSupplier(long id) {
 
     }
+
+    public Supplier getSupplierByWineId(long wineId) {
+        return null;
+    }
 }

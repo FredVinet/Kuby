@@ -1,5 +1,6 @@
 package com.example.kuby_api.model.Wines;
 
+import com.example.kuby_api.model.users.Supplier;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -10,11 +11,24 @@ public class Wine {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long supplierId;
-    private Long wineFamilyId;
-    private Long variety;
-    private Long terroir;
+
+    @ManyToOne
+    @JoinColumn(name = "supplierId")
+    private Supplier supplier;
+
+    @ManyToOne
+    @JoinColumn(name = "wineFamilyId")
+    private WineFamily wineFamily;
+
+    @ManyToOne
+    @JoinColumn(name = "variety")
+    private WineVariety variety;
+
+    @ManyToOne
+    @JoinColumn(name = "terroir")
+    private WineTerroir terroir;
+
     private String name;
-    private Integer stock;
+    private Long stock;
     private String description;
 }

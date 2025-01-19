@@ -1,6 +1,8 @@
 package com.example.kuby_api.controller.wines;
 
 import com.example.kuby_api.model.Wines.Wine;
+import com.example.kuby_api.model.users.Supplier;
+import com.example.kuby_api.service.users.SupplierService;
 import com.example.kuby_api.service.wines.WineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,14 +15,22 @@ import java.util.List;
 public class WineController {
     @Autowired
     private WineService wineService;
+    @Autowired
+    private SupplierService supplierService;
 
     @GetMapping("/wine/byId/{wineId}")
-    public ResponseEntity<Wine> getWineById(@PathVariable int wineId) {
+    public ResponseEntity<?> getWineById(@PathVariable long wineId) {
         try {
-            return ResponseEntity.ok(wineService.getWineById(wineId));
-        }catch (Exception e){
-            e.printStackTrace();
-            return ResponseEntity.notFound().build();
+            Wine wine = wineService.getWineById(wineId);
+            return ResponseEntity.ok(wine);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        } catch (SecurityException e) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        //} catch (ResourceNotFoundException e) {
+        //    return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.I_AM_A_TEAPOT).build();
         }
     }
 
@@ -65,18 +75,19 @@ public class WineController {
     }
 
     @GetMapping("/wine/bySupplier/{wineId}")
-    public ResponseEntity<List<Wine>> getWineBySupplierId(@PathVariable int wineId) {
+    public ResponseEntity<?> getWineBySupplierId(@PathVariable long wineId) {
         try {
-            return ResponseEntity.ok(wineService.getWineBySupplierId(wineId));
-        }catch (Exception e){
-            e.printStackTrace();
-            return ResponseEntity.notFound().build();
+            Supplier supplier = supplierService.getSupplierByWineId(wineId);
+            return ResponseEntity.ok(supplier);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
 
     @PostMapping("/wine")
     public ResponseEntity<Wine> createWine(@RequestBody Wine wine) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(wine);
+        Wine createdWine = wineService.createWine(wine);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdWine);
     }
 
     @PutMapping("/wine/{wineId}")
