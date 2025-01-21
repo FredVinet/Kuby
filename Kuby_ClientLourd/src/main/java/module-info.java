@@ -9,4 +9,6 @@ module com.kuby_clientlourd.kuby_clientlourd {
 
     opens com.kuby_clientlourd.kuby_clientlourd to javafx.fxml;
     exports com.kuby_clientlourd.kuby_clientlourd;
+    exports com.kuby_clientlourd.kuby_clientlourd.controller;
+    opens com.kuby_clientlourd.kuby_clientlourd.controller to javafx.fxml;
 }

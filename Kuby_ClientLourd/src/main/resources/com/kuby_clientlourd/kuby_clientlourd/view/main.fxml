@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.kuby_clientlourd.kuby_clientlourd.controller.MainController">
+    <left>
+        <fx:include source="sidebar.fxml"/>
+    </left>
+    <center>
+        <StackPane style="-fx-padding: 20;">
+            <Pane fx:id="contentArea"
+                  style="-fx-border-radius: 5;"/>
+        </StackPane>
+    </center>
+</BorderPane>
