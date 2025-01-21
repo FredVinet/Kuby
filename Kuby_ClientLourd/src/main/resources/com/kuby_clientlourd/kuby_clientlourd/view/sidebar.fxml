@@ -33,6 +33,18 @@
         <Button text="Commande Fournisseur" onAction="#loadSupplierOrder"
                 styleClass="button"
                 style="-fx-text-fill: #F5E5D5; -fx-background-color: transparent; -fx-font-size: 16;"/>
+        <Button text="Commande fournisseur info" onAction="#showSupplierOrderInfo"
+                styleClass="button"
+                style="-fx-text-fill: #F5E5D5; -fx-background-color: transparent; -fx-font-size: 16;"/>
+        <Button text="Information fournisseur" onAction="#showSupplierInfo"
+                styleClass="button"
+                style="-fx-text-fill: #F5E5D5; -fx-background-color: transparent; -fx-font-size: 16;"/>
+        <Button text="Information commande client" onAction="#showClientOrderInfo"
+                styleClass="button"
+                style="-fx-text-fill: #F5E5D5; -fx-background-color: transparent; -fx-font-size: 16;"/>
+        <Button text="Information client" onAction="#showClientInfo"
+                styleClass="button"
+                style="-fx-text-fill: #F5E5D5; -fx-background-color: transparent; -fx-font-size: 16;"/>
     </VBox>
 
     <!-- Espace pour centrer les boutons dans la fenêtre -->
@@ -41,7 +53,7 @@
     <!-- Bouton Connexion Admin en bas -->
     <VBox spacing="15" alignment="CENTER">
         <Line startX="0" startY="0" endX="180" endY="0" style="-fx-stroke: #F5E5D5; -fx-stroke-width: 2;"/>
-        <Button text="Connexion Admin" onAction="#showAdminLoginModal"
+        <Button text="Connexion Admin" onAction="#showAdminLogin"
                 styleClass="button"
                 style="-fx-text-fill: #F5E5D5;
                        -fx-background-color: transparent;
