@@ -8,14 +8,15 @@
     -fx-background-color: white; /* Fond blanc */
     -fx-font-size: 16;
 }
-
-.table-cell {
+.table-column-header-last {
     -fx-border-color: transparent transparent black transparent; /* Bordure uniquement en bas */
-    -fx-border-width: 0 0 1 0; /* Épaisseur de la bordure uniquement en bas */
+    -fx-border-width: 0 0 2 0; /* Épaisseur de la bordure uniquement en bas */
+    -fx-background-color: white; /* Fond blanc */
+    -fx-font-size: 16;
 }
 
 .table{
     -fx-border-radius: 5;
     -fx-border-color: black;
-    -fx-border-width: 1;
+    -fx-border-width: 2;
 }

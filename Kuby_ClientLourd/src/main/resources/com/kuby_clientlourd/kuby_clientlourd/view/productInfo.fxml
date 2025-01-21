@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+
+<AnchorPane>
+    <!-- Encadré principal -->
+    <BorderPane xmlns="http://javafx.com/javafx/8.0.171" style="-fx-border-color: black; -fx-border-width: 4;"
+                AnchorPane.topAnchor="100"
+                AnchorPane.leftAnchor="125">
+        <top>
+            <!-- Conteneur pour le titre avec un espacement réduit -->
+            <VBox alignment="CENTER" style="-fx-padding: 20;">
+                <Label text="Information produit #" style="-fx-font-size: 24; -fx-font-weight: bold;" />
+            </VBox>
+        </top>
+
+        <center>
+            <VBox alignment="CENTER" spacing="20" style="-fx-padding: 50;">
+                <!-- Contenu principal -->
+                <HBox alignment="CENTER_LEFT" spacing="100">
+                    <!-- Partie Texte à gauche -->
+                    <VBox prefWidth="400" spacing="10">
+                        <Label text="ID : 1" style="-fx-font-size: 20;" />
+                        <Label text="Nom : Champagne" style="-fx-font-size: 20;" />
+                        <Label text="Famille : Rosé" style="-fx-font-size: 20;" />
+                        <Label text="Description : Du rouge" style="-fx-font-size: 20;" />
+                    </VBox>
+
+                    <!-- Partie Image à droite -->
+                    <VBox alignment="CENTER_LEFT" spacing="10">
+                        <Label text="Année : 1617" style="-fx-font-size: 20;" />
+                        <Label text="Fournisseur : Dupont" style="-fx-font-size: 20;" />
+                        <Label text="Prix  : 0.15€" style="-fx-font-size: 20;" />
+                    </VBox>
+                </HBox>
+            </VBox>
+        </center>
+    </BorderPane>
+
+    <!-- Conteneur des boutons en dessous du BorderPane -->
+    <HBox spacing="30" alignment="CENTER" AnchorPane.topAnchor="525" AnchorPane.leftAnchor="425">
+        <Button text="Modifier produit"
+                style="-fx-background-color: #A55750; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10; -fx-border-radius: 5; -fx-background-radius: 5;" />
+        <Button text="Supprimer produit"
+                style="-fx-background-color: #A55750; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10; -fx-border-radius: 5; -fx-background-radius: 5;" />
+    </HBox>
+</AnchorPane>

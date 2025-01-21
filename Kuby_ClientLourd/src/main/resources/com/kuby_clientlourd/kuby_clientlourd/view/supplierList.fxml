@@ -12,50 +12,55 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml"
-            style="-fx-padding: 20;">
-    <!-- Titre -->
-    <top>
-        <Label text="Liste fournisseur"
-               style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-alignment: center;"
-               BorderPane.alignment="CENTER"/>
-    </top>
+<?import javafx.scene.layout.AnchorPane?>
+<AnchorPane>
+    <BorderPane xmlns:fx="http://javafx.com/fxml"
+                AnchorPane.topAnchor="30"
+                AnchorPane.leftAnchor="150"
+    >
+        <!-- Titre -->
+        <top>
+            <Label text="Liste fournisseur"
+                   style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-alignment: center;"
+                   BorderPane.alignment="CENTER"/>
+        </top>
 
-    <!-- Contenu principal -->
-    <center>
-        <StackPane style="-fx-border-radius: 5; -fx-background-radius: 5;">
-            <VBox spacing="20">
-                <!-- Barre de recherche et tri -->
-                <HBox spacing="20" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 5; -fx-padding: 15; -fx-border-width: 1; -fx-background-radius: 5;">
-                    <Label text="Barre de recherche : " style="-fx-font-weight: bold; -fx-font-size: 18;"/>
-                    <StackPane style="-fx-background-color: #D7C4B8; -fx-padding: 5; -fx-background-radius: 5;">
-                        <!-- Superpose TextField et bouton -->
-                        <TextField promptText="Rechercher un fournisseur..." style="-fx-background-color: transparent; -fx-padding: 5; -fx-padding-right: 30;"/> <!-- Espace pour le bouton -->
-                        <Button text="🔍" style="-fx-background-color: transparent; -fx-font-size: 14; -fx-padding: 0; -fx-alignment: CENTER_RIGHT;" StackPane.alignment="CENTER_RIGHT"/>
-                    </StackPane>
-                    <Label text="Trier par : " style="-fx-font-weight: bold; -fx-font-size: 18;"/>
-                    <ComboBox style="-fx-background-color: #D7C4B8; -fx-padding: 5;"/>
-                </HBox>
+        <!-- Contenu principal -->
+        <center>
+            <StackPane style="-fx-border-radius: 5; -fx-background-radius: 5;">
+                <VBox spacing="20" style="-fx-padding: 20;">
+                    <!-- Barre de recherche et tri -->
+                    <HBox spacing="20" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 5; -fx-padding: 15; -fx-border-width: 1; -fx-background-radius: 5;">
+                        <Label text="Barre de recherche : " style="-fx-font-weight: bold; -fx-font-size: 18;"/>
+                        <StackPane style="-fx-background-color: #D7C4B8; -fx-padding: 5; -fx-background-radius: 5;">
+                            <!-- Superpose TextField et bouton -->
+                            <TextField promptText="Rechercher un fournisseur..." style="-fx-background-color: transparent; -fx-padding: 5; -fx-padding-right: 30;"/> <!-- Espace pour le bouton -->
+                            <Button text="🔍" style="-fx-background-color: transparent; -fx-font-size: 14; -fx-padding: 0; -fx-alignment: CENTER_RIGHT;" StackPane.alignment="CENTER_RIGHT"/>
+                        </StackPane>
+                        <Label text="Trier par : " style="-fx-font-weight: bold; -fx-font-size: 18;"/>
+                        <ComboBox style="-fx-background-color: #D7C4B8; -fx-padding: 5;"/>
+                    </HBox>
 
-                <!-- Tableau -->
-                <TableView fx:id="clientTable" styleClass="table"  prefHeight="400">
-                    <columns>
-                        <TableColumn styleClass="table-column-header" style="-fx-font-size: 16;" text="ID" prefWidth="50"/>
-                        <TableColumn styleClass="table-column-header" style="-fx-font-size: 16;" text="Nom" prefWidth="350"/>
-                        <TableColumn styleClass="table-column-header" style="-fx-font-size: 16;" text="Prenom" prefWidth="350"/>
-                    </columns>
-                </TableView>
-            </VBox>
-        </StackPane>
-    </center>
+                    <!-- Tableau -->
+                    <TableView fx:id="clientTable" styleClass="table"  prefHeight="400">
+                        <columns>
+                            <TableColumn styleClass="table-column-header" style="-fx-font-size: 16;" text="ID" prefWidth="50"/>
+                            <TableColumn styleClass="table-column-header" style="-fx-font-size: 16;" text="Nom" prefWidth="350"/>
+                            <TableColumn styleClass="table-column-header-last" style="-fx-font-size: 16;" text="Prenom" prefWidth="350"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+            </StackPane>
+        </center>
 
-    <!-- Boutons en bas -->
-    <bottom>
-        <HBox spacing="30" alignment="CENTER" style="-fx-padding: 15;">
-            <Button text="Ajout fournisseur"
-                    style="-fx-background-color: #A55750; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10; -fx-border-radius: 5; -fx-background-radius: 5;"/>
-            <Button text="Passer commande"
-                    style="-fx-background-color: #A55750; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10; -fx-border-radius: 5; -fx-background-radius: 5;"/>
-        </HBox>
-    </bottom>
-</BorderPane>
+        <!-- Boutons en bas -->
+        <bottom>
+            <HBox spacing="30" alignment="CENTER" style="-fx-padding: 15;">
+                <Button text="Ajout fournisseur"
+                        style="-fx-background-color: #A55750; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10; -fx-border-radius: 5; -fx-background-radius: 5;"/>
+                <Button text="Passer commande"
+                        style="-fx-background-color: #A55750; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10; -fx-border-radius: 5; -fx-background-radius: 5;"/>
+            </HBox>
+        </bottom>
+    </BorderPane>
+</AnchorPane>

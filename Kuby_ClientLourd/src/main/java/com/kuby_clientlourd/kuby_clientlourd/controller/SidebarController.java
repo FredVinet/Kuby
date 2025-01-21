@@ -65,9 +65,41 @@ public class SidebarController {
         }
     }
 
-    public void showAdminLoginModal() {
+    public void showAdminLogin() {
         if (mainController != null) {
             mainController.setPage("/com/kuby_clientlourd/kuby_clientlourd/view/adminLogin.fxml");
+        } else {
+            System.out.println("MainController n'est pas défini !");
+        }
+    }
+
+    public void showSupplierOrderInfo() {
+        if (mainController != null) {
+            mainController.setPage("/com/kuby_clientlourd/kuby_clientlourd/view/supplierOrderInfo.fxml");
+        } else {
+            System.out.println("MainController n'est pas défini !");
+        }
+    }
+
+    public void showSupplierInfo() {
+        if (mainController != null) {
+            mainController.setPage("/com/kuby_clientlourd/kuby_clientlourd/view/supplierInfo.fxml");
+        } else {
+            System.out.println("MainController n'est pas défini !");
+        }
+    }
+
+    public void showClientInfo() {
+        if (mainController != null) {
+            mainController.setPage("/com/kuby_clientlourd/kuby_clientlourd/view/clientInfo.fxml");
+        } else {
+            System.out.println("MainController n'est pas défini !");
+        }
+    }
+
+    public void showClientOrderInfo() {
+        if (mainController != null) {
+            mainController.setPage("/com/kuby_clientlourd/kuby_clientlourd/view/clientOrderInfo.fxml");
         } else {
             System.out.println("MainController n'est pas défini !");
         }
