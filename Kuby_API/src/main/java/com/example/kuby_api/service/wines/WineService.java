@@ -1,7 +1,7 @@
 package com.example.kuby_api.service.wines;
 
 import com.example.kuby_api.model.Wines.Wine;
-import com.example.kuby_api.repository.wines.WineRepository;
+import com.example.kuby_api.repository.wines.IWineRepository;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,7 @@ import java.util.NoSuchElementException;
 @Service
 public class WineService {
     @Autowired
-    WineRepository wineRepository;
+    IWineRepository wineRepository;
 
     public Wine getWineById(long wineId) {
         return wineRepository.findById(wineId)
@@ -33,7 +33,7 @@ public class WineService {
     }
 
     public List<Wine> getWineByVarietyId(long varietyId) {
-        List<Wine> wines = wineRepository.findByVariety(varietyId);
+        List<Wine> wines = wineRepository.findByVarietyId(varietyId);
         if (wines.isEmpty()) {
             throw new NoSuchElementException("No wines found for variety id: " + varietyId);
         }
@@ -41,7 +41,7 @@ public class WineService {
     }
 
     public List<Wine> getWineByTerroirId(long terroirId) {
-        List<Wine> wines = wineRepository.findByTerroir(terroirId);
+        List<Wine> wines = wineRepository.findByTerroirId(terroirId);
         if (wines.isEmpty()) {
             throw new NoSuchElementException("No wines found for terroir id: " + terroirId);
         }

@@ -1,7 +1,7 @@
 package com.example.kuby_api.service.wines;
 
 import com.example.kuby_api.model.Wines.Wine;
-import com.example.kuby_api.repository.wines.WineRepository;
+import com.example.kuby_api.repository.wines.IWineRepository;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,7 @@ import java.util.NoSuchElementException;
 @Service
 public class WineQuantityService {
     @Autowired
-    private WineRepository wineRepository;
+    private IWineRepository wineRepository;
 
     public Long getWineQuantityById(long wineId) {
         Wine wine = wineRepository.findById(wineId)
@@ -29,14 +29,14 @@ public class WineQuantityService {
     }
 
     public Long getWineQuantityByVarietyId(long varietyId) {
-        List<Wine> wines = wineRepository.findByVariety(varietyId);
+        List<Wine> wines = wineRepository.findByVarietyId(varietyId);
         return wines.stream()
                 .mapToLong(Wine::getStock)
                 .sum();
     }
 
     public Long getWineQuantityByTerroirId(long terroirId) {
-        List<Wine> wines = wineRepository.findByTerroir(terroirId);
+        List<Wine> wines = wineRepository.findByTerroirId(terroirId);
         return wines.stream()
                 .mapToLong(Wine::getStock)
                 .sum();
