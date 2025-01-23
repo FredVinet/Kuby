@@ -13,14 +13,10 @@ spring:
     username: root
     password: routrout
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
+    database-platform: org.hibernate.dialect.MySQLDialect
     hibernate:
-      ddl-auto: none  # Empêche Hibernate de modifier le schéma
-    show-sql: true  # Affiche les requêtes SQL dans les logs
-  h2:
-    console:
-      enabled: true
-      path: /h2-console  # Confirme le chemin d'accès à la console H2
+      ddl-auto: update
+    show-sql: true
   sql:
     init:
-      mode: always  # Assure l'exécution des scripts au démarrage
+      mode: always
