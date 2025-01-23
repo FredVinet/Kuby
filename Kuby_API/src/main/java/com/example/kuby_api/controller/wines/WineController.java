@@ -8,8 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @RestController
 public class WineController {
@@ -17,6 +21,8 @@ public class WineController {
     private WineService wineService;
     @Autowired
     private SupplierService supplierService;
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     @GetMapping("/wine/byId/{wineId}")
     public ResponseEntity<?> getWineById(@PathVariable long wineId) {
@@ -27,11 +33,21 @@ public class WineController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         } catch (SecurityException e) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-        //} catch (ResourceNotFoundException e) {
-        //    return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.I_AM_A_TEAPOT).build();
         }
+    }
+
+    @GetMapping("/test")
+    public String test() {
+        try {
+            String result = jdbcTemplate.queryForObject("SELECT * FROM test", String.class);
+            return result;
+        }catch (Exception e) {
+            return "trop null" + e.getMessage() + "----" + e.getCause() + "----" + e.getStackTrace();
+       }
     }
 
     @GetMapping("/wines")
@@ -40,7 +56,7 @@ public class WineController {
             return ResponseEntity.ok(wineService.getAllWines());
         }catch (Exception e){
             e.printStackTrace();
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.notFound().build(); // TODO mettre INTERNAL_SERVER_ERROR (500)
         }
     }
 
