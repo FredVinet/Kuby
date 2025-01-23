@@ -10,7 +10,8 @@ public class Supplier {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long addressId;
+    @OneToOne
+    private Address address;
     private String name;
     private String firstName;
     private String mail;

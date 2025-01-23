@@ -1,8 +1,11 @@
 package com.example.kuby_api.model.orders;
 
+import com.example.kuby_api.model.Wines.WineQuantity;
+import com.example.kuby_api.model.users.Supplier;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
@@ -11,8 +14,10 @@ public class SupplierOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long supplierId;
-    private Long wineId;
+    @OneToOne
+    private Supplier supplier;
+    @OneToMany
+    private List<WineQuantity> wineQuantityList;
     private Date date;
-    private Integer wineQuantity;
+
 }

@@ -13,19 +13,15 @@ public class Wine {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "supplierId")
     private Supplier supplier;
 
     @ManyToOne
-    @JoinColumn(name = "wineFamilyId")
     private WineFamily wineFamily;
 
     @ManyToOne
-    @JoinColumn(name = "variety")
     private WineVariety variety;
 
     @ManyToOne
-    @JoinColumn(name = "terroir")
     private WineTerroir terroir;
 
     private String name;
