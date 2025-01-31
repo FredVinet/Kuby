@@ -7,7 +7,6 @@ import com.example.kuby_api.repository.users.ICustomerRepository;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -63,11 +62,19 @@ public class CustomerService {
         return newAddress;
     }
 
-    public Address updateAdresse(long customerId, Address address) {
-        return null;
+    public Address updateAdresse(Address address) {
+        if (!customerRepository.existsById(address.getId())) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Address not found with id: " + address.getId());
+        }
+        address.setId(address.getId());
+        return addressRepository.save(address);
     }
 
 
-    public void deleteAddressCustomer(long customerId) {
+    public void deleteAddressCustomer(long addressId) {
+        if (!customerRepository.existsById(addressId)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Address not found with id: " + addressId);
+        }
+        addressRepository.deleteById(addressId);
     }
 }

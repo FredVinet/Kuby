@@ -100,7 +100,7 @@ public class CustomerController {
         }
 
         try {
-            return ResponseEntity.ok(customerService.updateAdresse(customerAddressId, address));
+            return ResponseEntity.ok(customerService.updateAdresse(address));
         }catch (ResponseStatusException e) {
             return ResponseEntity.notFound().build();
         }
