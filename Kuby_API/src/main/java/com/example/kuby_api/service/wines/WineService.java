@@ -1,7 +1,13 @@
 package com.example.kuby_api.service.wines;
 
 import com.example.kuby_api.model.Wines.Wine;
+import com.example.kuby_api.model.Wines.WineFamily;
+import com.example.kuby_api.model.Wines.WineTerroir;
+import com.example.kuby_api.model.Wines.WineVariety;
+import com.example.kuby_api.repository.wines.IWineFamilyRepository;
 import com.example.kuby_api.repository.wines.IWineRepository;
+import com.example.kuby_api.repository.wines.IWineTerroirRepository;
+import com.example.kuby_api.repository.wines.IWineVarietyRepository;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +20,12 @@ import java.util.NoSuchElementException;
 public class WineService {
     @Autowired
     IWineRepository wineRepository;
+    @Autowired
+    IWineFamilyRepository familyRepository;
+    @Autowired
+    IWineVarietyRepository varietyRepository;
+    @Autowired
+    IWineTerroirRepository terroirRepository;
 
     public Wine getWineById(long wineId) {
         return wineRepository.findById(wineId)
@@ -48,13 +60,27 @@ public class WineService {
         return wines;
     }
 
-    public List<Wine> getWineBySupplierId(long supplierId) {
+    public List<Wine> getSupplierByWine(long supplierId) {
         List<Wine> wines = wineRepository.findBySupplierId(supplierId);
         if (wines.isEmpty()) {
             throw new NoSuchElementException("No wines found for supplier id: " + supplierId);
         }
         return wines;
     }
+
+    public List<Wine> getWineByYear(int year) {
+        List<Wine> wines = wineRepository.findByYear(year);
+        if (wines.isEmpty()) {
+            throw new NoSuchElementException("No wines found for year: " + year);
+        }
+        return wines;
+    }
+
+    public List<WineFamily> getAllFamilly() {return familyRepository.findAll();}
+
+    public List<WineVariety> getAllVariety() {return varietyRepository.findAll();}
+
+    public List<WineTerroir> getAllTerroir() {return terroirRepository.findAll();}
 
     public Wine createWine(Wine wine) {
         return wineRepository.save(wine);
@@ -74,4 +100,6 @@ public class WineService {
         }
         wineRepository.deleteById(wineId);
     }
+
+
 }

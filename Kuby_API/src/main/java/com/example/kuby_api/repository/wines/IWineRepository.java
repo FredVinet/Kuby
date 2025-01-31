@@ -12,4 +12,6 @@ public interface IWineRepository extends JpaRepository<Wine, Long> {
     List<Wine> findByVarietyId(Long varietyId);
     List<Wine> findByTerroirId(Long terroirId);
     List<Wine> findBySupplierId(Long supplierId);
+
+    List<Wine> findByYear(int year);
 }

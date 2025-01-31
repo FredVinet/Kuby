@@ -1,6 +1,9 @@
 package com.example.kuby_api.controller.wines;
 
 import com.example.kuby_api.model.Wines.Wine;
+import com.example.kuby_api.model.Wines.WineFamily;
+import com.example.kuby_api.model.Wines.WineTerroir;
+import com.example.kuby_api.model.Wines.WineVariety;
 import com.example.kuby_api.model.users.Supplier;
 import com.example.kuby_api.service.users.SupplierService;
 import com.example.kuby_api.service.wines.WineService;
@@ -90,13 +93,53 @@ public class WineController {
         }
     }
 
-    @GetMapping("/wine/bySupplier/{wineId}")
-    public ResponseEntity<?> getWineBySupplierId(@PathVariable long wineId) {
+    @GetMapping("/wine/SupplierByWine/{wineId}")
+    public ResponseEntity<Supplier> getSupplierByWine(@PathVariable long wineId) {
         try {
-            Supplier supplier = supplierService.getSupplierByWineId(wineId);
+            Supplier supplier = (Supplier) wineService.getSupplierByWine(wineId);
             return ResponseEntity.ok(supplier);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+
+    @GetMapping("/wine/byYear")
+    public ResponseEntity<List<Wine>> getWineByYear(@RequestParam int year) {
+        try{
+            return ResponseEntity.ok(wineService.getWineByYear(year));
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/wine/AllFamilly")
+    public ResponseEntity<List<WineFamily>> getAllFamilly() {
+        try {
+            return ResponseEntity.ok(wineService.getAllFamilly());
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/wine/AllVariety")
+    public ResponseEntity<List<WineVariety>> getAllVariety() {
+        try{
+            return ResponseEntity.ok(wineService.getAllVariety());
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/wine/AllTerroir")
+    public ResponseEntity<List<WineTerroir>> getAllTerroir() {
+        try {
+            return ResponseEntity.ok(wineService.getAllTerroir());
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResponseEntity.notFound().build();
         }
     }
 
@@ -130,4 +173,8 @@ public class WineController {
             return ResponseEntity.notFound().build();
         }
     }
+
+
+
+    //TODO rajouter les endpoints pour récupérer les variété, terroir et family
 }
