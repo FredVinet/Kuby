@@ -47,7 +47,9 @@ public class CustomerService {
 
     // Customer address
     public List<Address> getCustomerAddresses(long customerId) {
-        return null; //TODO comment choper la liste d'adresse
+        Customer customer = customerRepository.findById(customerId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Customer not found with id: " + customerId));
+        return customer.getAddressList();
     }
     
     public Address createCustomerAddress(long customerId, Address address) {
@@ -63,10 +65,9 @@ public class CustomerService {
     }
 
     public Address updateAdresse(Address address) {
-        if (!customerRepository.existsById(address.getId())) {
+        if (!addressRepository.existsById(address.getId())) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Address not found with id: " + address.getId());
         }
-        address.setId(address.getId());
         return addressRepository.save(address);
     }
 
