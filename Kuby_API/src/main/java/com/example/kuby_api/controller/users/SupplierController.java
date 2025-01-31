@@ -60,10 +60,10 @@ public class SupplierController {
     }
 
     // Supplier address
-    @GetMapping("/supplier/addresses/{supplierId}")
-    public ResponseEntity<List<Address>> getSupplierAddresses(@PathVariable int supplierId) {
+    @GetMapping("/supplier/address/{supplierId}")
+    public ResponseEntity<Address> getSupplierAddress(@PathVariable int supplierId) {
         try {
-            return ResponseEntity.ok(supplierService.getSupplierAddresses(supplierId));
+            return ResponseEntity.ok(supplierService.getSupplierAddress(supplierId));
         } catch (ResponseStatusException e) {
             return ResponseEntity.notFound().build();
         }
@@ -88,7 +88,7 @@ public class SupplierController {
         }
 
         try {
-            return ResponseEntity.ok(supplierService.updateAddress(supplierAddressId, address));
+            return ResponseEntity.ok(supplierService.updateAddress(address));
         } catch (ResponseStatusException e) {
             return ResponseEntity.notFound().build();
         }
