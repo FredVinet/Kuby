@@ -27,4 +27,5 @@ public class Wine {
     private String name;
     private Long stock;
     private String description;
+    private int year;
 }
