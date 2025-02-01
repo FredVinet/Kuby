@@ -45,6 +45,9 @@
         <Button text="Information client" onAction="#showClientInfo"
                 styleClass="button"
                 style="-fx-text-fill: #F5E5D5; -fx-background-color: transparent; -fx-font-size: 16;"/>
+        <Button text="Information produit" onAction="#showProductInfo"
+                styleClass="button"
+                style="-fx-text-fill: #F5E5D5; -fx-background-color: transparent; -fx-font-size: 16;"/>
     </VBox>
 
     <!-- Espace pour centrer les boutons dans la fenêtre -->

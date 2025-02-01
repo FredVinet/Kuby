@@ -100,4 +100,22 @@ public class SidebarController {
         }
     }
 
+    @FXML
+    public void showProductInfo() {
+        if (mainController != null) {
+            mainController.setPage("/com/kuby_clientlourd/kuby_clientlourd/view/productInfo.fxml");
+        } else {
+            System.out.println("MainController n'est pas défini !");
+        }
+    }
+
+    @FXML
+    private void loadAllWineFamilies() {
+        if (mainController != null) {
+            mainController.loadAllWineFamilies();
+            mainController.setPage("/com/kuby_clientlourd/kuby_clientlourd/view/productInfo.fxml");
+        } else {
+            System.out.println("MainController n'est pas défini !");
+        }
+    }
 }
