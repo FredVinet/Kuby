@@ -1,0 +1,21 @@
+server:
+  port: 9000
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE  # Assure que la DB reste ouverte
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: none  # Empêche Hibernate de modifier le schéma
+    show-sql: true  # Affiche les requêtes SQL dans les logs
+  h2:
+    console:
+      enabled: true
+      path: /h2-console  # Confirme le chemin d'accès à la console H2
+  sql:
+    init:
+      mode: always  # Assure l'exécution des scripts au démarrage
