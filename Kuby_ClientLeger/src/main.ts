@@ -12,6 +12,8 @@ import * as directives from 'vuetify/directives'
 import App from './App.vue'
 import router from './router'
 
+const pinia = createPinia()
+
 const vuetify = createVuetify({
   components,
   directives,
@@ -24,7 +26,7 @@ const vuetify = createVuetify({
       light: {
         colors: {
           primary: '#d1a671', // Dorée
-          secondary: '#40a1a1', 
+          secondary: '#F0E3D3', //Dorée fond main 
           accent: '#eae3de',  
           error: '#FF5252',    
           info: '#100E0E', //Noir Footer
@@ -47,7 +49,6 @@ const vuetify = createVuetify({
 const app = createApp(App)
 
 app.use(vuetify)
-app.use(createPinia())
 app.use(router)
-
+app.use(pinia)
 app.mount('#app')

@@ -11,10 +11,13 @@
                     <div class="text-body-1">{{product.wine}}</div>
                     <div class="text-body-1 ">{{product.price}} €</div>
                 </v-col>
+                <v-col cols="12" md="6">
+                    <div class="text-body-1 text-center">{{product.year}}</div>
+                </v-col>
             </v-row>
             <div class="mt-1" >
                 <input class="py-1 ms-1" id="number" type="number" min="1" value="1" style="width: 35%;" />
-                <v-btn class="mb-1 ms-4" variant="plain" >Ajouter</v-btn>
+                <v-btn class="mb-1 ms-4" variant="plain" color="primary" >Ajouter</v-btn>
             </div>
         </div>
     </div>
