@@ -18,19 +18,19 @@
 
     <!-- Section principale (boutons au milieu) -->
     <VBox spacing="10" alignment="CENTER_LEFT" style="-fx-padding: 8;">
-        <Button text="Gestion du Stock" onAction="#loadStockManagement"
+        <Button text="Gestion du Stock" onAction="#showStockManagement"
                 styleClass="button"
                 style="-fx-text-fill: #F5E5D5; -fx-background-color: transparent; -fx-font-size: 16;"/>
-        <Button text="Liste Client" onAction="#loadClientList"
+        <Button text="Liste Client" onAction="#showClientList"
                 styleClass="button"
                 style="-fx-text-fill: #F5E5D5; -fx-background-color: transparent; -fx-font-size: 16;"/>
-        <Button text="Liste Fournisseur" onAction="#loadSupplierList"
+        <Button text="Liste Fournisseur" onAction="#showSupplierList"
                 styleClass="button"
                 style="-fx-text-fill: #F5E5D5; -fx-background-color: transparent; -fx-font-size: 16;"/>
-        <Button text="Commande Client" onAction="#loadClientOrder"
+        <Button text="Commande Client" onAction="#showClientOrder"
                 styleClass="button"
                 style="-fx-text-fill: #F5E5D5; -fx-background-color: transparent; -fx-font-size: 16;"/>
-        <Button text="Commande Fournisseur" onAction="#loadSupplierOrder"
+        <Button text="Commande Fournisseur" onAction="#showSupplierOrder"
                 styleClass="button"
                 style="-fx-text-fill: #F5E5D5; -fx-background-color: transparent; -fx-font-size: 16;"/>
         <Button text="Commande fournisseur info" onAction="#showSupplierOrderInfo"
