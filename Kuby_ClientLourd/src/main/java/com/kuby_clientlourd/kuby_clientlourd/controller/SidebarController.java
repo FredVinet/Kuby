@@ -1,27 +1,17 @@
 package com.kuby_clientlourd.kuby_clientlourd.controller;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 public class SidebarController {
 
     private MainController mainController;
 
-    // Méthode pour définir le MainController depuis l'application principale
     public void setMainController(MainController mainController) {
         this.mainController = mainController;
     }
 
     @FXML
-    private void loadStockManagement() {
+    private void showStockManagement() {
         if (mainController != null) {
             mainController.setPage("/com/kuby_clientlourd/kuby_clientlourd/view/stockManagement.fxml");
         } else {
@@ -30,7 +20,7 @@ public class SidebarController {
     }
 
     @FXML
-    private void loadClientList() {
+    private void showClientList() {
         if (mainController != null) {
             mainController.setPage("/com/kuby_clientlourd/kuby_clientlourd/view/listClient.fxml");
         } else {
@@ -39,7 +29,7 @@ public class SidebarController {
     }
 
     @FXML
-    private void loadSupplierList() {
+    private void showSupplierList() {
         if (mainController != null) {
             mainController.setPage("/com/kuby_clientlourd/kuby_clientlourd/view/supplierList.fxml");
         } else {
@@ -48,7 +38,7 @@ public class SidebarController {
     }
 
     @FXML
-    private void loadClientOrder() {
+    private void showClientOrder() {
         if (mainController != null) {
             mainController.setPage("/com/kuby_clientlourd/kuby_clientlourd/view/clientOrder.fxml");
         } else {
@@ -57,7 +47,7 @@ public class SidebarController {
     }
 
     @FXML
-    private void loadSupplierOrder() {
+    private void showSupplierOrder() {
         if (mainController != null) {
             mainController.setPage("/com/kuby_clientlourd/kuby_clientlourd/view/supplierOrder.fxml");
         } else {
@@ -65,6 +55,7 @@ public class SidebarController {
         }
     }
 
+    @FXML
     public void showAdminLogin() {
         if (mainController != null) {
             mainController.setPage("/com/kuby_clientlourd/kuby_clientlourd/view/adminLogin.fxml");
@@ -73,6 +64,7 @@ public class SidebarController {
         }
     }
 
+    @FXML
     public void showSupplierOrderInfo() {
         if (mainController != null) {
             mainController.setPage("/com/kuby_clientlourd/kuby_clientlourd/view/supplierOrderInfo.fxml");
@@ -81,6 +73,7 @@ public class SidebarController {
         }
     }
 
+    @FXML
     public void showSupplierInfo() {
         if (mainController != null) {
             mainController.setPage("/com/kuby_clientlourd/kuby_clientlourd/view/supplierInfo.fxml");
@@ -89,6 +82,7 @@ public class SidebarController {
         }
     }
 
+    @FXML
     public void showClientInfo() {
         if (mainController != null) {
             mainController.setPage("/com/kuby_clientlourd/kuby_clientlourd/view/clientInfo.fxml");
@@ -97,6 +91,7 @@ public class SidebarController {
         }
     }
 
+    @FXML
     public void showClientOrderInfo() {
         if (mainController != null) {
             mainController.setPage("/com/kuby_clientlourd/kuby_clientlourd/view/clientOrderInfo.fxml");
