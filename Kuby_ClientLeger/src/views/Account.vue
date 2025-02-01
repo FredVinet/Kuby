@@ -1,7 +1,5 @@
 <template>  
     <v-container>
-      <h3>Account</h3>
-  
     </v-container>
   </template>
   
