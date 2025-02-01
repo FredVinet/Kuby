@@ -1,6 +1,5 @@
 package com.kuby_clientlourd.kuby_clientlourd.controller;
 
-import com.kuby_clientlourd.kuby_clientlourd.service.ApiService;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
 import javafx.fxml.FXMLLoader;
