@@ -1,4 +1,4 @@
-package com.kuby_clientlourd.kuby_clientlourd.controller;
+package com.kuby_clientlourd.kuby_clientlourd.controllers;
 
 import javafx.fxml.FXML;
 
@@ -109,13 +109,4 @@ public class SidebarController {
         }
     }
 
-    @FXML
-    private void loadAllWineFamilies() {
-        if (mainController != null) {
-            mainController.loadAllWineFamilies();
-            mainController.setPage("/com/kuby_clientlourd/kuby_clientlourd/view/productInfo.fxml");
-        } else {
-            System.out.println("MainController n'est pas défini !");
-        }
-    }
 }

@@ -9,7 +9,7 @@
 <?import javafx.scene.shape.Line?>
 
 <VBox xmlns:fx="http://javafx.com/fxml" alignment="TOP_CENTER" spacing="20"
-      fx:controller="com.kuby_clientlourd.kuby_clientlourd.controller.SidebarController"
+      fx:controller="com.kuby_clientlourd.kuby_clientlourd.controllers.SidebarController"
       style="-fx-background-color: #A55750; -fx-pref-width: 250; -fx-padding: 20;">
 
     <!-- Logo ou titre principal -->

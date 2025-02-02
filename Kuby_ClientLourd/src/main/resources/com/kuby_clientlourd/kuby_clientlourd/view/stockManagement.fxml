@@ -12,7 +12,8 @@
 <?import javafx.scene.layout.VBox?>
 
 <?import javafx.scene.layout.AnchorPane?>
-<AnchorPane>
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.kuby_clientlourd.kuby_clientlourd.controllers.WineController">
     <BorderPane xmlns:fx="http://javafx.com/fxml"
                 AnchorPane.topAnchor="30"
                 AnchorPane.leftAnchor="30"
@@ -54,14 +55,13 @@
                     <!-- Tableau -->
                     <TableView fx:id="clientTable" styleClass="table" prefHeight="400">
                         <columns>
-                            <TableColumn styleClass="table-column-header" text="ID" prefWidth="50"/>
-                            <TableColumn styleClass="table-column-header" text="Nom" prefWidth="150"/>
-                            <TableColumn styleClass="table-column-header" text="Varieté" prefWidth="150"/>
-                            <TableColumn styleClass="table-column-header" text="Famille" prefWidth="150"/>
-                            <TableColumn styleClass="table-column-header" text="Année" prefWidth="150"/>
-                            <TableColumn styleClass="table-column-header" text="Prix" prefWidth="100"/>
-                            <TableColumn styleClass="table-column-header" text="Fournisseur" prefWidth="150"/>
-                            <TableColumn styleClass="table-column-header-last" text="Quantité" prefWidth="100"/>
+                            <TableColumn fx:id="idColumn" text="ID" prefWidth="50"/>
+                            <TableColumn fx:id="nameColumn" text="Nom" prefWidth="150"/>
+                            <TableColumn fx:id="varietyColumn" text="Varieté" prefWidth="150"/>
+                            <TableColumn fx:id="familyColumn" text="Famille" prefWidth="150"/>
+                            <TableColumn fx:id="yearColumn" text="Année" prefWidth="150"/>
+                            <TableColumn fx:id="supplierColumn" text="Fournisseur" prefWidth="150"/>
+                            <TableColumn fx:id="stockColumn" text="Quantité" prefWidth="100"/>
                         </columns>
                     </TableView>
                 </VBox>

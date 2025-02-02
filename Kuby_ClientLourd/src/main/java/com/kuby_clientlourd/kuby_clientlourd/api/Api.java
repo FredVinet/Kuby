@@ -1,11 +1,11 @@
-package com.kuby_clientlourd.kuby_clientlourd.service;
+package com.kuby_clientlourd.kuby_clientlourd.api;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
-public class ApiService {
+public class Api {
     private static final String BASE_URL = "http://localhost:9000";
 
     public static String get(String endpoint) throws IOException {

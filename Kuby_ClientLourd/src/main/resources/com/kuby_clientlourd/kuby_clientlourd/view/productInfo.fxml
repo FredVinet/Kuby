@@ -4,13 +4,12 @@
 <?import javafx.scene.image.*?>
 
 <AnchorPane xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.kuby_clientlourd.kuby_clientlourd.controller.MainController">
+            fx:controller="com.kuby_clientlourd.kuby_clientlourd.controllers.WineController">
     <!-- Encadré principal -->
     <BorderPane xmlns="http://javafx.com/javafx/8.0.171" style="-fx-border-color: black; -fx-border-width: 4;"
                 AnchorPane.topAnchor="100"
                 AnchorPane.leftAnchor="125"
                 >
-        >
         <top>
             <!-- Conteneur pour le titre avec un espacement réduit -->
             <VBox alignment="CENTER" style="-fx-padding: 20;">
@@ -28,8 +27,8 @@
                         <Label text="Nom : Champagne" style="-fx-font-size: 20;" />
                         <VBox alignment="CENTER" spacing="20" style="-fx-padding: 50;">
                             <Label text="Familles de vins :" style="-fx-font-size: 20;"/>
-                            <ListView fx:id="wineFamilyList" prefHeight="150" prefWidth="200"/>
-                            <Button text="Charger familles" onAction="#loadAllWineFamilies"/>
+                            <ListView fx:id="wineListView" prefHeight="200" prefWidth="400"/>
+                            <Button text="Charger les vins" onAction="#loadAllWines"/>
                         </VBox>
                         <Label text="Description : Du rouge" style="-fx-font-size: 20;" />
                     </VBox>

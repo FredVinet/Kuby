@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.kuby_clientlourd.kuby_clientlourd.controller.MainController">
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.kuby_clientlourd.kuby_clientlourd.controllers.MainController">
     <left>
         <fx:include source="sidebar.fxml"/>
     </left>

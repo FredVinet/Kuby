@@ -1,7 +1,7 @@
 package com.kuby_clientlourd.kuby_clientlourd;
 
-import com.kuby_clientlourd.kuby_clientlourd.controller.MainController;
-import com.kuby_clientlourd.kuby_clientlourd.controller.SidebarController;
+import com.kuby_clientlourd.kuby_clientlourd.controllers.MainController;
+import com.kuby_clientlourd.kuby_clientlourd.controllers.SidebarController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
