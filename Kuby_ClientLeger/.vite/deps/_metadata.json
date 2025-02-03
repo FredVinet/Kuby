@@ -1,0 +1,61 @@
+{
+  "hash": "ce366fd2",
+  "configHash": "8e2157e1",
+  "lockfileHash": "5a4a7026",
+  "browserHash": "e4d18df0",
+  "optimized": {
+    "vue": {
+      "src": "../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
+      "file": "vue.js",
+      "fileHash": "9eef2748",
+      "needsInterop": false
+    },
+    "pinia": {
+      "src": "../../node_modules/pinia/dist/pinia.mjs",
+      "file": "pinia.js",
+      "fileHash": "f8639467",
+      "needsInterop": false
+    },
+    "vuetify": {
+      "src": "../../node_modules/vuetify/lib/framework.mjs",
+      "file": "vuetify.js",
+      "fileHash": "5c200088",
+      "needsInterop": false
+    },
+    "vuetify/components": {
+      "src": "../../node_modules/vuetify/lib/components/index.mjs",
+      "file": "vuetify_components.js",
+      "fileHash": "c0ae0113",
+      "needsInterop": false
+    },
+    "vuetify/directives": {
+      "src": "../../node_modules/vuetify/lib/directives/index.mjs",
+      "file": "vuetify_directives.js",
+      "fileHash": "53c8fc55",
+      "needsInterop": false
+    },
+    "vue-router": {
+      "src": "../../node_modules/vue-router/dist/vue-router.mjs",
+      "file": "vue-router.js",
+      "fileHash": "9142bffe",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-BO23WXU5": {
+      "file": "chunk-BO23WXU5.js"
+    },
+    "chunk-GN7VIJHK": {
+      "file": "chunk-GN7VIJHK.js"
+    },
+    "chunk-T4YFGQO3": {
+      "file": "chunk-T4YFGQO3.js"
+    },
+    "chunk-AYVSL3LM": {
+      "file": "chunk-AYVSL3LM.js"
+    },
+    "chunk-IJV5NOMV": {
+      "file": "chunk-IJV5NOMV.js"
+    }
+  }
+}
