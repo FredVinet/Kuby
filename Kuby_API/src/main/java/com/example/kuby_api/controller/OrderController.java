@@ -31,7 +31,7 @@ public class OrderController {
 
     @PutMapping("/{id}")
     public Orders updateOrders(@PathVariable Long id, @RequestBody Orders orders) {
-        orders.setOrders_id(id);
+        orders.setOrderId(id);
         return ordersService.saveOrders(orders);
     }
 

@@ -17,6 +17,9 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true  # Affiche les requêtes SQL dans les logs
+    properties:
+      hibernate:
+        format_sql: true
 #  sql:
 #    init:
 #      mode: always   # Assure l'exécution des scripts au démarrage
