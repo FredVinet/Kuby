@@ -1,63 +1,59 @@
 <template>
-    <v-row class="me-10">
-        <v-col cols="12" md="4">
-                <button style="background: none; border: none; padding: 0;" @click="navigateTo('/product')">
-                    <img src="../../assets/images/Bottle.png" style="cursor: pointer; object-fit: cover;">
-                </button>
+    <v-card class="mb-4 mx-auto" elevation="5" max-width="90%" border="opacity-50 md info" rounded="">
+      <v-row align="center" justify="space-between">
+        <v-col cols="5">
+          <div class="my-5">
+            <h3 class="product-name">{{ product.article_name }}</h3>
+            <p class="product-description">{{ product.article_description }}</p>
+            <h2 class="product-price">{{ product.article_price }}€</h2>
+          </div>
         </v-col>
-        <v-col cols="12" md="8">
-            <div 
-                class="text-h4 mb-5 d-inline-block text-truncate" 
-                style="max-width: 30rem"
-            >
-            {{product.title}}
-            </div>
-            <v-row>
-                <v-col cols="12" md="6">
-                    <div class="text-h6 my-2">{{product.wine}}</div>
-                    <div class="text-h6 my-2">{{product.grape}} </div>
-
-                    <div class="text-h6 my-2">{{product.price}} €</div>
-                </v-col>
-                <v-col cols="12" md="6">
-
-                    <div class="text-h6 my-2 text-end ">{{product.year}}</div>
-                </v-col>
-            </v-row>
-            <div class="mt-1" >
-                <v-row>
-                    <v-col>
-                        <input class="py-1 ms-1" id="number" type="number" min="1" :value="product.quantity" />
-                    </v-col>
-                    <v-col>
-                        <div class="text-h6 text-end ">Quantité</div>
-                    </v-col>
-                </v-row>
-                
-                <v-btn class="mt-3 text-error text-bold " variant="plain" block>Supprimer</v-btn>
-            </div>
-
+        <v-col cols="4" class="d-flex align-center justify-space-evenly">
+          <v-text-field
+            v-model="localQuantity"
+            type="number"
+            min="0"
+            max-width="60%"
+            @change="onQuantityChange"
+          />
+          <v-btn icon small color="error" class="mb-5" @click="onRemove">
+            <v-icon>mdi-delete</v-icon>
+          </v-btn>
         </v-col>
-    </v-row>
-
-
-
+      </v-row>
+    </v-card>
   </template>
-
-<script setup lang="ts">
-  import { useRouter } from 'vue-router';
-  import { defineProps } from 'vue';
-
-  const router = useRouter();
-
-    function navigateTo(path) {
-        router.push(path);
-    }
-
-    const props = defineProps({
+  
+  <script setup lang="ts">
+  import { defineProps, ref, watch } from 'vue';
+  import { useCartStore } from '@/stores/cartStore';
+  
+  const props = defineProps({
     product: {
       type: Object,
+      required: true,
+    },
+    quantity: {
+      type: Number,
+      required: true,
     },
   });
-
-</script>
+  
+  const emit = defineEmits(['update-quantity', 'remove']);
+  const localQuantity = ref(props.quantity);
+  
+  const onQuantityChange = () => {
+    emit('update-quantity', props.product.article_id, localQuantity.value);
+  };
+  
+  const onRemove = () => {
+    emit('remove', props.product.article_id);
+  };
+  
+  watch(
+    () => props.quantity,
+    (newQuantity) => {
+      localQuantity.value = newQuantity;
+    },
+  );
+  </script>
