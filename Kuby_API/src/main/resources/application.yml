@@ -11,12 +11,16 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/kubydata
     username: root
-    password: root
+    password:
   jpa:
     database-platform: org.hibernate.dialect.MySQLDialect
     hibernate:
       ddl-auto: update
-    show-sql: true
+    show-sql: true  # Affiche les requêtes SQL dans les logs
+    properties:
+      hibernate:
+        format_sql: true
   sql:
     init:
-      mode: always
+      mode: always   # Assure l'exécution des scripts au démarrage
+# A décommenter si la base de donnée n'est pas déjà existante
