@@ -15,28 +15,28 @@ public class FamilyController {
     @Autowired
     private FamilyService familyService;
 
-    @GetMapping
+    @GetMapping("/getAllFamilies")
     public Iterable<Family> getFamilies() {
         return familyService.getFamilies();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/getOneFamily/{id}")
     public Optional<Family> getFamilyById(@PathVariable long id) {
         return familyService.getFamily(id);
     }
 
-    @PostMapping
+    @PostMapping("/createFamily")
     public Family createFamily(@RequestBody Family family) {
         return familyService.saveFamily(family);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/updateFamily/{id}")
     public Family updateFamily(@PathVariable long id, @RequestBody Family family) {
         family.setFamily_id(id);
         return familyService.saveFamily(family);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/deleteFamily/{id}")
     public void deleteFamily(@PathVariable long id) {
         familyService.deleteFamily(id);
     }

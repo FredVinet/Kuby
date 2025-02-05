@@ -15,28 +15,28 @@ public class SupplierArticleController {
     @Autowired
     private SupplierArticleService supplierArticleService;
 
-    @GetMapping
+    @GetMapping("/getAllSupplierArticles")
     public Iterable<SupplierArticle> getSupplierArticles() {
         return supplierArticleService.getSupplierArticles();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/getOneSupplierArticle/{id}")
     public Optional<SupplierArticle> getSupplierArticleById(@PathVariable Long id) {
         return supplierArticleService.getSupplierArticle(id);
     }
 
-    @PostMapping
+    @PostMapping("/createSupplierArticle")
     public SupplierArticle createSupplierArticle(@RequestBody SupplierArticle supplierArticle) {
         return supplierArticleService.saveSupplierArticle(supplierArticle);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/updateSupplierArticle/{id}")
     public SupplierArticle updateSupplierArticle(@PathVariable Long id, @RequestBody SupplierArticle supplierArticle) {
         supplierArticle.setSupplier_article_id(id);
         return supplierArticleService.saveSupplierArticle(supplierArticle);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/deleteSupplierArticle/{id}")
     public void deleteSupplierArticle(@PathVariable Long id) {
         supplierArticleService.deleteSupplierArticle(id);
     }

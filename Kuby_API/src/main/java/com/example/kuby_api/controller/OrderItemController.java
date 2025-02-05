@@ -9,34 +9,34 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/orderitems")
+@RequestMapping("/orderItems")
 public class OrderItemController {
 
     @Autowired
     private OrderItemService orderItemService;
 
-    @GetMapping
+    @GetMapping("/getAllOrderItems")
     public Iterable<OrderItem> getOrderItems() {
         return orderItemService.getOrderItems();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/getOrderItemById/{id}")
     public Optional<OrderItem> getOrderItemById(@PathVariable Long id) {
         return orderItemService.getOrderItem(id);
     }
 
-    @PostMapping
+    @PostMapping("/createOrderItems")
     public OrderItem createOrderItem(@RequestBody OrderItem orderItem) {
-        return orderItemService.saveOrderItem(orderItem);
+        return orderItemService.createOrderItem(orderItem);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/updateOrderItem/{id}")
     public OrderItem updateOrderItem(@PathVariable Long id, @RequestBody OrderItem orderItem) {
         orderItem.setOrder_items_id(id);
-        return orderItemService.saveOrderItem(orderItem);
+        return orderItemService.createOrderItem(orderItem);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/deleteOrderItem/{id}")
     public void deleteOrderItem(@PathVariable Long id) {
         orderItemService.deleteOrderItem(id);
     }

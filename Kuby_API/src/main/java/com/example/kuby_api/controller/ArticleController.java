@@ -15,24 +15,24 @@ public class ArticleController {
     @Autowired
     private ArticleService articleService;
 
-    @GetMapping
+    @GetMapping("/getAllArticles")
     public Iterable<Article> getArticles() {
         return articleService.getArticles();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/getOneArticle/{id}")
     public ResponseEntity<Article> getArticleById(@PathVariable Long id) {
         Optional<Article> article = articleService.getArticle(id);
         return article.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @PostMapping
+    @PostMapping("/createArticle")
     public ResponseEntity<Article> createArticle(@RequestBody Article article) {
         Article savedArticle = articleService.saveArticle(article);
         return ResponseEntity.ok(savedArticle);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/updateArticle/{id}")
     public ResponseEntity<Article> updateArticle(@PathVariable Long id, @RequestBody Article newArticle) {
         return articleService.getArticle(id)
                 .map(existingArticle -> {
@@ -43,7 +43,7 @@ public class ArticleController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/deleteArticle/{id}")
     public ResponseEntity<Void> deleteArticle(@PathVariable Long id) {
         if (articleService.getArticle(id).isPresent()) {
             articleService.deleteArticle(id);

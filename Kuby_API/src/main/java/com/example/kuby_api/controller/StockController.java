@@ -15,28 +15,28 @@ public class StockController {
     @Autowired
     private StockService stockService;
 
-    @GetMapping
+    @GetMapping("/getAllStocks")
     public Iterable<Stock> getStocks() {
         return stockService.getStocks();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/getOneStock/{id}")
     public Optional<Stock> getStockById(@PathVariable Long id) {
         return stockService.getStock(id);
     }
 
-    @PostMapping
+    @PostMapping("/createStock")
     public Stock createStock(@RequestBody Stock stock) {
         return stockService.saveStock(stock);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/updateStock/{id}")
     public Stock updateStock(@PathVariable Long id, @RequestBody Stock stock) {
         stock.setStock_id(id);
         return stockService.saveStock(stock);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/deleteStock/{id}")
     public void deleteStock(@PathVariable Long id) {
         stockService.deleteStock(id);
     }

@@ -66,7 +66,7 @@ CREATE TABLE `stock` (
 CREATE TABLE `orders` (
                           `orders_id` BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
                           `orders_date` timestamp NOT NULL,
-                          `orders_status` int NOT NULL DEFAULT 1,
+                          `orders_status` ENUM('placed', 'paid') DEFAULT 'placed' NOT NULL,
                           `orders_amount` DECIMAL(10,2) NOT NULL,
                           `id_localisation` integer NOT NULL,
                           FOREIGN KEY (`id_localisation`) REFERENCES `localisation` (`localisation_id`)
@@ -74,9 +74,10 @@ CREATE TABLE `orders` (
 
 CREATE TABLE `order_items` (
                                `order_items_id` integer PRIMARY KEY NOT NULL AUTO_INCREMENT,
-                               `order_items_quantity` integer NOT NULL,
                                `id_order` integer NOT NULL,
                                `id_article` integer NOT NULL,
+                               `order_items_quantity` integer NOT NULL,
+                               `unit_price` DECIMAL(10,6) NOT NULL,
                                FOREIGN KEY (`id_order`) REFERENCES `orders` (`orders_id`),
                                FOREIGN KEY (`id_article`) REFERENCES `article` (`article_id`)
 );
@@ -121,13 +122,13 @@ INSERT INTO `stock` (`stock_date_in`, `stock_date_out`, `stock_quantity_in`, `st
                                                                                                                      ('2022-01-01 00:00:00', '2022-01-10 00:00:00', 100, 10, 1),
                                                                                                                      ('2022-02-01 00:00:00', '2022-02-10 00:00:00', 150, 15, 2);
 
-INSERT INTO `orders` (`orders_date`, `orders_status`, `orders_amount`, `id_localisation`) VALUES
-                                                                          ('2022-03-01 00:00:00', 1, 2000, 1),
-                                                                          ('2022-04-01 00:00:00', 2, 2000, 2);
+INSERT INTO `orders` (`orders_date`, `orders_amount`, `id_localisation`) VALUES
+                                                                          ('2022-03-01 00:00:00', 2000, 1),
+                                                                          ('2022-04-01 00:00:00', 2000, 2);
 
-INSERT INTO `order_items` (`order_items_quantity`, `id_order`, `id_article`) VALUES
-                                                                                 (2, 1, 1),
-                                                                                 (3, 2, 2);
+INSERT INTO `order_items` (`order_items_quantity`, `id_order`, `unit_price`, `id_article`) VALUES
+                                                                                 (2, 1,  90, 2),
+                                                                                 (3, 2,  120, 1);
 
 INSERT INTO `supplier_article` (`id_user`, `id_article`) VALUES
                                                              (1, 1),
