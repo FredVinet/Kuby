@@ -27,7 +27,7 @@ public class OrdersService {
         orderRepository.deleteById(id);
     }
 
-    public Orders saveOrders(Orders order){
+    public Orders createOrder(Orders order){
         return orderRepository.save(order);
     }
 }

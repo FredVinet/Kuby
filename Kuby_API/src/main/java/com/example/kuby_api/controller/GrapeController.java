@@ -15,27 +15,28 @@ public class GrapeController {
     @Autowired
     private GrapeService grapeService;
 
-    @GetMapping
+    @GetMapping("/getAllGrapes")
     public Iterable<Grape> getGrapes() {
         return grapeService.getGrapes();
     }
-    @GetMapping("/{id}")
+
+    @GetMapping("/getOneGrape/{id}")
     public Optional<Grape> getGrapeById(@PathVariable Long id) {
         return grapeService.getGrape(id);
     }
 
-    @PostMapping
+    @PostMapping("/createGrape")
     public Grape createGrape(@RequestBody Grape grape) {
         return grapeService.saveGrape(grape);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/updateGrape/{id}")
     public Grape updateGrape(@PathVariable Long id, @RequestBody Grape grape) {
         grape.setGrape_id(id);
         return grapeService.saveGrape(grape);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/deleteGrape/{id}")
     public void deleteGrape(@PathVariable Long id) {
         grapeService.deleteGrape(id);
     }

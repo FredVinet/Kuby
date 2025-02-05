@@ -11,15 +11,18 @@ public class Orders {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "order_id") // Correspond à la colonne `order_id` dans la base de données
-    private Long orderId; // Utilisez camelCase pour les noms de variables
+    @Column(name = "orders_id")
+    private Long orders_id;
 
-    @Column(name = "order_date") // Correspond à la colonne `order_date` dans la base de données
-    private LocalDateTime orderDate;
+    @Column(name = "orders_date")
+    private LocalDateTime orders_date;
 
-    @Column(name = "order_status") // Correspond à la colonne `order_status` dans la base de données
-    private int orderStatus;
+    @Column(name = "orders_status")
+    private String orders_status;
 
-    @Column(name = "id_localisation") // Correspond à la colonne `id_localisation` dans la base de données
-    private int idLocalisation;
+    @Column(name = "orders_amount")
+    private int orders_amount;
+
+    @Column(name = "id_localisation")
+    private int id_localisation;
 }

@@ -14,28 +14,28 @@ public class OrderController {
     @Autowired
     private OrdersService ordersService;
 
-    @GetMapping
+    @GetMapping("/getAllOrders")
     public Iterable<Orders> getOrders() {
         return ordersService.getOrders();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/getOneOrder/{id}")
     public Optional<Orders> getOrdersById(@PathVariable Long id) {
         return ordersService.getOrders(id);
     }
 
-    @PostMapping
-    public Orders createOrders(@RequestBody Orders orders) {
-        return ordersService.saveOrders(orders);
+    @PostMapping("/createOrder")
+    public Orders createOrder(@RequestBody Orders orders) {
+        return ordersService.createOrder(orders);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/updateOrder/{id}")
     public Orders updateOrders(@PathVariable Long id, @RequestBody Orders orders) {
-        orders.setOrderId(id);
-        return ordersService.saveOrders(orders);
+        orders.setOrders_id(id);
+        return ordersService.createOrder(orders);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/deleteOrder/{id}")
     public void deleteOrders(@PathVariable Long id) {
         ordersService.deleteOrders(id);
     }

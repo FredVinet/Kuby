@@ -20,7 +20,7 @@ spring:
     properties:
       hibernate:
         format_sql: true
-  sql:
-    init:
-      mode: always   # Assure l'exécution des scripts au démarrage
+#  sql:
+#    init:
+#      mode: always   # Assure l'exécution des scripts au démarrage
 # A décommenter si la base de donnée n'est pas déjà existante

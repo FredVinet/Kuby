@@ -15,28 +15,28 @@ public class LocalisationController {
     @Autowired
     private LocalisationService localisationService;
 
-    @GetMapping
+    @GetMapping("/getAllLocalisations")
     public Iterable<Localisation> getLocalisations() {
         return localisationService.getLocalisations();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/getOneLocalisation/{id}")
     public Optional<Localisation> getLocalisationById(@PathVariable Long id) {
         return localisationService.getLocalisation(id);
     }
 
-    @PostMapping
+    @PostMapping("/createLocalisation")
     public Localisation createLocalisation(@RequestBody Localisation localisation) {
         return localisationService.saveLocalisation(localisation);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/updateLocalisation/{id}")
     public Localisation updateLocalisation(@PathVariable Long id, @RequestBody Localisation localisation) {
         localisation.setLocalisation_id(id);
         return localisationService.saveLocalisation(localisation);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/deleteLocalisation/{id}")
     public void deleteLocalisation(@PathVariable Long id) {
         localisationService.deleteLocalisation(id);
     }

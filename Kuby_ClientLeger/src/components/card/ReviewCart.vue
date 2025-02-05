@@ -24,7 +24,7 @@
             </v-row>
         </v-card-text>
         <v-row justify="center" class="my-5">
-            <v-btn color="primary" width="80%">
+            <v-btn color="primary" width="80%" @click="checkout(totalWithDelivery)">
                 Payer ma commande
             </v-btn>
         </v-row>
@@ -37,8 +37,11 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { computed, ref, reactive } from 'vue';
 import { useCartStore } from '@/stores/cartStore';
+import type { Orders } from '@/api/interfaces/Orders';
+import OrdersService from '@/api/services/OrdersService';
+import OrderItemService from '@/api/services/OrderItemService';
 
 const cartStore = useCartStore();
 
@@ -66,4 +69,37 @@ const formatPrice = (price: number) => {
 const clearCart = () => {
   cartStore.clearCart();
 };
+
+const newOrder = reactive<Orders>({
+  orders_date: new Date(),
+  orders_status: 'placed',
+  orders_amount: 0,
+  id_location: 1,
+})
+
+async function checkout(orderTotal: number) {
+  try {
+    newOrder.orders_amount = orderTotal
+
+    const createdOrder = await OrdersService.createOrder(newOrder)
+    if (!createdOrder || !createdOrder.orders_id) {
+      throw new Error('Erreur lors de la création de la commande.')
+    }
+    const orderId = createdOrder.orders_id
+
+    const orderItems = cartStore.cartItems.map((cartItem) => ({
+        id_order: orderId,
+        id_article: cartItem.product.article_id,
+        order_items_quantity: cartItem.quantity,
+        unit_price: cartItem.product.article_price,
+    }))
+    for (const item of orderItems) {
+      await OrderItemService.createOrderItem(item)
+    }
+
+    cartStore.clearCart()
+  } catch (error) {
+    console.error('Erreur lors de l’ajout de la commande ou des items :', error)
+  }
+}
 </script>

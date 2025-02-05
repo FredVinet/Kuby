@@ -13,28 +13,28 @@ public class AdressController {
     @Autowired
     private AdressService adressService;
 
-    @GetMapping
+    @GetMapping("/getAllAdresses")
     public Iterable<Adress> getAdresses() {
         return adressService.getAdresses();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/getOneAdress/{id}")
     public Optional<Adress> getAdressById(@PathVariable Long id) {
         return adressService.getAdress(id);
     }
 
-    @PostMapping
+    @PostMapping("/createAdress")
     public Adress createAdress(@RequestBody Adress adress) {
         return adressService.saveAdress(adress);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/updateAdress/{id}")
     public Adress updateAdress(@PathVariable Long id, @RequestBody Adress adress) {
         adress.setAdress_id(id);
         return adressService.saveAdress(adress);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/deleteAdress/{id}")
     public void deleteAdress(@PathVariable Long id) {
         adressService.deleteAdress(id);
     }

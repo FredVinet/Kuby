@@ -11,9 +11,13 @@ public class Localisation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "localisation_id")
     private Long localisation_id;
 
+    @Column(name = "id_user")
     private int id_user;
+
+    @Column(name = "id_adress")
     private int id_adress;
 
 }
