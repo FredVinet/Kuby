@@ -33,8 +33,8 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    public Optional<User> findByUserMail(String user_mail) {
-        return userRepository.findByUserMail(user_mail);
+    public Optional<User> findByuserMail(String userMail) {
+        return userRepository.findByuserMail(userMail);
     }
 
     public String hashPassword(String rawPassword) {

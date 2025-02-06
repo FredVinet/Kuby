@@ -42,6 +42,7 @@
   <script setup lang="ts">
   import TitleComponent from '@/components/title/TitleComponent.vue'
   import { ref } from 'vue'
+  import AuthService from '@/api/services/AuthService'
   import { useUserConnectedStore } from '@/stores/userConnected' // Importez le store
   
   const title = ref("Connexion")
@@ -56,15 +57,28 @@
   
   // Méthode de connexion
   async function login() {
-    const credentials = {
-      email: email.value,
-      password: password.value,
+    try {
+      const credentials = {
+        email: email.value,
+        password: password.value,
+      };
+      const { user, token } = await AuthService.login(credentials.email, credentials.password);
+  
+      // Stocker les informations de l'utilisateur dans le store
+      userConnectedStore.setUserInfo(user);
+      if (token) {
+        localStorage.setItem('authToken', token); // Stocker le token dans le localStorage
+      }
+  
+      alert('Connexion réussie!');
+    } catch (error) {
+      alert('Erreur de connexion: ' + error.message);
     }
-    await userConnectedStore.login(credentials)
   }
   
   // Méthode de déconnexion
   function logout() {
-    userConnectedStore.logout()
+    userConnectedStore.clearUserInfo(); // Effacer les informations de l'utilisateur
+    alert('Déconnexion réussie!');
   }
   </script>

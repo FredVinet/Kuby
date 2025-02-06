@@ -1,60 +1,73 @@
 import { jwtDecode } from 'jwt-decode';
 
 interface DecodedToken {
-    iss: string;
-    iat: number;
-    exp: number;
-    userId: number;
-    firstname: string;
-    name: string;
-    phone: string;
-    email: string;
-    type: number;
-    admin: boolean;
+  iss: string;
+  iat: number;
+  exp: number;
+  userId: number;
+  firstname: string;
+  name: string;
+  phone: string;
+  email: string;
+  type: number;
+  admin: boolean;
 }
 
 export interface Ids {
-    userId: number;
-    firstname: string;
-    name: string;
-    phone: string;
-    email: string;
-    type: number;
-    admin: boolean;
+  userId: number;
+  firstname: string;
+  name: string;
+  phone: string;
+  email: string;
+  type: number;
+  admin: boolean;
 }
 
 export function isTokenValid(token: string): boolean {
-    try {
-        const decodedToken: DecodedToken = jwtDecode(token);
-        const currentTime = Math.floor(Date.now() / 1000); // Heure actuelle en secondes
-        // return false;
-        return decodedToken.exp !== undefined && decodedToken.exp > currentTime;
-    } catch (error) {
-        console.error('Erreur lors de la validation du token :', error);
-        return false;
-    }
+  try {
+    const decodedToken: DecodedToken = jwtDecode(token);
+    const currentTime = Math.floor(Date.now() / 1000); // Heure actuelle en secondes
+    return decodedToken.exp !== undefined && decodedToken.exp > currentTime;
+  } catch (error) {
+    console.error('Erreur lors de la validation du token :', error);
+    return false;
+  }
 }
-
 
 export function getIds(token: string): Ids {
-    try {
-        const decodedToken: DecodedToken = jwtDecode(token);
-        const currentTime = Math.floor(Date.now() / 1000); // Heure actuelle en secondes
-        // return false;
-        const Ids: Ids = {userId: decodedToken.userId, firstname:decodedToken.firstname, name: decodedToken.name, phone: decodedToken.phone, email: decodedToken.email, type: decodedToken.type, admin: decodedToken.admin}
-        return Ids;
-    } catch (error) {
-        console.error('Erreur lors de la validation du token :', error);
-        const Ids: Ids = {userId: 0, firstname:'', name: '', phone: '', email: '', type:0, admin:false};
-        return Ids;
-    }
+  try {
+    const decodedToken: DecodedToken = jwtDecode(token);
+    return {
+      userId: decodedToken.userId,
+      firstname: decodedToken.firstname,
+      name: decodedToken.name,
+      phone: decodedToken.phone,
+      email: decodedToken.email,
+      type: decodedToken.type,
+      admin: decodedToken.admin,
+    };
+  } catch (error) {
+    console.error('Erreur lors de la validation du token :', error);
+    return {
+      userId: 0,
+      firstname: '',
+      name: '',
+      phone: '',
+      email: '',
+      type: 0,
+      admin: false,
+    };
+  }
 }
+
 export const setToken = (token: string): void => {
-    localStorage.setItem('authToken', token);
-  };
-export const removeToken = (): void => {
-localStorage.removeItem('authToken');
+  localStorage.setItem('authToken', token);
 };
+
+export const removeToken = (): void => {
+  localStorage.removeItem('authToken');
+};
+
 export const getToken = (): string | null => {
-return localStorage.getItem('authToken');
+  return localStorage.getItem('authToken');
 };
