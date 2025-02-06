@@ -37,6 +37,10 @@ public class UserService {
         return userRepository.findByUserMail(user_mail);
     }
 
+    public String hashPassword(String rawPassword) {
+        return passwordEncoder.encode(rawPassword);
+    }
+
     public User saveUser(User user) {
         user.setUser_password(passwordEncoder.encode(user.getUser_password()));
         return userRepository.save(user);
