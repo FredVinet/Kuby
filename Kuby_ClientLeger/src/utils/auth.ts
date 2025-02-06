@@ -5,7 +5,7 @@ interface DecodedToken {
     iat: number;
     exp: number;
     userId: number;
-    firstname: number;
+    firstname: string;
     name: string;
     phone: string;
     email: string;
@@ -15,7 +15,7 @@ interface DecodedToken {
 
 export interface Ids {
     userId: number;
-    firstname: number;
+    firstname: string;
     name: string;
     phone: string;
     email: string;
@@ -41,11 +41,20 @@ export function getIds(token: string): Ids {
         const decodedToken: DecodedToken = jwtDecode(token);
         const currentTime = Math.floor(Date.now() / 1000); // Heure actuelle en secondes
         // return false;
-        const Ids: Ids = {userId: decodedToken.userId, profileId:decodedToken.profileId, profile: decodedToken.profile, department: decodedToken.department, companyId: decodedToken.companyId}
+        const Ids: Ids = {userId: decodedToken.userId, firstname:decodedToken.firstname, name: decodedToken.name, phone: decodedToken.phone, email: decodedToken.email, type: decodedToken.type, admin: decodedToken.admin}
         return Ids;
     } catch (error) {
         console.error('Erreur lors de la validation du token :', error);
-        const Ids: Ids = {userId: 0, profileId:0, profile: '', department: '', companyId: 0};
+        const Ids: Ids = {userId: 0, firstname:'', name: '', phone: '', email: '', type:0, admin:false};
         return Ids;
     }
 }
+export const setToken = (token: string): void => {
+    localStorage.setItem('authToken', token);
+  };
+export const removeToken = (): void => {
+localStorage.removeItem('authToken');
+};
+export const getToken = (): string | null => {
+return localStorage.getItem('authToken');
+};

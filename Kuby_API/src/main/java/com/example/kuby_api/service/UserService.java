@@ -3,6 +3,7 @@ package com.example.kuby_api.service;
 import com.example.kuby_api.model.User;
 import com.example.kuby_api.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import lombok.Data;
@@ -18,6 +19,8 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
     public Optional<User> getUser(final Long id){
         return userRepository.findById(id);
     }
@@ -30,7 +33,17 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    public User saveUser(User user){
+    public Optional<User> findByUserMail(String user_mail) {
+        return userRepository.findByUserMail(user_mail);
+    }
+
+    public User saveUser(User user) {
+        user.setUser_password(passwordEncoder.encode(user.getUser_password()));
         return userRepository.save(user);
+    }
+
+    // Méthode pour vérifier le mot de passe
+    public boolean checkPassword(String rawPassword, String encodedPassword) {
+        return passwordEncoder.matches(rawPassword, encodedPassword);
     }
 }

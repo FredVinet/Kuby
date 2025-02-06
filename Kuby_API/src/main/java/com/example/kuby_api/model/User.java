@@ -25,7 +25,7 @@ public class User {
     private String user_phone;
 
     @Column(name = "user_mail")
-    private String user_mail;
+    private String userMail;
 
     @Column(name = "user_password")
     private String user_password;

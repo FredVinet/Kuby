@@ -68,5 +68,12 @@ export const API_ENDPOINTS = {
     CREATE_USER: '/articles/createUser',
     UPDATE_USER: '/articles/updateUser/',
     DELETE_USER: '/articles/deleteUser/',
+
+    // Auth
+    LOGIN: '/users/login',
+    CHECK_FIRST_LOGIN: '/auth/checkFirstLogin.php',
+    SET_NEW_PASSWORD: '/auth/setNewPassword.php',
+    UPDATE_PASSWORD: '/auth/updatePassword.php',
+    CHANGE_PASSWORD: '/auth/changePassword.php',
 }
   
