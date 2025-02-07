@@ -44,6 +44,7 @@
   import { ref } from 'vue'
   import AuthService from '@/api/services/AuthService'
   import { useUserConnectedStore } from '@/stores/userConnected' // Importez le store
+import { useRouter } from 'vue-router'
   
   const title = ref("Connexion")
   const msg = ref("Connectez-vous pour commencer vos achats")
@@ -64,17 +65,25 @@
       };
       const { user, token } = await AuthService.login(credentials.email, credentials.password);
   
+      console.log("userinfo", user)
       // Stocker les informations de l'utilisateur dans le store
       userConnectedStore.setUserInfo(user);
       if (token) {
         localStorage.setItem('authToken', token); // Stocker le token dans le localStorage
       }
-  
+      
       alert('Connexion réussie!');
+      navigateTo('/account')
     } catch (error) {
       alert('Erreur de connexion: ' + error.message);
     }
   }
+
+  const router = useRouter();
+
+function navigateTo(path) {
+    router.push(path);
+}
   
   // Méthode de déconnexion
   function logout() {

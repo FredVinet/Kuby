@@ -51,12 +51,22 @@ public class UserController {
         Optional<User> user = userService.findByuserMail(userMail);
 
         if (user.isPresent() && userService.checkPassword(password, user.get().getUser_password())) {
-            return ResponseEntity.ok(user.get());
+            // Générer un token JWT (si vous utilisez JWT)
+            String token = generateToken(user.get());
+            return ResponseEntity.ok(Map.of(
+                    "user", user.get(), // Assurez-vous que l'objet User est bien renvoyé
+                    "token", token      // Assurez-vous que le token est bien renvoyé
+            ));
         } else {
             Map<String, String> response = new HashMap<>();
             response.put("message", "Email ou mot de passe incorrect");
             return ResponseEntity.status(401).body(response);
         }
+    }
+
+    private String generateToken(User user) {
+        // Implémentez la génération du token JWT ici
+        return "your-jwt-token";
     }
 
     @PostMapping("/updatePassword/{id}")
