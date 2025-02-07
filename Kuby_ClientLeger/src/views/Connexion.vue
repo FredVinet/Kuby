@@ -91,3 +91,4 @@ function navigateTo(path) {
     alert('Déconnexion réussie!');
   }
   </script>
+
