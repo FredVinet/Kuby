@@ -20,10 +20,6 @@ export default class UserService {
 
       const user = response.data
 
-      if (typeof user.details_user === 'string') {
-        user.details_user = this.transformUser(user.details_user)
-      }
-
       return user
     } catch (error: any) {
       throw new Error(`Error fetching user: ${error.response?.data?.message || error.message}`)

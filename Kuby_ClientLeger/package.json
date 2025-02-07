@@ -16,6 +16,7 @@
     "@mdi/font": "^7.4.47",
     "axios": "^1.7.9",
     "boxicons": "^2.1.4",
+    "jwt-decode": "^4.0.0",
     "pinia": "^2.2.6",
     "vue": "^3.5.12",
     "vue-router": "^4.4.5",
