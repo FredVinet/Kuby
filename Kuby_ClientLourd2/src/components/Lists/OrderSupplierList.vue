@@ -7,7 +7,7 @@
       rounded="lg"
     >
       <v-table
-        v-if="wines && wines.length > 0"
+        v-if="orders && orders.length > 0"
         style="max-height: 28rem; overflow-y: auto"
         fixed-header
       >
@@ -16,9 +16,24 @@
             <th class="d-flex justify-center">
               <div class="d-flex align-center">
                 <v-btn variant="text">
-                  <h2 class="text-primary text-center" style="text-transform: none">id</h2>
+                  <h2 class="text-primary text-center" style="text-transform: none">ID</h2>
                 </v-btn>
               </div>
+            </th>
+            <th class="text-center">
+              <v-btn variant="text">
+                <h2 class="text-primary" style="text-transform: none">Statut</h2>
+              </v-btn>
+            </th>
+            <th class="text-center">
+              <v-btn variant="text">
+                <h2 class="text-primary" style="text-transform: none">Date</h2>
+              </v-btn>
+            </th>
+            <th class="text-center">
+              <v-btn variant="text">
+                <h2 class="text-primary" style="text-transform: none">Qté Article</h2>
+              </v-btn>
             </th>
             <th class="text-center">
               <v-btn variant="text">
@@ -27,17 +42,12 @@
             </th>
             <th class="text-center">
               <v-btn variant="text">
-                <h2 class="text-primary" style="text-transform: none">Famille</h2>
+                <h2 class="text-primary" style="text-transform: none">Prénom</h2>
               </v-btn>
             </th>
             <th class="text-center">
               <v-btn variant="text">
-                <h2 class="text-primary" style="text-transform: none">Variété</h2>
-              </v-btn>
-            </th>
-            <th class="text-center">
-              <v-btn variant="text">
-                <h2 class="text-primary" style="text-transform: none">Année</h2>
+                <h2 class="text-primary" style="text-transform: none">Adresse Livraison</h2>
               </v-btn>
             </th>
             <th class="text-center">
@@ -45,97 +55,75 @@
                 <h2 class="text-primary" style="text-transform: none">Prix</h2>
               </v-btn>
             </th>
-            <th class="text-center">
-              <v-btn variant="text">
-                <h2 class="text-primary" style="text-transform: none">Fournisseur</h2>
-              </v-btn>
-            </th>
-            <th class="text-center">
-              <v-btn variant="text">
-                <h2 class="text-primary" style="text-transform: none">Quantité</h2>
-              </v-btn>
-            </th>
           </tr>
         </thead>
         <tbody>
           <tr
-            v-for="wine in wines"
-            :key="wine.id"
+            v-for="order in orders"
+            :key="order.id"
             class="clickable-row"
-            @click="selectWine(wine)"
+            @click="selectOrder(order)"
           >
             <td>
               <h3 class="font-weight-regular text-center">
-                {{ wine.id }}
+                {{ order.id }}
               </h3>
             </td>
             <td>
               <h3 class="font-weight-regular text-center">
-                {{ wine.name }}
+                {{ order.status }}
               </h3>
             </td>
             <td>
               <h3 class="font-weight-regular text-center">
-                {{ wine.family }}
+                {{ order.date }}
               </h3>
             </td>
             <td>
               <h3 class="font-weight-regular text-center">
-                {{ wine.variety }}
+                {{ order.quantity }}
               </h3>
             </td>
             <td>
               <h3 class="font-weight-regular text-center">
-                {{ wine.year }}
+                {{ order.name }}
               </h3>
             </td>
             <td>
               <h3 class="font-weight-regular text-center">
-                {{ wine.price }} €
+                {{ order.prenom }}
               </h3>
             </td>
             <td>
               <h3 class="font-weight-regular text-center">
-                {{ wine.supplier }}
+                {{ order.deliveryAddress }}
               </h3>
             </td>
             <td>
               <h3 class="font-weight-regular text-center">
-                {{ wine.quantity }}
+                {{ order.price }} €
               </h3>
             </td>
           </tr>
         </tbody>
       </v-table>
       <div v-else>
-        <p class="text-center text-muted">Aucun vin trouvé.</p>
+        <p class="text-center text-muted">Aucune commande trouvée.</p>
       </div>
     </v-card>
-
-    <div class="d-flex justify-center my-10">
-            <v-btn
-            color="primary"
-            class="mx-5"
-            >Ajouter un Produit</v-btn>
-            <v-btn
-            color="primary"
-            class="mx-5"
-            >Gestion inventaire</v-btn>
-        </div>
   </template>
   
-  <script setup lang="ts">
+  <script setup lang="ts">  
   import { defineEmits, defineProps } from 'vue'
 
   defineProps<{
-    wines?: []
-  }>()  
+    orders?: []
+  }>()
   
+  const emits = defineEmits(['updateSelectedOrder'])
   
-  const emits = defineEmits(['updateSelectedWine'])
-  
-  const selectWine = (wine: { id: number, name: string, family: string, variety: string, year: number, price: number, supplier: string, quantity: number }) => {
-    emits('updateSelectedWine', wine)
+  const selectOrder = (order: { id: number, status: string, date: string, quantity: number, name: string, prenom: string, deliveryAddress: string, price: number }) => {
+    emits('updateSelectedOrder', order)
   }
   </script>
   

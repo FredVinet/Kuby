@@ -10,25 +10,25 @@ const routes = [
   {
     path: '/clientslist',
     name: 'clientslist',
-    component: () => import('../views/ClientsList.vue'),
+    component: () => import('../views/MyClients.vue'),
     meta: { requiresAuth: true }
   },
   {
     path: '/supplierslist',
     name: 'supplierslist',
-    component: () => import('../views/SuppliersList.vue'),
+    component: () => import('../views/MySuppliers.vue'),
     meta: { requiresAuth: true }
   },
   {
     path: '/clientsorders',
     name: 'clientsorders',
-    component: () => import('../views/ClientsOrders.vue'),
+    component: () => import('../views/MyClientsOrders.vue'),
     meta: { requiresAuth: true }
   },
   {
     path: '/suppliersorders',
     name: 'suppliersorders',
-    component: () => import('../views/SuppliersOrders.vue'),
+    component: () => import('../views/MySuppliersOrders.vue'),
     meta: { requiresAuth: true }
   },
   {

@@ -4,8 +4,8 @@ let mainWindow;
 
 app.whenReady().then(() => {
   mainWindow = new BrowserWindow({
-    width: 1200,
-    height: 800,
+    width: 1680,
+    height: 900,
     webPreferences: {
       nodeIntegration: true, // Active Node.js dans Electron
     },

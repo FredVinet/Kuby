@@ -7,8 +7,8 @@
       rounded="lg"
     >
       <v-table
-        v-if="tableData && tableData.length > 0"
-        style="max-height: 40rem; overflow-y: auto"
+        v-if="orders && orders.length > 0"
+        style="max-height: 28rem; overflow-y: auto"
         fixed-header
       >
         <thead>
@@ -59,7 +59,7 @@
         </thead>
         <tbody>
           <tr
-            v-for="order in tableData"
+            v-for="order in orders"
             :key="order.id"
             class="clickable-row"
             @click="selectOrder(order)"
@@ -113,72 +113,12 @@
     </v-card>
   </template>
   
-  <script setup lang="ts">
-  import { defineEmits } from 'vue'
-  
-  // Liste des commandes avec ID, Statut, Date, Qté Article, Nom, Prénom, Adresse Livraison et Prix
-  const tableData = [
-    {
-      id: 1,
-      status: 'En cours',
-      date: '2025-02-01',
-      quantity: 3,
-      name: 'Dupont',
-      prenom: 'Jean',
-      deliveryAddress: '123 Rue Principale, Paris',
-      price: 150
-    },
-    {
-      id: 2,
-      status: 'Livrée',
-      date: '2025-01-28',
-      quantity: 2,
-      name: 'Martin',
-      prenom: 'Claire',
-      deliveryAddress: '45 Avenue des Champs-Élysées, Paris',
-      price: 200
-    },
-    {
-      id: 3,
-      status: 'Annulée',
-      date: '2025-01-30',
-      quantity: 1,
-      name: 'Lemoine',
-      prenom: 'Pierre',
-      deliveryAddress: '12 Boulevard Saint-Germain, Paris',
-      price: 80
-    },
-    {
-      id: 4,
-      status: 'Livrée',
-      date: '2025-02-02',
-      quantity: 5,
-      name: 'Lemoine',
-      prenom: 'Sylvie',
-      deliveryAddress: '78 Rue de Rivoli, Paris',
-      price: 300
-    },
-    {
-      id: 5,
-      status: 'En cours',
-      date: '2025-02-03',
-      quantity: 10,
-      name: 'Durand',
-      prenom: 'Lucie',
-      deliveryAddress: '56 Rue de la Paix, Lyon',
-      price: 500
-    },
-    {
-      id: 6,
-      status: 'Livrée',
-      date: '2025-01-29',
-      quantity: 7,
-      name: 'Bernard',
-      prenom: 'Paul',
-      deliveryAddress: '34 Avenue de la République, Marseille',
-      price: 350
-    }
-  ]
+  <script setup lang="ts">  
+  import { defineEmits, defineProps } from 'vue'
+
+  defineProps<{
+    orders?: []
+  }>()
   
   const emits = defineEmits(['updateSelectedOrder'])
   

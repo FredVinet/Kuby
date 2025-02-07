@@ -7,14 +7,14 @@
         class="mx-auto my-8"
     >
         <v-card-title class="text-center text-accent my-2 font-weight-bold">
-            <h1 class="text-info">Informations de la Commande</h1>
+            <h1 class="text-info">Client : {{client?.name}} {{client?.prenom}} </h1>
         </v-card-title>
         <v-row align="center" no-gutters>
             <v-col class="text-left px-3" :cols="12" :md="6">
                 <v-card-text class="font-weight-bold text-accent">
-                    <div class="py-3"><h2>ID : <span class="font-weight-medium">client.id </span></h2></div>
-                    <div class="py-3"><h2>Nom : <span class="font-weight-medium">client.Nom </span></h2></div>
-                    <div class="py-3"><h2>Prénom : <span class="font-weight-medium">client.Prénom </span></h2></div>
+                    <div class="py-3"><h2>ID : <span class="font-weight-medium">{{client?.id}} </span></h2></div>
+                    <div class="py-3"><h2>Nom : <span class="font-weight-medium">{{client?.name}} </span></h2></div>
+                    <div class="py-3"><h2>Prénom : <span class="font-weight-medium">{{client?.prenom}} </span></h2></div>
                     <div class="py-3"><h2>Téléphone : <span class="font-weight-medium">client.tel </span></h2></div>
 
 
@@ -53,6 +53,12 @@
 
 <script setup lang="ts">
 
+    import { defineProps } from 'vue'
+
+    defineProps<{
+        client: User | null
+
+    }>()
 
 </script>
 

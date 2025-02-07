@@ -12,11 +12,11 @@
         <v-row align="center" no-gutters>
             <v-col class="text-left px-3" :cols="12" :md="8">
                 <v-card-text class="font-weight-bold text-accent">
-                    <div class="py-3"><h2>Pour le client: <span class="font-weight-medium">Nom </span></h2></div>
-                    <div class="py-3"><h2>Statut: : <span class="font-weight-medium">Validée </span></h2></div>
-                    <div class="py-3"><h2>Montant de la commande : <span class="font-weight-medium">10000€ </span></h2></div>
-                    <div class="py-3"><h2>Date de la commande : <span class="font-weight-medium">10/10/2010 </span></h2></div>
-                    <div class="py-3"><h2>Adresse de livraison : <span class="font-weight-medium">3 rue des gens heureux, HappyTown, France </span></h2></div>
+                    <div class="py-3"><h2>Pour le client: <span class="font-weight-medium">{{order.name}} </span></h2></div>
+                    <div class="py-3"><h2>Statut: : <span class="font-weight-medium">{{order.status}} </span></h2></div>
+                    <div class="py-3"><h2>Montant de la commande : <span class="font-weight-medium">{{order.price}} € </span></h2></div>
+                    <div class="py-3"><h2>Date de la commande : <span class="font-weight-medium">{{order.date}}</span></h2></div>
+                    <div class="py-3"><h2>Adresse de livraison : <span class="font-weight-medium">{{order.deliveryAddress}} </span></h2></div>
 
                 </v-card-text>
             </v-col>
@@ -43,6 +43,12 @@
 
 <script setup lang="ts">
 
+import { defineProps } from 'vue'
+
+defineProps<{
+    order: User | null
+
+}>()
 
 </script>
 

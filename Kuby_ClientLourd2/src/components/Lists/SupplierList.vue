@@ -7,7 +7,7 @@
       rounded="lg"
     >
       <v-table
-        v-if="clients && clients.length > 0"
+        v-if="suppliers && suppliers.length > 0"
         style="max-height: 28rem; overflow-y: auto"
         fixed-header
       >
@@ -34,31 +34,31 @@
         </thead>
         <tbody>
           <tr
-            v-for="client in clients"
-            :key="client.id"
+            v-for="supplier in suppliers"
+            :key="supplier.id"
             class="clickable-row"
-            @click="selectClient(client)"
+            @click="selectSupplier(supplier)"
           >
             <td>
               <h3 class="font-weight-regular text-center">
-                {{ client.id }}
+                {{ supplier.id }}
               </h3>
             </td>
             <td>
               <h3 class="font-weight-regular text-center">
-                {{ client.name }}
+                {{ supplier.name }}
               </h3>
             </td>
             <td>
               <h3 class="font-weight-regular text-center">
-                {{ client.prenom }}
+                {{ supplier.prenom }}
               </h3>
             </td>
           </tr>
         </tbody>
       </v-table>
       <div v-else>
-        <p class="text-center text-muted">Aucun client trouvé.</p>
+        <p class="text-center text-muted">Aucun supplier trouvé.</p>
       </div>
     </v-card>
 
@@ -66,7 +66,7 @@
             <v-btn
             color="primary"
             class=""
-            >Ajouter un client</v-btn>
+            >Ajouter un supplier</v-btn>
         </div>
   </template>
   
@@ -74,13 +74,13 @@
   import { defineEmits, defineProps } from 'vue'
 
   defineProps<{
-    clients?: []
+    suppliers?: User[]
   }>()
   
-  const emits = defineEmits(['updateSelectedClient'])
+  const emits = defineEmits(['updateSelectedSupplier'])
   
-  const selectClient = (client: { id: number, name: string, prenom: string }) => {
-    emits('updateSelectedClient', client)
+  const selectSupplier = (supplier: { id: number, name: string, prenom: string }) => {
+    emits('updateSelectedSupplier', supplier)
   }
   </script>
   
