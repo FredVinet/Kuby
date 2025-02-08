@@ -1,23 +1,43 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import { getIds, isTokenValid, setToken, removeToken } from '@/utils/auth'
+import { getIds, isTokenValid } from '@/utils/auth'
 import type { User } from '@/api/interfaces/User'
+import { useCartStore } from './cartStore'
+import UserService from '@/api/services/UserService'
 
 export const useUserConnectedStore = defineStore('userConnected', () => {
   const userId = ref<number | null>(null)
-  const userDetails = ref<User | null>(null)
+  const userDetails = ref<Record<string, any> | null>(null)
 
   // Méthode pour définir les informations de l'utilisateur
-  const setUserInfo = (user: User) => {
-    userId.value = user.user_id
-    userDetails.value = user
+  const setUserInfo = (newUserId: number) => {
+    userId.value = newUserId
   }
 
   // Méthode pour effacer les informations de l'utilisateur
   const clearUserInfo = () => {
     userId.value = null
     userDetails.value = null
-    removeToken() // Supprimer le token du localStorage
+
+    localStorage.removeItem('authToken')
+    localStorage.removeItem('cart')
+
+    useCartStore().$reset()
+  }
+
+  const fetchUserInfo = async () => {
+    if (!userId.value) {
+      console.error('Aucun ID utilisateur')
+      return
+    }
+
+    try {
+      const details = await UserService.getUserById(userId.value)
+      userDetails.value = details
+    } catch (error) {
+      console.error('Erreur lors de la récupération des détails utilisateur :', error)
+      userDetails.value = null
+    }
   }
 
   // Méthode pour initialiser l'utilisateur à partir du token
@@ -25,9 +45,9 @@ export const useUserConnectedStore = defineStore('userConnected', () => {
     const token = localStorage.getItem('authToken')
     if (token && isTokenValid(token)) {
       const ids = getIds(token)
-      userId.value = ids.userId
+      setUserInfo(ids.userId)
 
-      // Vous pouvez appeler une méthode pour récupérer les détails de l'utilisateur ici
+      await fetchUserInfo()
     } else {
       clearUserInfo()
     }
@@ -39,5 +59,6 @@ export const useUserConnectedStore = defineStore('userConnected', () => {
     setUserInfo,
     clearUserInfo,
     initializeFromToken,
+    fetchUserInfo,
   }
 })

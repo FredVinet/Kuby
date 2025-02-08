@@ -74,7 +74,7 @@ const newOrder = reactive<Orders>({
   orders_date: new Date(),
   orders_status: 'placed',
   orders_amount: 0,
-  id_location: 1,
+  id_localisation: 1,
 })
 
 async function checkout(orderTotal: number) {

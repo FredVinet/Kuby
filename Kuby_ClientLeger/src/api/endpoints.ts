@@ -1,10 +1,10 @@
 export const API_ENDPOINTS = {
     // address
-    GET_ALL_ADRESSES: '/articles/getAllAdresses',
-    GET_ADRESSE_BY_ID: '/articles/getOneAdress/',
-    CREATE_ADRESSES: '/articles/createAdress',
-    UPDATE_ADRESSES: '/articles/updateAdress/',
-    DELETE_ADRESSES: '/articles/deleteAdress/',
+    GET_ALL_ADRESSES: '/adresses/getAllAdresses',
+    GET_ADRESSE_BY_ID: '/adresses/getOneAdress/',
+    CREATE_ADRESSES: '/adresses/createAdress',
+    UPDATE_ADRESSES: '/adresses/updateAdress/',
+    DELETE_ADRESSES: '/adresses/deleteAdress/',
 
     // article
     GET_ALL_ARTICLES: '/articles/getAllArticles',
@@ -14,25 +14,25 @@ export const API_ENDPOINTS = {
     DELETE_ARTICLE: '/articles/deleteArticle/',
 
     // family
-    GET_ALL_FAMILIES: '/articles/getAllFamilies',
-    GET_FAMILY_BY_ID: '/articles/getOneFamily/',
-    CREATE_FAMILY: '/articles/createFamily',
-    UPDATE_FAMILY: '/articles/updateFamily/',
-    DELETE_FAMILY: '/articles/deleteFamily/',
+    GET_ALL_FAMILIES: '/families/getAllFamilies',
+    GET_FAMILY_BY_ID: '/families/getOneFamily/',
+    CREATE_FAMILY: '/families/createFamily',
+    UPDATE_FAMILY: '/families/updateFamily/',
+    DELETE_FAMILY: '/families/deleteFamily/',
 
     // grape
-    GET_ALL_GRAPES: '/articles/getAllGrapes',
-    GET_GRAPE_BY_ID: '/articles/getOneGrape/',
-    CREATE_GRAPE: '/articles/createGrape',
-    UPDATE_GRAPE: '/articles/updateGrape/',
-    DELETE_GRAPE: '/articles/deleteGrape/',
+    GET_ALL_GRAPES: '/grapes/getAllGrapes',
+    GET_GRAPE_BY_ID: '/grapes/getOneGrape/',
+    CREATE_GRAPE: '/grapes/createGrape',
+    UPDATE_GRAPE: '/grapes/updateGrape/',
+    DELETE_GRAPE: '/grapes/deleteGrape/',
 
     // localisation
-    GET_ALL_LOCALISATIONS: '/articles/getAllLocalisations',
-    GET_LOCALISATION_BY_ID: '/articles/getOneLocalisation/',
-    CREATE_LOCALISATION: '/articles/createLocalisation',
-    UPDATE_LOCALISATION: '/articles/updateLocalisation/',
-    DELETE_LOCALISATION: '/articles/deleteLocalisation/',
+    GET_ALL_LOCALISATIONS: '/localisations/getAllLocalisations',
+    GET_LOCALISATION_BY_ID: '/localisations/getOneLocalisation/',
+    CREATE_LOCALISATION: '/localisations/createLocalisation',
+    UPDATE_LOCALISATION: '/localisations/updateLocalisation/',
+    DELETE_LOCALISATION: '/localisations/deleteLocalisation/',
 
     // orders 
     GET_ALL_ORDERS: '/orders/getAllOrders',
@@ -49,31 +49,29 @@ export const API_ENDPOINTS = {
     DELETE_ORDER_ITEM: '/orderItems/deleteOrderItem/',
     
     // stock
-    GET_ALL_STOCKS: '/articles/getAllStocks',
-    GET_STOCK_BY_ID: '/articles/getOneStock/',
-    CREATE_STOCK: '/articles/createStock',
-    UPDATE_STOCK: '/articles/updateStock/',
-    DELETE_STOCK: '/articles/deleteStock/',
+    GET_ALL_STOCKS: '/stocks/getAllStocks',
+    GET_STOCK_BY_ID: '/stocks/getOneStock/',
+    CREATE_STOCK: '/stocks/createStock',
+    UPDATE_STOCK: '/stocks/updateStock/',
+    DELETE_STOCK: '/stocks/deleteStock/',
 
     // supplier_article
-    GET_ALL_SUPPLIER_ARTICLES: '/articles/getAllSupplierArticles',
-    GET_SUPPLIER_ARTICLE_BY_ID: '/articles/getOneSupplierArticle/',
-    CREATE_SUPPLIER_ARTICLE: '/articles/createSupplierArticle',
-    UPDATE_SUPPLIER_ARTICLE: '/articles/updateSupplierArticle/',
-    DELETE_SUPPLIER_ARTICLE: '/articles/deleteSupplierArticle/',
+    GET_ALL_SUPPLIER_ARTICLES: '/supplierarticles/getAllSupplierArticles',
+    GET_SUPPLIER_ARTICLE_BY_ID: '/supplierarticles/getOneSupplierArticle/',
+    CREATE_SUPPLIER_ARTICLE: '/supplierarticles/createSupplierArticle',
+    UPDATE_SUPPLIER_ARTICLE: '/supplierarticles/updateSupplierArticle/',
+    DELETE_SUPPLIER_ARTICLE: '/supplierarticles/deleteSupplierArticle/',
 
     // users
-    GET_ALL_USERS: '/articles/getAllUsers',
-    GET_USER_BY_ID: '/articles/getOneUser/',
-    CREATE_USER: '/articles/createUser',
-    UPDATE_USER: '/articles/updateUser/',
-    DELETE_USER: '/articles/deleteUser/',
+    GET_ALL_USERS: '/users/getAllUsers',
+    GET_USER_BY_ID: '/users/getOneUser/{userId}',
+    GET_ADRESSES_BY_USER_ID: '/users/{userId}/adresses',
+    GET_ORDERS_BY_USER_ID: '/users/{userId}/orders',
+    CREATE_USER: '/users/createUser',
+    UPDATE_USER: '/users/updateUser/{userId}',
+    DELETE_USER: '/users/deleteUser/{userId}',
 
     // Auth
     LOGIN: '/users/login',
-    CHECK_FIRST_LOGIN: '/auth/checkFirstLogin.php',
-    SET_NEW_PASSWORD: '/auth/setNewPassword.php',
-    UPDATE_PASSWORD: '/auth/updatePassword.php',
-    CHANGE_PASSWORD: '/auth/changePassword.php',
 }
   

@@ -29,7 +29,7 @@ public class AdressController {
     }
 
     @PutMapping("/updateAdress/{id}")
-    public Adress updateAdress(@PathVariable Long id, @RequestBody Adress adress) {
+    public Adress updateAdress(@PathVariable Integer id, @RequestBody Adress adress) {
         adress.setAdress_id(id);
         return adressService.saveAdress(adress);
     }
