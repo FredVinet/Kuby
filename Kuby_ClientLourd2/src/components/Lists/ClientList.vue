@@ -41,17 +41,17 @@
           >
             <td>
               <h3 class="font-weight-regular text-center">
-                {{ client.id }}
+                {{ client.user_id }}
               </h3>
             </td>
             <td>
               <h3 class="font-weight-regular text-center">
-                {{ client.name }}
+                {{ client.user_name }}
               </h3>
             </td>
             <td>
               <h3 class="font-weight-regular text-center">
-                {{ client.prenom }}
+                {{ client.user_firstname }}
               </h3>
             </td>
           </tr>
@@ -72,6 +72,7 @@
   
   <script setup lang="ts">
   import { defineEmits, defineProps } from 'vue'
+  import { User } from '@/api/interfaces/user.ts';
 
   defineProps<{
     clients?: []
@@ -79,7 +80,7 @@
   
   const emits = defineEmits(['updateSelectedClient'])
   
-  const selectClient = (client: { id: number, name: string, prenom: string }) => {
+  const selectClient = (client: User) => {
     emits('updateSelectedClient', client)
   }
   </script>

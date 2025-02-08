@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import lombok.Data;
 
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -27,6 +28,10 @@ public class UserService {
 
     public Iterable<User> getUsers() {
         return userRepository.findAll();
+    }
+
+    public List<User> getUsersByType(int userType) {
+        return userRepository.findByUserType(userType);
     }
 
     public void deleteUser(final Long id){
