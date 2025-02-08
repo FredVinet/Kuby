@@ -41,17 +41,17 @@
           >
             <td>
               <h3 class="font-weight-regular text-center">
-                {{ supplier.id }}
+                {{ supplier.user_id }}
               </h3>
             </td>
             <td>
               <h3 class="font-weight-regular text-center">
-                {{ supplier.name }}
+                {{ supplier.user_name }}
               </h3>
             </td>
             <td>
               <h3 class="font-weight-regular text-center">
-                {{ supplier.prenom }}
+                {{ supplier.user_firstname}}
               </h3>
             </td>
           </tr>

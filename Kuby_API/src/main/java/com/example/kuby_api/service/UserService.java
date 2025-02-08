@@ -40,6 +40,10 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    public List<User> getUsersByType(int userType) {
+        return userRepository.findByUserType(userType);
+    }
+
     public void deleteUser(final Long id){
         userRepository.deleteById(id);
     }

@@ -12,6 +12,11 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import java.util.*;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
 @RestController
 @CrossOrigin(origins = "http://localhost:5173")
 @RequestMapping("/users")
@@ -31,6 +36,11 @@ public class UserController {
     @GetMapping("/getOneUser/{id}")
     public Optional<User> getUserById(@PathVariable Long id) {
         return userService.getUser(id);
+    }
+
+    @GetMapping("/getUsersByType/{type}")
+    public List<User> getUsersByType(@PathVariable int type) {
+        return userService.getUsersByType(type);
     }
 
     @PostMapping("/createUser")

@@ -66,42 +66,42 @@
           >
             <td>
               <h3 class="font-weight-regular text-center">
-                {{ wine.id }}
+                {{ wine.article_id }}
               </h3>
             </td>
             <td>
               <h3 class="font-weight-regular text-center">
-                {{ wine.name }}
+                {{ wine.article_name }}
               </h3>
             </td>
             <td>
               <h3 class="font-weight-regular text-center">
-                {{ wine.family }}
+                {{ wine.family.family_name }}
               </h3>
             </td>
             <td>
               <h3 class="font-weight-regular text-center">
-                {{ wine.variety }}
+                {{ wine.grape.grape_name }}
               </h3>
             </td>
             <td>
               <h3 class="font-weight-regular text-center">
-                {{ wine.year }}
+                {{ wine.article_yearprod }}
               </h3>
             </td>
             <td>
               <h3 class="font-weight-regular text-center">
-                {{ wine.price }} €
+                {{ wine.article_price }} €
               </h3>
             </td>
             <td>
               <h3 class="font-weight-regular text-center">
-                {{ wine.supplier }}
+                {{ wine.supplierArticle?.supplier?.user_name || 'Non renseigné' }}              
               </h3>
             </td>
             <td>
               <h3 class="font-weight-regular text-center">
-                {{ wine.quantity }}
+                {{ calculateTotalQuantity(wine) }}
               </h3>
             </td>
           </tr>
@@ -125,17 +125,23 @@
   </template>
   
   <script setup lang="ts">
-  import { defineEmits, defineProps } from 'vue'
+  import { defineEmits, defineProps,ref } from 'vue'
+  import {Article} from '@/api/interfaces/Article.ts'
 
-  defineProps<{
+  const props = defineProps<{
     wines?: []
   }>()  
   
-  
+
+  const calculateTotalQuantity = (wine: Article) => {
+    return (wine.article_quantity_in ?? 0) - (wine.article_quantity_out ?? 0)
+  }
+
   const emits = defineEmits(['updateSelectedWine'])
   
-  const selectWine = (wine: { id: number, name: string, family: string, variety: string, year: number, price: number, supplier: string, quantity: number }) => {
+  const selectWine = (wine: Article) => {
     emits('updateSelectedWine', wine)
+    console.log(wine)
   }
   </script>
   
