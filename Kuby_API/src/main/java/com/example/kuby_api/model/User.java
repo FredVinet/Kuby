@@ -31,7 +31,7 @@ public class User {
     private String user_password;
 
     @Column(name = "user_type")
-    private int user_type;
+    private int userType;
 
     @Column(name = "user_admin")
     private boolean user_admin;

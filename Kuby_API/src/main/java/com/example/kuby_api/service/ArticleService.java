@@ -15,6 +15,7 @@ public class ArticleService {
     @Autowired
     private ArticleRepository articleRepository;
 
+
     public Optional<Article> getArticle(final Long id){
         return articleRepository.findById(id);
     }

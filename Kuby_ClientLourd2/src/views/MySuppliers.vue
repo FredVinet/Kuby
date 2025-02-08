@@ -17,63 +17,29 @@
   import SupplierList from '@/components/Lists/SupplierList.vue';
   import FilterClient from '@/components/Search/FilterClient.vue';
   import BigTitle from '@/components/Titles/BigTitle.vue';
-  import { ref } from 'vue';
+  import UserService from '@/api/services/UserService.ts'; 
+  import { User } from '@/api/interfaces/user.ts'
+  import { ref, onMounted } from 'vue';
 
   const title = ref('Suppliers Liste');
 
   const selectedSupplier= ref<User | null>(null)
-  const suppliers = [
-  {
-    id: 1,
-    name: 'Dupont',
-    prenom: 'Jean'
-  },
-  {
-    id: 2,
-    name: 'Martin',
-    prenom: 'Claire'
-  },
-  {
-    id: 3,
-    name: 'Lemoine',
-    prenom: 'Pierre'
-  },
-  {
-    id: 4,
-    name: 'Lemoine',
-    prenom: 'Sylvie'
-  },
-  {
-    id: 5,
-    name: 'Durand',
-    prenom: 'Lucie'
-  },
-  {
-    id: 6,
-    name: 'Bernard',
-    prenom: 'Paul'
-  },
-  {
-    id: 7,
-    name: 'Thomas',
-    prenom: 'Nicolas'
-  },
-  {
-    id: 8,
-    name: 'Robert',
-    prenom: 'Marie'
-  },
-  {
-    id: 9,
-    name: 'Henri',
-    prenom: 'Emilie'
-  },
-  {
-    id: 10,
-    name: 'Garnier',
-    prenom: 'Victor'
+  const suppliers = ref<User[]>([]);
+
+const getSupplier = async () => {
+  try {
+    const users = await UserService.getUsersByType(2);
+    suppliers.value = users; 
+    console.log(suppliers.value);
+  } catch (error) {
+    console.error('Erreur lors de la récupération des utilisateurs:', error);
   }
-];
+};
+
+onMounted(() => {
+  getSupplier();
+});
+
 
 const updateSelectedSupplier = (supplier: User) => {
   selectedSupplier.value = supplier

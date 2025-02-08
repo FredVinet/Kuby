@@ -7,11 +7,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
+@CrossOrigin(origins = "http://localhost:5173")
 public class UserController {
 
     @Autowired
@@ -25,6 +27,11 @@ public class UserController {
     @GetMapping("/getOneUser/{id}")
     public Optional<User> getUserById(@PathVariable Long id) {
         return userService.getUser(id);
+    }
+
+    @GetMapping("/getUsersByType/{type}")
+    public List<User> getUsersByType(@PathVariable int type) {
+        return userService.getUsersByType(type);
     }
 
     @PostMapping("/createUser")

@@ -15,9 +15,10 @@ CREATE TABLE `article` (
                            `article_id` integer PRIMARY KEY NOT NULL AUTO_INCREMENT,
                            `article_name` varchar(50) NOT NULL,
                            `article_description` varchar(500),
-                           `article_grape` varchar(200),
                            `article_yearprod` integer,
-                           `article_price` DECIMAL(10, 2) NOT NULL,
+                           `article_price` DECIMAL(10, 2),
+                           `article_quantity_in` integer,
+                           `article_quantity_out` integer,
                            `id_family` integer NOT NULL,
                            `id_grape` integer NOT NULL,
                            FOREIGN KEY (`id_family`) REFERENCES `family` (`family_id`),
@@ -26,7 +27,7 @@ CREATE TABLE `article` (
 
 CREATE TABLE `users` (
                          `user_id` integer PRIMARY KEY NOT NULL AUTO_INCREMENT,
-                         `user_firstname` varchar(50) NOT NULL,
+                         `user_firstname` varchar(50),
                          `user_name` varchar(50) NOT NULL,
                          `user_phone` varchar(50),
                          `user_mail` varchar(50) NOT NULL,
@@ -64,13 +65,15 @@ CREATE TABLE `stock` (
 );
 
 CREATE TABLE `orders` (
-                          `orders_id` BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+                          `orders_id` integer PRIMARY KEY NOT NULL AUTO_INCREMENT,
                           `orders_date` timestamp NOT NULL,
-                          `orders_status` ENUM('placed', 'paid') DEFAULT 'placed' NOT NULL,
+                          `orders_status` integer DEFAULT 1 NOT NULL,
                           `orders_amount` DECIMAL(10,2) NOT NULL,
                           `id_localisation` integer NOT NULL,
                           FOREIGN KEY (`id_localisation`) REFERENCES `localisation` (`localisation_id`)
 );
+
+
 
 CREATE TABLE `order_items` (
                                `order_items_id` integer PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -90,46 +93,55 @@ CREATE TABLE `supplier_article` (
                                     FOREIGN KEY (`id_article`) REFERENCES `article` (`article_id`)
 );
 
+
 -- Inserting data
 INSERT INTO `family` (`family_name`, `family_description`) VALUES
-                                                               ('Red Wines', 'Wines that are red in color, made from a variety of red grapes.'),
-                                                               ('White Wines', 'Wines that are white in color, usually made from white grapes.'),
-                                                               ('Sparkling Wines', 'Effervescent wines made from various grapes.');
+    ('Vins Rouges', 'Vins de couleur rouge, produits à partir de divers cépages rouges.'),
+    ('Vins Blancs', 'Vins de couleur blanche, souvent fabriqués à partir de raisins blancs.'),
+    ('Vins Effervescents', 'Vins avec des bulles, produits principalement avec des raisins blancs.');
 
+-- Insertion des cépages
 INSERT INTO `grape` (`grape_name`, `grape_description`) VALUES
-                                                            ('Cabernet Sauvignon', 'A popular variety of red grape known for its robust flavor.'),
-                                                            ('Chardonnay', 'A widely cultivated white wine grape used in the production of Chardonnay.'),
-                                                            ('Pinot Noir', 'A red wine grape variety of the species Vitis vinifera.');
+    ('Cabernet Sauvignon', 'Un cépage rouge populaire, connu pour son goût robuste.'),
+    ('Chardonnay', 'Un cépage de raisin blanc utilisé pour produire des vins comme le Chardonnay.'),
+    ('Pinot Noir', 'Un cépage rouge délicat, connu pour ses arômes fruités et floraux.');
 
-INSERT INTO `article` (`article_name`, `article_description`, `article_grape`, `article_yearprod`, `article_price`, `id_family`, `id_grape`) VALUES
-                                                                                                                                                 ('2019 Napa Valley Cabernet', 'A rich and full-bodied red wine from Napa Valley.', 'Cabernet Sauvignon', 2019, 120, 1, 1),
-                                                                                                                                                 ('2020 Chardonnay Reserve', 'A vibrant and smooth Chardonnay.', 'Chardonnay', 2020, 90, 2, 2),
-                                                                                                                                                 ('2018 Classic Pinot Noir', 'A delicate and fruity Pinot Noir.', 'Pinot Noir', 2018, 110, 1, 3);
+INSERT INTO `article` (`article_name`, `article_description`, `article_yearprod`, `article_price`, `article_quantity_in`, `article_quantity_out`, `id_family`, `id_grape`) VALUES
+    ('Cabernet Sauvignon 2020', 'Un vin rouge riche et puissant, parfait pour les repas de viande.', 2020, 25.50, 100, 0, 1, 1),
+    ('Chardonnay 2021', 'Un vin blanc fruité, idéal pour les apéritifs.', 2021, 22.00, 150, 0, 2, 2),
+    ('Pinot Noir 2019', 'Un vin rouge léger et élégant, avec des notes de fruits rouges.', 2019, 28.00, 80, 0, 1, 3);
 
 INSERT INTO `users` (`user_firstname`, `user_name`, `user_phone`, `user_mail`, `user_password`, `user_type`, `user_admin`) VALUES
-                                                                                                                               ('John', 'Doe', '123-456-7890', 'john.doe@example.com', 'hashed_password', 1, TRUE),
-                                                                                                                               ('Jane', 'Smith', '987-654-3210', 'jane.smith@example.com', 'hashed_password', 2, FALSE);
+    ('Pierre', 'Dupont', '0123456789', 'pierre.dupont@email.com', 'password_hashed', 1, FALSE),
+    ('Sophie', 'Lemoine', '0987654321', 'sophie.lemoine@email.com', 'password_hashed', 1, FALSE);
+
+-- Insertion des fournisseurs (user_type = 2)
+INSERT INTO `users` (`user_firstname`, `user_name`, `user_phone`, `user_mail`, `user_password`, `user_type`, `user_admin`) VALUES
+    ('Jacques', 'Martin', '0612345678', 'jacques.martin@supplier.com', 'password_hashed', 2, FALSE),
+    ('Claire', 'Bernard', '0678901234', 'claire.bernard@supplier.com', 'password_hashed', 2, FALSE);
 
 INSERT INTO `adress` (`adress_number`, `adress_country`, `adress_state`, `adress_name`, `adress_city`, `adress_code`) VALUES
-                                                                                                                          (101, 'USA', 'California', 'Vine St', 'Napa', '94558'),
-                                                                                                                          (202, 'France', 'Bordeaux', 'Chateau Rd', 'Bordeaux', '33000');
+    (12, 'France', 'Île-de-France', 'Rue de Paris', 'Paris', '75001'),
+    (56, 'France', 'Provence-Alpes-Côte d Azur', 'Avenue des Vins', 'Nice', '06000'),
+    (6, 'France', 'Finistère', 'Place Keruscun', 'Brest', '29200'),
+    (27, 'France', 'Finistère', 'Douvez Bourg', 'Guipavas', '29490');
 
 INSERT INTO `localisation` (`id_user`, `id_adress`) VALUES
-                                                        (1, 1),
-                                                        (2, 2);
+    (1, 1),  
+    (2, 2),
+    (3, 3),  
+    (4, 4);  
 
-INSERT INTO `stock` (`stock_date_in`, `stock_date_out`, `stock_quantity_in`, `stock_quantity_out`, `id_article`) VALUES
-                                                                                                                     ('2022-01-01 00:00:00', '2022-01-10 00:00:00', 100, 10, 1),
-                                                                                                                     ('2022-02-01 00:00:00', '2022-02-10 00:00:00', 150, 15, 2);
+INSERT INTO `orders` (`orders_date`, `orders_status`, `orders_amount`, `id_localisation`) VALUES
+    ('2025-02-08 12:30:00', 1, 51.00, 1),  
+    ('2025-02-08 14:00:00', 1, 66.00, 2);
 
-INSERT INTO `orders` (`orders_date`, `orders_amount`, `id_localisation`) VALUES
-                                                                          ('2022-03-01 00:00:00', 2000, 1),
-                                                                          ('2022-04-01 00:00:00', 2000, 2);
-
-INSERT INTO `order_items` (`order_items_quantity`, `id_order`, `unit_price`, `id_article`) VALUES
-                                                                                 (2, 1,  90, 2),
-                                                                                 (3, 2,  120, 1);
+INSERT INTO `order_items` (`id_order`, `id_article`, `order_items_quantity`, `unit_price`) VALUES
+    (1, 1, 2, 25.50),  
+    (1, 2, 1, 22.00),  
+    (2, 2, 3, 22.00),  
+    (2, 3, 2, 28.00);  
 
 INSERT INTO `supplier_article` (`id_user`, `id_article`) VALUES
-                                                             (1, 1),
-                                                             (2, 2);
+    (3, 1),  
+    (4, 2); 
