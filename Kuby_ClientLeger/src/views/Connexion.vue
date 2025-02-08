@@ -28,7 +28,7 @@
         ></v-text-field>
         
         <div class="my-5 d-flex justify-space-evenly">
-          <v-btn color="primary" @click="login">Se Connecter</v-btn>
+          <v-btn color="primary" @click="attemptLogin">Se Connecter</v-btn>
           <v-btn color="primary" @click="logout">Se Déconnecter</v-btn>
         </div>
       </v-form>
@@ -39,56 +39,86 @@
     </div>
   </template>
   
-  <script setup lang="ts">
-  import TitleComponent from '@/components/title/TitleComponent.vue'
-  import { ref } from 'vue'
-  import AuthService from '@/api/services/AuthService'
-  import { useUserConnectedStore } from '@/stores/userConnected' // Importez le store
+<script setup lang="ts">
+import TitleComponent from '@/components/title/TitleComponent.vue'
+import { ref } from 'vue'
+import { jwtDecode } from 'jwt-decode'
+import AuthService from '@/api/services/AuthService'
+import { useUserConnectedStore } from '@/stores/userConnected' // Importez le store
 import { useRouter } from 'vue-router'
-  
-  const title = ref("Connexion")
-  const msg = ref("Connectez-vous pour commencer vos achats")
-  
-  const email = ref('')
-  const password = ref('')
-  
-  // Utilisez le store
-  const userConnectedStore = useUserConnectedStore()
-  const userConnected = userConnectedStore.userDetails
-  
-  // Méthode de connexion
-  async function login() {
-    try {
-      const credentials = {
-        email: email.value,
-        password: password.value,
-      };
-      const { user, token } = await AuthService.login(credentials.email, credentials.password);
-  
-      console.log("userinfo", user)
-      // Stocker les informations de l'utilisateur dans le store
-      userConnectedStore.setUserInfo(user);
-      if (token) {
-        localStorage.setItem('authToken', token); // Stocker le token dans le localStorage
-      }
-      
+import { getIds } from '@/utils/auth'
+
+interface DecodedToken {
+  iss: string
+  iat: number
+  exp: number
+  userId: number
+  email: string
+}
+// Utilisez le store
+const userConnectedStore = useUserConnectedStore()
+const userConnected = userConnectedStore.userDetails
+
+const title = ref("Connexion")
+const msg = ref("Connectez-vous pour commencer vos achats")
+
+const email = ref('')
+const password = ref('')
+const error = ref('')
+
+const isAuthenticated = ref(false)
+const userProfile = ref<DecodedToken | null>(null)
+
+
+
+const attemptLogin = async () => {
+try {
+  // on ajouter la requete axios + la logique de verification du token ici
+
+  // Appel à AuthService pour récupérer le token
+  error.value = ''
+  const { user, token } = await AuthService.login(email.value, password.value)
+
+  // Enregistrement du token dans le localStorage
+  if (token != null) {
+    localStorage.setItem('authToken', token)
+
+    // Décodage et validation du token
+    const decodedToken: DecodedToken = jwtDecode(token)
+    const currentTime = Math.floor(Date.now() / 1000)
+
+    if (decodedToken.exp > currentTime) {
+      isAuthenticated.value = true
+      userProfile.value = decodedToken
+
+      // Logique selon le profil utilisateur
+      console.log(
+        `Utilisateur connecté : ${decodedToken.email}, ${user}`,
+      )
+      console.log(decodedToken)
+      const Ids = getIds(token)
+      userConnectedStore.setUserInfo(Ids.userId)
+
       alert('Connexion réussie!');
       navigateTo('/account')
-    } catch (error) {
-      alert('Erreur de connexion: ' + error.message);
     }
   }
+} catch (err: any) {
+  error.value = err.message || 'Une erreur est survenue lors de la connexion.'
+  console.error(error.value)
+}
+}
 
-  const router = useRouter();
+const router = useRouter();
 
 function navigateTo(path) {
-    router.push(path);
+  router.push(path);
 }
-  
-  // Méthode de déconnexion
-  function logout() {
-    userConnectedStore.clearUserInfo(); // Effacer les informations de l'utilisateur
-    alert('Déconnexion réussie!');
-  }
-  </script>
+
+// Méthode de déconnexion
+function logout() {
+  userConnectedStore.clearUserInfo(); // Effacer les informations de l'utilisateur
+  alert('Déconnexion réussie!');
+}
+</script>
 

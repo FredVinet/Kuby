@@ -1,6 +1,10 @@
 package com.example.kuby_api.service;
 
+import com.example.kuby_api.model.Adress;
+import com.example.kuby_api.model.Orders;
 import com.example.kuby_api.model.User;
+import com.example.kuby_api.repository.AdressRepository;
+import com.example.kuby_api.repository.OrdersRepository;
 import com.example.kuby_api.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -16,6 +20,12 @@ import java.util.Optional;
 @Data
 @Service
 public class UserService {
+
+    @Autowired
+    private OrdersRepository ordersRepository;
+
+    @Autowired
+    private AdressRepository adressRepository;
 
     @Autowired
     private UserRepository userRepository;
@@ -54,5 +64,13 @@ public class UserService {
     // Méthode pour vérifier le mot de passe
     public boolean checkPassword(String rawPassword, String encodedPassword) {
         return passwordEncoder.matches(rawPassword, encodedPassword);
+    }
+
+    public List<Orders> getOrdersByUserId(Integer userId) {
+        return ordersRepository.findByUserId(userId);
+    }
+
+    public List<Adress> getAdressesByUserId(Integer userId) {
+        return adressRepository.findByUserId(userId);
     }
 }

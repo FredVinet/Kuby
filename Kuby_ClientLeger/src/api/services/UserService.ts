@@ -15,7 +15,7 @@ export default class UserService {
 
   static async getUserById(userId: number): Promise<User> {
     try {
-      const endpoint = API_ENDPOINTS.GET_USER_BY_ID.replace(':id', userId.toString())
+      const endpoint = API_ENDPOINTS.GET_USER_BY_ID.replace('{userId}', userId.toString())
       const response = await apiClient.get(endpoint)
 
       const user = response.data
@@ -25,6 +25,10 @@ export default class UserService {
       throw new Error(`Error fetching user: ${error.response?.data?.message || error.message}`)
     }
   }
+
+  
+
+  
 
   static async createUser(user: User): Promise<User> {
     try {

@@ -12,4 +12,17 @@ export default class OrderService {
       throw new Error(`Error creating order: ${error.response?.data?.message || error.message}`)
     }
   }
+
+  static async getOrdersByUserId(userId: number): Promise<Orders> {
+    try {
+      const endpoint = API_ENDPOINTS.GET_ORDERS_BY_USER_ID.replace('{userId}', userId.toString())
+      const response = await apiClient.get(endpoint)
+
+      const user = response.data
+
+      return user
+    } catch (error: any) {
+      throw new Error(`Error fetching user: ${error.response?.data?.message || error.message}`)
+    }
+  }
 }

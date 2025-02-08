@@ -5,6 +5,6 @@ export interface Orders {
         | 'placed'
         | 'paid'
     orders_amount: number
-    id_location: number
+    id_localisation: number
 }
   

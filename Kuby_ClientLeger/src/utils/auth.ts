@@ -5,22 +5,12 @@ interface DecodedToken {
   iat: number;
   exp: number;
   userId: number;
-  firstname: string;
-  name: string;
-  phone: string;
   email: string;
-  type: number;
-  admin: boolean;
 }
 
 export interface Ids {
   userId: number;
-  firstname: string;
-  name: string;
-  phone: string;
   email: string;
-  type: number;
-  admin: boolean;
 }
 
 export function isTokenValid(token: string): boolean {
@@ -39,35 +29,13 @@ export function getIds(token: string): Ids {
     const decodedToken: DecodedToken = jwtDecode(token);
     return {
       userId: decodedToken.userId,
-      firstname: decodedToken.firstname,
-      name: decodedToken.name,
-      phone: decodedToken.phone,
       email: decodedToken.email,
-      type: decodedToken.type,
-      admin: decodedToken.admin,
     };
   } catch (error) {
     console.error('Erreur lors de la validation du token :', error);
     return {
       userId: 0,
-      firstname: '',
-      name: '',
-      phone: '',
       email: '',
-      type: 0,
-      admin: false,
     };
   }
 }
-
-export const setToken = (token: string): void => {
-  localStorage.setItem('authToken', token);
-};
-
-export const removeToken = (): void => {
-  localStorage.removeItem('authToken');
-};
-
-export const getToken = (): string | null => {
-  return localStorage.getItem('authToken');
-};
