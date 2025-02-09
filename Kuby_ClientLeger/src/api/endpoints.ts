@@ -1,10 +1,10 @@
 export const API_ENDPOINTS = {
     // address
     GET_ALL_ADRESSES: '/adresses/getAllAdresses',
-    GET_ADRESSE_BY_ID: '/adresses/getOneAdress/',
+    GET_ADRESSE_BY_ID: '/adresses/getOneAdress/{adressId}',
     CREATE_ADRESSES: '/adresses/createAdress',
-    UPDATE_ADRESSES: '/adresses/updateAdress/',
-    DELETE_ADRESSES: '/adresses/deleteAdress/',
+    UPDATE_ADRESSES: '/adresses/updateAdress/{adressId}',
+    DELETE_ADRESSES: '/adresses/deleteAdress/{adressId}',
 
     // article
     GET_ALL_ARTICLES: '/articles/getAllArticles',

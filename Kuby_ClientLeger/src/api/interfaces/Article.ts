@@ -5,6 +5,8 @@ export interface Article {
     article_grape?: string;
     article_yearprod?: number,
     article_price: number,
+    article_quantity_in: number,
+    article_quantity_out: number,
     id_family?: number;
     id_grape?: number;
 }
