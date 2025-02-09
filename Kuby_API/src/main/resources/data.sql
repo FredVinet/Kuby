@@ -134,13 +134,15 @@ INSERT INTO `localisation` (`id_user`, `id_adress`) VALUES
 
 INSERT INTO `orders` (`orders_date`, `orders_status`, `orders_amount`, `id_localisation`) VALUES
     ('2025-02-08 12:30:00', 1, 51.00, 1),  
-    ('2025-02-08 14:00:00', 1, 66.00, 2);
+    ('2025-02-08 14:00:00', 1, 66.00, 2),
+    ('2025-02-08 14:00:00', 1, 66.00, 3);
 
 INSERT INTO `order_items` (`id_order`, `id_article`, `order_items_quantity`, `unit_price`) VALUES
     (1, 1, 2, 25.50),  
     (1, 2, 1, 22.00),  
     (2, 2, 3, 22.00),  
-    (2, 3, 2, 28.00);  
+    (2, 3, 2, 28.00), 
+    (3, 3, 2, 28.00);  
 
 INSERT INTO `supplier_article` (`id_user`, `id_article`) VALUES
     (3, 1),  

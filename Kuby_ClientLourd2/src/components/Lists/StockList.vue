@@ -129,7 +129,7 @@
   import {Article} from '@/api/interfaces/Article.ts'
 
   const props = defineProps<{
-    wines?: []
+    wines: Article[];  
   }>()  
   
 

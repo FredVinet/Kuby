@@ -3,10 +3,11 @@
       <div class="my-5 mx-5">
         <v-text-field
           hide-details
-          label="Recherchez un nom, une variété..."
+          label="Recherchez un nom, prénom, ville..."
           outlined
           variant="solo-filled"
-          @keyup.enter=""
+          v-model="searchTerm" 
+          @input="onSearchChange" 
         ></v-text-field>
   
         <v-row class="mt-2 ">
@@ -53,7 +54,7 @@
   
         <v-row class="mt-4">
           <v-col cols="12" class="d-flex justify-end">
-            <v-btn variant="plain" color="accent" large @click="" class="mr-4">
+            <v-btn variant="plain" color="accent" large @click="resetSearch" class="mr-4">
               Réinitialiser
             </v-btn>
             <v-btn color="primary" large @click="">
@@ -64,3 +65,24 @@
       </div>
     </v-card>
   </template>
+
+<script setup lang="ts">
+import { ref, defineEmits } from 'vue';
+
+const emit = defineEmits<{
+  (event: 'filterStock', searchTerm: string): void;
+}>();
+
+const searchTerm = ref('');
+
+const onSearchChange = () => {
+  console.log('Recherche en cours:', searchTerm.value); 
+  emit('filterStock', searchTerm.value);
+};
+
+const resetSearch = () => {
+  searchTerm.value = '';
+  emit('filterStock', '');  
+};
+
+</script>

@@ -1,10 +1,10 @@
 export const API_ENDPOINTS = {
     // address
-    GET_ALL_ADRESSES: '/articles/getAllAdresses',
-    GET_ADRESSE_BY_ID: '/articles/getOneAdress/',
-    CREATE_ADRESSES: '/articles/createAdress',
-    UPDATE_ADRESSES: '/articles/updateAdress/',
-    DELETE_ADRESSES: '/articles/deleteAdress/',
+    GET_ALL_ADRESSES: '/adresses/getAllAdresses',
+    GET_ADRESSE_BY_ID: '/adresses/getOneAdress/',
+    CREATE_ADRESSES: '/adresses/createAdress',
+    UPDATE_ADRESSES: '/adresses/updateAdress/',
+    DELETE_ADRESSES: '/adresses/deleteAdress/',
 
     // article
     GET_ALL_ARTICLES: '/articles/getAllArticles',
@@ -28,11 +28,11 @@ export const API_ENDPOINTS = {
     DELETE_GRAPE: '/articles/deleteGrape/',
 
     // localisation
-    GET_ALL_LOCALISATIONS: '/articles/getAllLocalisations',
-    GET_LOCALISATION_BY_ID: '/articles/getOneLocalisation/',
-    CREATE_LOCALISATION: '/articles/createLocalisation',
-    UPDATE_LOCALISATION: '/articles/updateLocalisation/',
-    DELETE_LOCALISATION: '/articles/deleteLocalisation/',
+    GET_ALL_LOCALISATIONS: '/localisations/getAllLocalisations',
+    GET_LOCALISATION_BY_ID: '/localisations/getOneLocalisation/',
+    CREATE_LOCALISATION: '/localisations/createLocalisation',
+    UPDATE_LOCALISATION: '/localisations/updateLocalisation/',
+    DELETE_LOCALISATION: '/localisations/deleteLocalisation/',
 
     // orders 
     GET_ALL_ORDERS: '/orders/getAllOrders',

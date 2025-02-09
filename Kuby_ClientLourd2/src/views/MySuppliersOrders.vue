@@ -1,8 +1,8 @@
 <template>
     <v-container>
       <BigTitle :title="title" />
-      <FilterOrder />
-      <OrderList :orders="orders" @updateSelectedOrder="updateSelectedOrder"/>
+      <FilterOrder @filterOrder="filterOrder"/>
+      <OrderList :orders="filtereOrder" @updateSelectedOrder="updateSelectedOrder"/>
       <div v-if="selectedOrder">
         <OrderCard :order="selectedOrder"/>
       </div>
@@ -17,80 +17,48 @@
     import OrderList from '@/components/Lists/OrderSupplierList.vue';
     import FilterOrder from '@/components/Search/FilterOrder.vue';
     import BigTitle from '@/components/Titles/BigTitle.vue';
-    import { ref } from 'vue';
-  
-    const title = ref('Suppliers Order');
+    import { ref, onMounted } from 'vue';
 
-    const selectedOrder= ref<{} | null>(null)
+    import OrdersService from '@/api/services/OrdersService';
+    import type { Orders } from '@/api/interfaces/Orders.ts';
 
+    const orders = ref<Orders[]>([]);
+    const selectedOrder = ref<Orders | null>(null);
+    const filtereOrder = ref<Orders[]>([]);
 
-    const orders = [
-    {
-      id: 1,
-      status: 'En cours',
-      date: '2025-02-01',
-      quantity: 3,
-      name: 'Dupont',
-      prenom: 'Jean',
-      deliveryAddress: '123 Rue Principale, Paris',
-      price: 150
-    },
-    {
-      id: 2,
-      status: 'Livrée',
-      date: '2025-01-28',
-      quantity: 2,
-      name: 'Martin',
-      prenom: 'Claire',
-      deliveryAddress: '45 Avenue des Champs-Élysées, Paris',
-      price: 200
-    },
-    {
-      id: 3,
-      status: 'Annulée',
-      date: '2025-01-30',
-      quantity: 1,
-      name: 'Lemoine',
-      prenom: 'Pierre',
-      deliveryAddress: '12 Boulevard Saint-Germain, Paris',
-      price: 80
-    },
-    {
-      id: 4,
-      status: 'Livrée',
-      date: '2025-02-02',
-      quantity: 5,
-      name: 'Lemoine',
-      prenom: 'Sylvie',
-      deliveryAddress: '78 Rue de Rivoli, Paris',
-      price: 300
-    },
-    {
-      id: 5,
-      status: 'En cours',
-      date: '2025-02-03',
-      quantity: 10,
-      name: 'Durand',
-      prenom: 'Lucie',
-      deliveryAddress: '56 Rue de la Paix, Lyon',
-      price: 500
-    },
-    {
-      id: 6,
-      status: 'Livrée',
-      date: '2025-01-29',
-      quantity: 7,
-      name: 'Bernard',
-      prenom: 'Paul',
-      deliveryAddress: '34 Avenue de la République, Marseille',
-      price: 350
-    }
-    ]
+    const getOrders = async () => {
+      try {
+        orders.value = await OrdersService.getAllOrders();
+        console.log("Commandes enrichies :", orders.value);
+        filtereOrder.value = orders.value;
+
+      } catch (error) {
+        console.error('Erreur lors de la récupération des commandes:', error);
+      }
+    };
+
+    onMounted(() => {
+      getOrders();
+    });
 
 
-    const updateSelectedOrder = (order: User) => {
+    const updateSelectedOrder = (order: Orders) => {
     selectedOrder.value = order
     console.log('order sélectionné :', order)
     }
+
+    const filterOrder = (searchTerm: string) => {
+    if (!searchTerm) {
+      filtereOrder.value = orders.value;  
+      console.log("filtereOrder", filtereOrder.value);
+    } else {
+      filtereOrder.value = orders.value.filter((order: Orders) => 
+        order.localisation.user?.user_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        order.localisation.address.adress_city.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        order.localisation.user?.user_firstname.toLowerCase().includes(searchTerm.toLowerCase()) 
+      );
+      console.log("filtereOrder", filtereOrder.value);
+    }
+  };
   </script>
   
