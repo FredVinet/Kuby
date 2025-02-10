@@ -1,10 +1,10 @@
 export const API_ENDPOINTS = {
     // address
     GET_ALL_ADRESSES: '/adresses/getAllAdresses',
-    GET_ADRESSE_BY_ID: '/adresses/getOneAdress/',
+    GET_ADRESSE_BY_ID: '/adresses/getOneAdress/{adressId}',
     CREATE_ADRESSES: '/adresses/createAdress',
-    UPDATE_ADRESSES: '/adresses/updateAdress/',
-    DELETE_ADRESSES: '/adresses/deleteAdress/',
+    UPDATE_ADRESSES: '/adresses/updateAdress/{adressId}',
+    DELETE_ADRESSES: '/adresses/deleteAdress/{adressId}',
 
     // article
     GET_ALL_ARTICLES: '/articles/getAllArticles',
@@ -67,6 +67,7 @@ export const API_ENDPOINTS = {
     GET_USER_BY_ID: '/users/getOneUser/{userId}',
     GET_ADRESSES_BY_USER_ID: '/users/{userId}/adresses',
     GET_ORDERS_BY_USER_ID: '/users/{userId}/orders',
+    CREATE_USER_ADRESSES: '/adresses/createUserAdress/{userId}',
     CREATE_USER: '/users/createUser',
     UPDATE_USER: '/users/updateUser/{userId}',
     DELETE_USER: '/users/deleteUser/{userId}',

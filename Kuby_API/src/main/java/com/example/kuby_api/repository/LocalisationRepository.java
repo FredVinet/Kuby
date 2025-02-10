@@ -13,4 +13,7 @@ import java.util.List;
 public interface LocalisationRepository extends CrudRepository<Localisation, Long> {
     @Query("SELECT l FROM Localisation l WHERE l.id_user = :userId")
     List<Localisation> findByUserId(@Param("userId") Integer userId);
+
+    @Query("SELECT l FROM Localisation l WHERE l.id_adress = :idAdress")
+    List<Localisation> findByIdAdress(@Param("idAdress") Long idAdress);
 }

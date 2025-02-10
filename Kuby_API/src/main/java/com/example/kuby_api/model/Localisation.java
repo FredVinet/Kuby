@@ -15,9 +15,9 @@ public class Localisation {
     private Long localisation_id;
 
     @Column(name = "id_user")
-    private int id_user;
+    private Long id_user;
 
     @Column(name = "id_adress")
-    private int id_adress;
+    private Long id_adress;
 
 }
