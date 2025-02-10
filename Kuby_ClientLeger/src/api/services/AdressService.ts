@@ -1,6 +1,7 @@
 import apiClient from '../index'
 import type { Adress } from '@/api/interfaces/Adress'
 import { API_ENDPOINTS } from '../endpoints'
+import type { Localisation } from '../interfaces/Localisation';
 
 export default class AdressService {
 
@@ -13,6 +14,19 @@ export default class AdressService {
         throw new Error(`Error fetching addresses by user: ${error.response?.data?.message || error.message}`);
       }
     }
+
+    static async createUserAddress(userId: number, address: Adress): Promise<{ adress: Adress, localisation: Localisation }> {
+      try {
+          // Créer l'adresse
+          const adressEndpoint = API_ENDPOINTS.CREATE_USER_ADRESSES.replace('{userId}', userId.toString());
+          const adressResponse = await apiClient.post(adressEndpoint, address);
+          const createdAdress = adressResponse.data;
+  
+          return createdAdress;
+      } catch (error: any) {
+          throw new Error(`Error creating address and localisation: ${error.response?.data?.message || error.message}`);
+      }
+    } 
 
     static async updateAddress(addressId: number, address: Partial<Adress>): Promise<Adress> {
       try {

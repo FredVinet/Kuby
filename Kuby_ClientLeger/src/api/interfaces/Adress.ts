@@ -1,6 +1,6 @@
 export interface Adress {
-    adress_id: number
-    adress_number: string
+    adress_id?: number
+    adress_number: number
     adress_country: string
     adress_state: string
     adress_name: string

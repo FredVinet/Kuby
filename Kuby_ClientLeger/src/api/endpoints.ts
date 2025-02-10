@@ -67,6 +67,7 @@ export const API_ENDPOINTS = {
     GET_USER_BY_ID: '/users/getOneUser/{userId}',
     GET_ADRESSES_BY_USER_ID: '/users/{userId}/adresses',
     GET_ORDERS_BY_USER_ID: '/users/{userId}/orders',
+    CREATE_USER_ADRESSES: '/adresses/createUserAdress/{userId}',
     CREATE_USER: '/users/createUser',
     UPDATE_USER: '/users/updateUser/{userId}',
     DELETE_USER: '/users/deleteUser/{userId}',
