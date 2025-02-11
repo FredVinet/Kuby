@@ -1,8 +1,8 @@
 <template>
   <v-container>
     <BigTitle :title="title" />
-    <FilterClient />
-    <SupplierList  :suppliers="suppliers" @updateSelectedSupplier="updateSelectedSupplier"/>
+    <FilterClient @filterClients="filterClients" />
+    <SupplierList  :suppliers="filteredSuppliers" @updateSelectedSupplier="updateSelectedSupplier"/>
     <div v-if="selectedSupplier">
       <SupplierCard :supplier="selectedSupplier"/>
     </div>
@@ -25,11 +25,14 @@
 
   const selectedSupplier= ref<User | null>(null)
   const suppliers = ref<User[]>([]);
+  const filteredSuppliers = ref<User[]>([]);
+
 
 const getSupplier = async () => {
   try {
     const users = await UserService.getUsersByType(2);
     suppliers.value = users; 
+    filteredSuppliers.value = users;  
     console.log(suppliers.value);
   } catch (error) {
     console.error('Erreur lors de la récupération des utilisateurs:', error);
@@ -40,6 +43,16 @@ onMounted(() => {
   getSupplier();
 });
 
+const filterClients = (searchTerm: string) => {
+  if (!searchTerm) {
+    filteredSuppliers.value = suppliers.value;  
+  } else {
+    filteredSuppliers.value = suppliers.value.filter((supplier:User) =>
+      supplier.user_firstname.toLowerCase().includes(searchTerm.toLowerCase()) || 
+      supplier.user_name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }
+};
 
 const updateSelectedSupplier = (supplier: User) => {
   selectedSupplier.value = supplier

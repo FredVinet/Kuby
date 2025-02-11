@@ -47,7 +47,7 @@
             </th>
             <th class="text-center">
               <v-btn variant="text">
-                <h2 class="text-primary" style="text-transform: none">Adresse Livraison</h2>
+                <h2 class="text-primary" style="text-transform: none">Ville de Livraison</h2>
               </v-btn>
             </th>
             <th class="text-center">
@@ -59,49 +59,49 @@
         </thead>
         <tbody>
           <tr
-            v-for="order in orders"
-            :key="order.id"
+          v-for="order in orders.filter(order => order.localisation?.user?.userType === 1)"            
+          :key="order.id"
             class="clickable-row"
             @click="selectOrder(order)"
           >
             <td>
               <h3 class="font-weight-regular text-center">
-                {{ order.id }}
+                {{ order.orders_id }}
               </h3>
             </td>
             <td>
               <h3 class="font-weight-regular text-center">
-                {{ order.status }}
+                {{ order.orders_status }}
               </h3>
             </td>
             <td>
               <h3 class="font-weight-regular text-center">
-                {{ order.date }}
+                {{ formatDate(order.orders_date) }}
               </h3>
             </td>
             <td>
               <h3 class="font-weight-regular text-center">
-                {{ order.quantity }}
+                {{ order.items.length }}
               </h3>
             </td>
             <td>
               <h3 class="font-weight-regular text-center">
-                {{ order.name }}
+                {{ order.localisation.user.user_name }}
               </h3>
             </td>
             <td>
               <h3 class="font-weight-regular text-center">
-                {{ order.prenom }}
+                {{ order.localisation.user.user_firstname }}
               </h3>
             </td>
             <td>
               <h3 class="font-weight-regular text-center">
-                {{ order.deliveryAddress }}
+                {{ order.localisation.address.adress_city}}
               </h3>
             </td>
             <td>
               <h3 class="font-weight-regular text-center">
-                {{ order.price }} €
+                {{ order.orders_amount }} €
               </h3>
             </td>
           </tr>
@@ -114,6 +114,7 @@
   </template>
   
   <script setup lang="ts">  
+  import type { Orders } from '@/api/interfaces/Orders';
   import { defineEmits, defineProps } from 'vue'
 
   defineProps<{
@@ -122,8 +123,16 @@
   
   const emits = defineEmits(['updateSelectedOrder'])
   
-  const selectOrder = (order: { id: number, status: string, date: string, quantity: number, name: string, prenom: string, deliveryAddress: string, price: number }) => {
+  const selectOrder = (order: Orders) => {
     emits('updateSelectedOrder', order)
+  }
+
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
   }
   </script>
   

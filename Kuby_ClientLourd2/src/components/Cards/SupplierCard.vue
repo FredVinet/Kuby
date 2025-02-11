@@ -15,18 +15,19 @@
                     <div class="py-3"><h2>ID : <span class="font-weight-medium">{{supplier.user_id}} </span></h2></div>
                     <div class="py-3"><h2>Nom : <span class="font-weight-medium">{{supplier.user_name}} </span></h2></div>
                     <div class="py-3"><h2>Prénom : <span class="font-weight-medium">{{supplier.user_firstname}} </span></h2></div>
-                    <div class="py-3"><h2>Téléphone : <span class="font-weight-medium">{{supplier.user_phone}} </span></h2></div>
 
 
                 </v-card-text>
             </v-col>
             <v-col :cols="12" :md="6">
-                <v-card-text class="font-weight-bold text-accent">
+                <v-card-text class="font-weight-bold text-accent mt-14">
 
                     <div class="py-3"><h2>Mail : <span class="font-weight-medium">{{supplier.userMail}}</span></h2></div>
-                    <div class="py-3"><h2>Nb Commande : <span class="font-weight-medium">supplier.mail</span></h2></div>
+                    <div class="py-3"><h2>Téléphone : <span class="font-weight-medium">{{supplier.user_phone}} </span></h2></div>
+
+                    <!-- <div class="py-3"><h2>Nb Commande : <span class="font-weight-medium">supplier.mail</span></h2></div>
                     <div class="py-3"><h2>Prix Total : <span class="font-weight-medium">supplier.mail</span></h2></div>
-                    <div class="py-3"><h2>Derniere Connexion : <span class="font-weight-medium">supplier.mail</span></h2></div>
+                    <div class="py-3"><h2>Derniere Connexion : <span class="font-weight-medium">supplier.mail</span></h2></div> -->
 
                 </v-card-text>
             </v-col>
@@ -34,7 +35,7 @@
         <v-row align="center" no-gutters>
             <v-col class="text-left px-3" :cols="12" :md="6">
                 <v-card-text class="font-weight-bold text-accent">
-                    <div class="py-3"><h2>Liste d'adresse : <span class="font-weight-medium">supplier.adresse </span></h2></div>
+                    <div class="py-3"><h2>Liste d'adresse : <span class="font-weight-medium">{{supplier.address.adress_number}} {{supplier.address.adress_name}} {{supplier.address.adress_code}} {{supplier.address.adress_city}}, {{supplier.address.adress_country}}</span></h2></div>
                 </v-card-text>
             </v-col>
         </v-row>
@@ -52,7 +53,7 @@
 </template>
 
 <script setup lang="ts">
-
+    import { User } from '@/api/interfaces/User';
     import { defineProps } from 'vue'
 
     defineProps<{

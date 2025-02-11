@@ -1,15 +1,37 @@
-import apiClient from '../index'
-import type { User } from '@/api/interfaces/User'
-import { API_ENDPOINTS } from '../endpoints'
+import apiClient from '../index';
+import type { User } from '@/api/interfaces/User';
+import type { Localisation } from '@/api/interfaces/Localisation';
+import type { Address } from '@/api/interfaces/Address';
+import { API_ENDPOINTS } from '../endpoints';
+import LocalisationService from '@/api/services/LocalisationService';
+import AddressService from '@/api/services/AdressService'; 
 
 export default class UserService {
 
   static async getAllUsers(): Promise<User[]> {
     try {
-      const response = await apiClient.get(API_ENDPOINTS.GET_ALL_USERS)
-      return response.data
+      const response = await apiClient.get(API_ENDPOINTS.GET_ALL_USERS);
+      const users: User[] = response.data || [];
+
+      const localisationsResponse = await LocalisationService.getAllLocalisations();
+      const addressesResponse = await AddressService.getAllAddresses();
+      const localisations: Localisation[] = localisationsResponse || [];
+      const addresses: Address[] = addressesResponse || [];
+
+      const enrichedUsers = users.map(user => {
+        const userLocation = localisations.find(loc => loc.id_user === user.user_id);
+        const userAddress = userLocation ? addresses.find(addr => addr.adress_id === userLocation.id_adress) : null;
+
+        return {
+          ...user,
+          localisation: userLocation || null,
+          address: userAddress || null,
+        };
+      });
+
+      return enrichedUsers;
     } catch (error: any) {
-      throw new Error(`Error fetching users: ${error.response?.data?.message || error.message}`)
+      throw new Error(`Error fetching users: ${error.response?.data?.message || error.message}`);
     }
   }
 
@@ -29,7 +51,25 @@ export default class UserService {
   static async getUsersByType(userType: number): Promise<User[]> {
     try {
       const response = await apiClient.get(`${API_ENDPOINTS.GET_USERS_BY_TYPE}/${userType}`);
-      return response.data;
+      const users: User[] = response.data || [];
+
+      const localisationsResponse = await LocalisationService.getAllLocalisations();
+      const addressesResponse = await AddressService.getAllAddresses();
+      const localisations: Localisation[] = localisationsResponse || [];
+      const addresses: Address[] = addressesResponse || [];
+
+      const enrichedUsers = users.map(user => {
+        const userLocation = localisations.find(loc => loc.id_user === user.user_id);
+        const userAddress = userLocation ? addresses.find(addr => addr.adress_id === userLocation.id_adress) : null;
+
+        return {
+          ...user,
+          localisation: userLocation || null,
+          address: userAddress || null,
+        };
+      });
+
+      return enrichedUsers;
     } catch (error: any) {
       throw new Error(`Error fetching users by type: ${error.response?.data?.message || error.message}`);
     }

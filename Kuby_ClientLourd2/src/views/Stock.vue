@@ -1,8 +1,8 @@
 <template>
   <v-container>
     <BigTitle :title="title" />
-    <Filter />
-    <StockList :wines="wines" @updateSelectedWine="updateSelectedWine"/>
+    <Filter @filterStock="filterStock" />
+    <StockList :wines="filteredWine" @updateSelectedWine="updateSelectedWine"/>
     <div v-if="selectedWine">
       <StockCard :wine="selectedWine"/>
     </div>
@@ -26,11 +26,14 @@
 
   const selectedWine= ref<{} | null>(null)
   const wines = ref<Article[]>([]);
+  const filteredWine = ref<Article[]>([]);
+
     
     const getArticle = async () => {
       try {
         const articles = await ArticleService.getAllArticles();
         wines.value = articles; 
+        filteredWine.value = articles;
         console.log("wines.value",wines.value);
       } catch (error) {
         console.error('Erreur lors de la récupération des utilisateurs:', error);
@@ -41,9 +44,22 @@
     getArticle();
   });
 
-const updateSelectedWine = (wine: User) => {
-    selectedWine.value = wine
-    console.log('wine sélectionné :', wine)
-  }
+  const filterStock = (searchTerm: string) => {
+    if (!searchTerm) {
+      filteredWine.value = wines.value;  
+      console.log("filteredWine", filteredWine.value);
+    } else {
+      filteredWine.value = wines.value.filter((wine: Article) => 
+        wine.article_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        wine.supplierArticle?.supplier?.user_name?.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      console.log("filteredWine", filteredWine.value);
+    }
+  };
 
+  const updateSelectedWine = (wine: Article) => {
+    selectedWine.value = wine
+    console.log(wine.supplierArticle.supplier.user_name)
+  }
+  
 </script>
