@@ -4,7 +4,7 @@ import type { Localisation } from '@/api/interfaces/Localisation';
 import type { User } from '@/api/interfaces/User';
 import type { OrderItems } from '@/api/interfaces/OrderItems';
 import type { Article } from '@/api/interfaces/Article';
-import type { Address } from '@/api/interfaces/Address';
+import type { Address } from '@/api/interfaces/Adress';
 import { API_ENDPOINTS } from '../endpoints';
 
 import UserService from '@/api/services/UserService';
