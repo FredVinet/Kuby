@@ -58,30 +58,7 @@ export default class AuthService {
     }
   }
 
-  static async updatePassword(
-    userId: number,
-    userEmail: string,
-    newPassword: string,
-    oldPassword: string,
-    authJwt: string,
-  ): Promise<Boolean> {
-    try {
-      const response = await apiClient.post(API_ENDPOINTS.UPDATE_PASSWORD, {
-        userId,
-        userEmail,
-        newPassword,
-        oldPassword,
-        authJwt,
-      })
-
-      // Retourne le token reçu
-      return response.data.success
-    } catch (error: any) {
-      throw new Error(
-        `Erreur lors de la connexion : ${error.response?.data?.message || error.message}`,
-      )
-    }
-  }
+  
 
   static async changePassword(
     userEmail: string,

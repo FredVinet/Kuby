@@ -1,46 +1,85 @@
 <template>
-    <div class="mx-10 my-10" style="width: 11vw;">
-        <button style="background: none; border: none; padding: 0;">
-            <img src="../../assets/images/Bottle.png" style=" height: 450; cursor: pointer;">
-        </button>
-        <div class="mt-2">
-            <div class="text-h6 " style="min-height: 4rem; max-height: 4rem; overflow: hidden">{{ product.article_name }}</div>
-            <v-row>
-                <v-col cols="12" md="6">
-                    <div class="text-body-1">{{ product.article_grape }}</div>
-                    <div class="text-body-1">{{ product.article_price }} €</div>
-                </v-col>
-                <v-col cols="12" md="6">
-                    <div class="text-body-1 text-center">{{ product.article_yearprod }}</div>
-                </v-col>
-            </v-row>
-            <div class="mt-1">
-                <input class="py-1 ms-1" id="number" type="number" min="1" v-model="quantity" style="width: 35%;" />
-                <v-btn class="mb-1 ms-4" variant="plain" color="primary" @click="addToCart">Ajouter</v-btn>
-            </div>
-        </div>
+    <div class="card-container ml-4 mb-4" style="width: 350px; border: 1px solid #e0e0e0; border-radius: 8px; padding: 12px;">
+      <v-row no-gutters align="start">
+        <v-col cols="4">
+          <img
+            src="../../assets/images/Bottle.png"
+            style="height: 150px; border-radius: 8px; width: 100%; object-fit: cover;"
+            alt="Product Image"
+          />
+        </v-col>
+  
+        <v-col cols="8" class="pl-4">
+          <div class="text-h6 font-weight-bold" style="color: #2c3e50;">
+            {{ product.article_name }}
+          </div>
+  
+          <div class="text-body-1 font-weight-medium" style="color: #7f8c8d;">
+            {{ product.article_yearprod }}
+          </div>
+  
+          <div class="text-body-1 font-weight-bold mt-4" style="color: #27ae60;">
+            {{ product.article_price }} €
+          </div>
+  
+          <v-row align="center">
+            <v-col cols="8">
+              <v-text-field
+                v-model="quantity"
+                type="number"
+                min="1"
+                density="compact"
+                variant="outlined"
+                hide-details
+                style="max-width: 100px;"
+              />
+            </v-col>
+  
+            <v-col cols="4">
+              <v-btn
+                class="bg-primary"
+                icon
+                variant="flat"
+                @click="addToCart"
+              >
+                <v-icon>mdi-cart</v-icon>
+              </v-btn>
+            </v-col>
+          </v-row>
+        </v-col>
+      </v-row>
     </div>
-</template>
-
-<script setup lang="ts">
-import { ref } from 'vue';
-import { useCartStore } from '@/stores/cartStore';
-
-const cartStore = useCartStore();
-const quantity = ref(1);
-
-const props = defineProps({
+  </template>
+  
+  <script setup lang="ts">
+  import { ref } from 'vue';
+  import { useCartStore } from '@/stores/cartStore';
+  
+  const cartStore = useCartStore();
+  const quantity = ref(1);
+  
+  const props = defineProps({
     product: {
-        type: Object,
-        required: true,
+      type: Object,
+      required: true,
     },
-});
-
-const addToCart = () => {
+  });
+  
+  const addToCart = () => {
     if (quantity.value > 0) {
-        cartStore.addToCart(props.product, quantity.value);
-        alert(`${quantity.value} × ${props.product.title} ajouté(s) au panier.`);
-        quantity.value = 1; // Réinitialiser la quantité après l'ajout
+      cartStore.addToCart(props.product, quantity.value);
+      alert(`${quantity.value} × ${props.product.article_name} ajouté(s) au panier.`);
+      quantity.value = 1;
     }
-};
-</script>
+  };
+  </script>
+  
+  <style scoped>
+  .card-container {
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .card-container:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  </style>

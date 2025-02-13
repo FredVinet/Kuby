@@ -29,7 +29,7 @@ import ArticleMain from '@/components/card/ArticleMain.vue';
 import ImgMain from '@/components/img/imgMain.vue';
 import TitleComponentMain from '@/components/title/TitleComponentMain.vue';
 
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 
@@ -48,8 +48,6 @@ const msg2 = ref("Venez essayez les dernière arrivées de la maison Kuby. ");
 
 const title3 = ref("Et bien d’autre");
 const msg3 = ref("Retrouver l’ensemble des vins ne sélectionnez pas nos experts, et profiter de nos conseils, pour choisir le vin qui vous convient.");
-
-
 
 </script>
 

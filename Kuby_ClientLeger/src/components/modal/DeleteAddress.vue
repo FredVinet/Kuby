@@ -2,13 +2,9 @@
   <v-dialog v-model="dialog" max-width="800">
 
     <template v-slot:activator="{ props: activatorProps }">
-
-          <v-btn 
-            v-bind="activatorProps"
-            class="bg-error"
-          >
-            <v-icon>mdi-delete</v-icon>
-          </v-btn>
+      <v-btn icon v-bind="activatorProps" class="bg-error">
+        <v-icon>mdi-delete</v-icon>
+      </v-btn>
     </template>
 
     <template v-slot:default="{ isActive }">
@@ -56,12 +52,21 @@ import { defineProps,ref } from 'vue';
   
 const dialog = ref(false)
 
+const emit = defineEmits(['refreshAddresses']);
+
 defineProps<{
   adress: number
 }>()
-function DeleteItem(id: number) {
-  AdressService.deleteAddress(id);
-  dialog.value = false;
+async function DeleteItem(id: number) {
+  try {
+    await AdressService.deleteAddress(id);
+    dialog.value = false;
+
+    // Émettre un événement pour demander un rafraîchissement des adresses
+    emit('refreshAddresses');
+  } catch (error) {
+    console.error("Erreur lors de la suppression de l'adresse :", error);
+  }
 }
 
 </script>

@@ -71,6 +71,7 @@ export const API_ENDPOINTS = {
     CREATE_USER: '/users/createUser',
     UPDATE_USER: '/users/updateUser/{userId}',
     DELETE_USER: '/users/deleteUser/{userId}',
+    UPDATE_PASSWORD: '/updatePassword/{userId}',
 
     // Auth
     LOGIN: '/users/login',

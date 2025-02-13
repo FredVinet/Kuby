@@ -30,13 +30,13 @@
     <v-divider class="my-2"></v-divider>
     <v-card-actions class="d-flex justify-end gap-2">
       <template v-if="editable">
-        <ModifyAdress :address="address">
+        <ModifyAdress :address="address" @refreshAddresses="$emit('refreshAddresses')">
           <v-btn>
             Modifier
           </v-btn>
         </ModifyAdress>
 
-        <DeleteAddress :adress="address?.adress_id ?? 0">
+        <DeleteAddress :adress="address?.adress_id ?? 0" @refreshAddresses="$emit('refreshAddresses')">
           <v-btn>
             Supprimer
           </v-btn>
@@ -51,6 +51,8 @@ import { defineProps } from 'vue';
 import type { Adress } from '@/api/interfaces/Adress';
 import ModifyAdress from '../modal/ModifyAdress.vue';
 import DeleteAddress from '../modal/DeleteAddress.vue';
+
+const emit = defineEmits(['refreshAddresses']);
 
 // Définir la prop address
 const props = defineProps<{
