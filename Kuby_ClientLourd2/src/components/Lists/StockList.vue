@@ -60,7 +60,7 @@
         <tbody>
           <tr
             v-for="wine in wines"
-            :key="wine.id"
+            :key="wine.article_id"
             class="clickable-row"
             @click="selectWine(wine)"
           >
@@ -76,12 +76,12 @@
             </td>
             <td>
               <h3 class="font-weight-regular text-center">
-                {{ wine.family.family_name }}
+                {{ wine.family?.family_name }}
               </h3>
             </td>
             <td>
               <h3 class="font-weight-regular text-center">
-                {{ wine.grape.grape_name }}
+                {{ wine.grape?.grape_name }}
               </h3>
             </td>
             <td>
@@ -113,10 +113,7 @@
     </v-card>
 
     <div class="d-flex justify-center my-10">
-            <v-btn
-            color="primary"
-            class="mx-5"
-            >Ajouter un Produit</v-btn>
+            <AddArticle :families="props.families" :grapes="props.grapes" :suppliers="props.suppliers" />            
             <v-btn
             color="primary"
             class="mx-5"
@@ -125,12 +122,19 @@
   </template>
   
   <script setup lang="ts">
-  import { defineEmits, defineProps,ref } from 'vue'
-  import {Article} from '@/api/interfaces/Article.ts'
+  import { defineEmits, defineProps,ref} from 'vue'
+  import type {Article} from '@/api/interfaces/Article'
+  import type { Family } from '@/api/interfaces/Family';
+  import type { Grape } from '@/api/interfaces/Grape';
+  import type { SupplierArticle } from '@/api/interfaces/Supplier';
+  import AddArticle from '../Modal/AddArticle.vue';
 
   const props = defineProps<{
-    wines: Article[];  
-  }>()  
+    wines: Article[];
+    families: Family[];
+    grapes: Grape[];
+    suppliers: SupplierArticle[];
+}>();
   
 
   const calculateTotalQuantity = (wine: Article) => {

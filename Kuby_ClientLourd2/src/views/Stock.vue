@@ -2,7 +2,7 @@
   <v-container>
     <BigTitle :title="title" />
     <Filter @filterStock="filterStock" />
-    <StockList :wines="filteredWine" @updateSelectedWine="updateSelectedWine"/>
+    <StockList :wines="filteredWine" :families="families" :grapes="grapes" :suppliers="suppliers" @updateSelectedWine="updateSelectedWine" />    
     <div v-if="selectedWine">
       <StockCard :wine="selectedWine"/>
     </div>
@@ -17,8 +17,14 @@
   import StockList from '@/components/Lists/StockList.vue';
   import Filter from '@/components/Search/Filter.vue';
   import BigTitle from '@/components/Titles/BigTitle.vue';
-  import ArticleService from '@/api/services/ArticlesService.ts'; 
-  import {Article} from '@/api/interfaces/Article.ts'
+  import ArticleService from '@/api/services/ArticlesService'; 
+  import FamilyService from '@/api/services/FamilyService';
+  import GrapeService from '@/api/services/GrapeService';
+  import type { SupplierArticle } from '@/api/interfaces/Supplier';
+  import SupplierService from '@/api/services/SupplierService';
+  import type {Article} from '@/api/interfaces/Article'
+  import type { Family } from '@/api/interfaces/Family';
+  import type { Grape } from '@/api/interfaces/Grape';
 
   import { ref, onMounted } from 'vue';
 
@@ -27,7 +33,9 @@
   const selectedWine= ref<{} | null>(null)
   const wines = ref<Article[]>([]);
   const filteredWine = ref<Article[]>([]);
-
+  const families = ref<Family[]>([]);
+  const grapes = ref<Grape[]>([]);
+  const suppliers = ref<SupplierArticle[]>([]);
     
     const getArticle = async () => {
       try {
@@ -40,9 +48,39 @@
       }
     };
 
+    async function getFamilies() {
+    try {
+        families.value = await FamilyService.getAllFamily();
+        console.log(families.value)
+    } catch (error) {
+        console.error("Erreur lors de la récupération des familles", error);
+    }
+}
+
+  async function getGrapes() {
+      try {
+          grapes.value = await GrapeService.getAllGrape();
+          console.log(grapes.value)
+      } catch (error) {
+          console.error("Erreur lors de la récupération des familles", error);
+      }
+  }
+
+  async function getSupplier() {
+      try {
+          suppliers.value = await SupplierService.getAllSupplierArticles();
+          console.log('Supplier',suppliers.value)
+      } catch (error) {
+          console.error("Erreur lors de la récupération des familles", error);
+      }
+  }
+
   onMounted(() => {
     getArticle();
-  });
+    getFamilies();
+    getGrapes();
+    getSupplier();
+});
 
   const filterStock = (searchTerm: string) => {
     if (!searchTerm) {
@@ -59,7 +97,6 @@
 
   const updateSelectedWine = (wine: Article) => {
     selectedWine.value = wine
-    console.log(wine.supplierArticle.supplier.user_name)
-  }
+  };
   
 </script>

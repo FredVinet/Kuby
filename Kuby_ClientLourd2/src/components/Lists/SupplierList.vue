@@ -63,15 +63,13 @@
     </v-card>
 
     <div class="d-flex justify-center my-10">
-            <v-btn
-            color="primary"
-            class=""
-            >Ajouter un supplier</v-btn>
-        </div>
+      <AddSupplier />
+    </div>
   </template>
   
   <script setup lang="ts">
   import { defineEmits, defineProps } from 'vue'
+import AddSupplier from '../Modal/AddSupplier.vue';
 
   defineProps<{
     suppliers?: User[]

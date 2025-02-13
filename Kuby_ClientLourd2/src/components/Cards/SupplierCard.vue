@@ -44,22 +44,21 @@
             color="primary"
             class="mx-5"
             >Modifier Supplier</v-btn>
-            <v-btn
-            color="primary"
-            class="mx-5"
-            >Supprimer Supplier</v-btn>
-        </div>
+            <DelSupplier :user="supplierRef"  />       
+         </div>
     </v-card>
 </template>
 
 <script setup lang="ts">
     import { User } from '@/api/interfaces/User';
-    import { defineProps } from 'vue'
+    import { defineProps,computed } from 'vue'
+    import DelSupplier from '@/components/Modal/DelSupplier.vue';
 
-    defineProps<{
-        supplier: User | null
-
+    const props = defineProps<{
+        supplier: User 
     }>()
+
+    const supplierRef = computed(() => props.supplier)
 
 </script>
 

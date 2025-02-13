@@ -27,6 +27,7 @@ public class SupplierArticleController {
 
     @PostMapping("/createSupplierArticle")
     public SupplierArticle createSupplierArticle(@RequestBody SupplierArticle supplierArticle) {
+        System.out.println("Received SupplierArticle: " + supplierArticle);
         return supplierArticleService.saveSupplierArticle(supplierArticle);
     }
 
