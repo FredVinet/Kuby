@@ -63,7 +63,7 @@
     </v-card>
 
     <div class="d-flex justify-center my-10">
-      <AddSupplier />
+      <AddSupplier @refresh="refresh"/>
     </div>
   </template>
   
@@ -75,11 +75,15 @@ import AddSupplier from '../Modal/AddSupplier.vue';
     suppliers?: User[]
   }>()
   
-  const emits = defineEmits(['updateSelectedSupplier'])
+  const emits = defineEmits(['updateSelectedSupplier','refresh'])
   
   const selectSupplier = (supplier: { id: number, name: string, prenom: string }) => {
     emits('updateSelectedSupplier', supplier)
   }
+
+  const refresh = () => {
+      emits('refresh')
+  };
   </script>
   
   <style>

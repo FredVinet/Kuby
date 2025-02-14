@@ -40,23 +40,27 @@
             </v-col>
         </v-row>
         <div class="d-flex justify-center my-10">
-            <v-btn
-            color="primary"
-            class="mx-5"
-            >Modifier Supplier</v-btn>
-            <DelSupplier :user="supplierRef"  />       
+            <UpdateSupplier :user="supplierRef" @refresh="refresh"/>
+            <DelSupplier :user="supplierRef"  @refresh="refresh"/>      
          </div>
     </v-card>
 </template>
 
 <script setup lang="ts">
     import { User } from '@/api/interfaces/User';
-    import { defineProps,computed } from 'vue'
+    import { defineProps,computed,defineEmits } from 'vue'
     import DelSupplier from '@/components/Modal/DelSupplier.vue';
+    import UpdateSupplier from '../Modal/UpdateSupplier.vue';
+
+    const emits = defineEmits(['refresh']);
 
     const props = defineProps<{
         supplier: User 
     }>()
+
+    const refresh = () => {
+      emits('refresh')
+    };
 
     const supplierRef = computed(() => props.supplier)
 
