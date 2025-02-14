@@ -15,14 +15,14 @@ export const API_ENDPOINTS = {
 
     // family
     GET_ALL_FAMILIES: '/families/getAllFamilies',
-    GET_FAMILY_BY_ID: '/families/getOneFamily/',
+    GET_FAMILY_BY_ID: '/families/getOneFamily/{familyId}',
     CREATE_FAMILY: '/families/createFamily',
     UPDATE_FAMILY: '/families/updateFamily/',
     DELETE_FAMILY: '/families/deleteFamily/',
 
     // grape
     GET_ALL_GRAPES: '/grapes/getAllGrapes',
-    GET_GRAPE_BY_ID: '/grapes/getOneGrape/',
+    GET_GRAPE_BY_ID: '/grapes/getOneGrape/{grapeId}',
     CREATE_GRAPE: '/grapes/createGrape',
     UPDATE_GRAPE: '/grapes/updateGrape/',
     DELETE_GRAPE: '/grapes/deleteGrape/',

@@ -1,5 +1,6 @@
 package com.example.kuby_api.repository;
 
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -28,4 +29,8 @@ public interface ArticleRepository extends CrudRepository<Article, Long> {
 
     @Query("SELECT a FROM Article a WHERE a.id_grape = :idGrape")
     List<Article> findByGrapeId(@Param("idGrape") Long idGrape);
+
+    @Modifying
+    @Query("UPDATE Article a SET a.article_quantity_in = a.article_quantity_in - :quantity WHERE a.article_id = :articleId AND a.article_quantity_in >= :quantity")
+    int decreaseStock(@Param("articleId") Long articleId, @Param("quantity") int quantity);
 }

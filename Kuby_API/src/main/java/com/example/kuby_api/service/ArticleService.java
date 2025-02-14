@@ -2,6 +2,7 @@ package com.example.kuby_api.service;
 
 import com.example.kuby_api.model.Article;
 import com.example.kuby_api.repository.ArticleRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -70,5 +71,18 @@ public class ArticleService {
 
     public List<Article> getArticlesByGrapeId(Long idGrape) {
         return articleRepository.findByGrapeId(idGrape);
+    }
+
+    @Transactional
+    public void decreaseArticleQuantity(Long articleId, int quantityOrdered) {
+        Article article = articleRepository.findById(articleId)
+                .orElseThrow(() -> new RuntimeException("Article non trouvé"));
+
+        if (article.getArticle_quantity_in() < quantityOrdered) {
+            throw new RuntimeException("Stock insuffisant pour l'article " + article.getArticle_name());
+        }
+
+        article.setArticle_quantity_in(article.getArticle_quantity_in() - quantityOrdered);
+        articleRepository.save(article);
     }
 }

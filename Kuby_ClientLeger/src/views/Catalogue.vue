@@ -7,7 +7,6 @@
   
 <script setup lang="ts">
   
-  import ArticleCatalogue from '@/components/card/ArticleCatalogue.vue';
   import ListArticleCatalogue from '@/components/list/ListArticleCatalogue.vue';
   import TitleComponent from '@/components/title/TitleComponent.vue'
   import { ref } from 'vue';
