@@ -1,13 +1,11 @@
 package com.example.kuby_api.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
 @Entity
 @Table(name = "supplier_article")
-@JsonIgnoreProperties({"article"})
 public class SupplierArticle {
 
     @Id
@@ -15,11 +13,9 @@ public class SupplierArticle {
     @Column(name = "supplier_article_id")
     private Long supplier_article_id;
 
-    @ManyToOne
-    @JoinColumn(name = "id_article", referencedColumnName = "article_id", nullable = false)
-    private Article article;
+    @Column(name = "id_article")
+    private Long id_article;  // Stocke l'ID de l'article
 
-    @ManyToOne
-    @JoinColumn(name = "id_user", referencedColumnName = "user_id", nullable = false)
-    private User supplier;
+    @Column(name = "id_user")
+    private Long id_user;  // Stocke l'ID du fournisseur
 }

@@ -2,9 +2,9 @@
   <v-container>
     <BigTitle :title="title" />
     <Filter @filterStock="filterStock" />
-    <StockList :wines="filteredWine" :families="families" :grapes="grapes" :suppliers="suppliers" @updateSelectedWine="updateSelectedWine" />    
+    <StockList :wines="filteredWine" :families="families" :grapes="grapes" :suppliers="suppliers" @updateSelectedWine="updateSelectedWine" @refresh="refresh"/>    
     <div v-if="selectedWine">
-      <StockCard :wine="selectedWine"/>
+      <StockCard :wine="selectedWine" @refresh="refresh"/>
     </div>
       <div v-else class="text-center text-muted py-4">
         Veuillez sélectionner un vin.
@@ -20,11 +20,12 @@
   import ArticleService from '@/api/services/ArticlesService'; 
   import FamilyService from '@/api/services/FamilyService';
   import GrapeService from '@/api/services/GrapeService';
-  import type { SupplierArticle } from '@/api/interfaces/Supplier';
-  import SupplierService from '@/api/services/SupplierService';
+  import UserService from '@/api/services/UserService';
   import type {Article} from '@/api/interfaces/Article'
   import type { Family } from '@/api/interfaces/Family';
   import type { Grape } from '@/api/interfaces/Grape';
+  import type { User } from '@/api/interfaces/Grape';
+
 
   import { ref, onMounted } from 'vue';
 
@@ -35,7 +36,7 @@
   const filteredWine = ref<Article[]>([]);
   const families = ref<Family[]>([]);
   const grapes = ref<Grape[]>([]);
-  const suppliers = ref<SupplierArticle[]>([]);
+  const suppliers = ref<User[]>([]);
     
     const getArticle = async () => {
       try {
@@ -68,19 +69,26 @@
 
   async function getSupplier() {
       try {
-          suppliers.value = await SupplierService.getAllSupplierArticles();
+          suppliers.value = await UserService.getUsersByType(2);
           console.log('Supplier',suppliers.value)
       } catch (error) {
           console.error("Erreur lors de la récupération des familles", error);
       }
   }
-
-  onMounted(() => {
+function update(){
     getArticle();
     getFamilies();
     getGrapes();
     getSupplier();
+};
+
+  onMounted(() => {
+    update();
 });
+
+const refresh = () => {
+  update();
+};
 
   const filterStock = (searchTerm: string) => {
     if (!searchTerm) {

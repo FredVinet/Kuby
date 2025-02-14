@@ -8,10 +8,11 @@ export const API_ENDPOINTS = {
 
     // article
     GET_ALL_ARTICLES: '/articles/getAllArticles',
+    GET_ALL_ARTICLES_DETAILS: '/articles/getAllArticlesDetails',
     GET_ARTICLES_BY_ID: '/articles/getOneArticle/',
-    CREATE_ARTICLE: '/articles/createArticle',
+    CREATE_ARTICLE: '/articles/createArticle/:id',
     UPDATE_ARTICLE: '/articles/updateArticle/',
-    DELETE_ARTICLE: '/articles/deleteArticle/',
+    DELETE_ARTICLE: '/articles/deleteArticle/:id',
 
     // family
     GET_ALL_FAMILIES: '/families/getAllFamilies',
