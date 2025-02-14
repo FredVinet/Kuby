@@ -5,11 +5,6 @@
     style="border-radius: 12px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1)"
     border="opacity-50 md info"
   >
-    <!-- Titre et service -->
-    <v-card-title class="text-lg font-semibold text-center mb-4">
-      {{ title }}
-    </v-card-title>
-
     <!-- Contenu de l'adresse -->
     <v-card-text v-if="address" class="text-center text-body-1">
       <div>{{ address.adress_name }}</div>

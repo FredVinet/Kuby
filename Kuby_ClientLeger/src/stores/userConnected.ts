@@ -30,12 +30,11 @@ export const useUserConnectedStore = defineStore('userConnected', () => {
       console.error('Aucun ID utilisateur')
       return
     }
-
+  
     try {
       const details = await UserService.getUserById(userId.value)
       userDetails.value = details
     } catch (error) {
-      console.error('Erreur lors de la récupération des détails utilisateur :', error)
       userDetails.value = null
     }
   }

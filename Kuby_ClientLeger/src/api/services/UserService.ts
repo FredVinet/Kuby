@@ -50,12 +50,14 @@ export default class UserService {
     newPassword: string
   ): Promise<boolean> {
     try {
-      const endpoint = API_ENDPOINTS.UPDATE_PASSWORD.replace('{userId}', userId.toString())
+      const endpoint = API_ENDPOINTS.UPDATE_PASSWORD.replace('{userId}', userId.toString());
+      
+      // Envoyer la requête POST avec le nouveau mot de passe
       const response = await apiClient.post(endpoint, {
-        newPassword
+        newPassword: newPassword // Assurez-vous que le nom de la clé correspond à ce que l'API attend
       });
   
-      if (response.data.message === "Mot de passe mis à jour avec succès") {
+      if (response.data === "Mot de passe mis à jour avec succès") {
         return true;
       } else {
         throw new Error(response.data.message || "Une erreur est survenue.");

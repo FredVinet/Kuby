@@ -96,35 +96,6 @@ try {
   }
 } catch (err: any) {
   error.value = err.message || 'Une erreur est survenue lors de la connexion.'
-  console.error(error.value)
-}
-}
-
-const createAccount = async () => {
-try {
-  error.value = ''
-  const { user, token } = await AuthService.login(email.value, password.value)
-
-  if (token != null) {
-    localStorage.setItem('authToken', token)
-
-    const decodedToken: DecodedToken = jwtDecode(token)
-    const currentTime = Math.floor(Date.now() / 1000)
-
-    if (decodedToken.exp > currentTime) {
-      isAuthenticated.value = true
-      userProfile.value = decodedToken
-      
-
-      const Ids = getIds(token)
-      userConnectedStore.setUserInfo(Ids.userId)
-
-      navigateTo('/')
-    }
-  }
-} catch (err: any) {
-  error.value = err.message || 'Une erreur est survenue lors de la connexion.'
-  console.error(error.value)
 }
 }
 
@@ -133,8 +104,6 @@ const router = useRouter();
 function navigateTo(path) {
   router.push(path);
 }
-
-// Méthode de déconnexion
 
 </script>
 

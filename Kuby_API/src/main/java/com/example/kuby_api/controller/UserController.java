@@ -110,14 +110,11 @@ public class UserController {
     public ResponseEntity<?> updatePassword(@PathVariable Long id, @RequestBody Map<String, String> request) {
         String newPassword = request.get("newPassword");
 
-        Optional<User> userOptional = userService.getUser(id);
-        if (userOptional.isPresent()) {
-            User user = userOptional.get();
-            user.setUser_password(userService.hashPassword(newPassword)); // Hacher le nouveau mot de passe
-            userService.saveUser(user);
+        try {
+            userService.updatePassword(id, newPassword);
             return ResponseEntity.ok().body("Mot de passe mis à jour avec succès");
-        } else {
-            return ResponseEntity.status(404).body("Utilisateur non trouvé");
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(404).body(e.getMessage());
         }
     }
 }

@@ -8,7 +8,7 @@ export const API_ENDPOINTS = {
 
     // article
     GET_ALL_ARTICLES: '/articles/getAllArticles',
-    GET_ARTICLES_BY_ID: '/articles/getOneArticle/',
+    GET_ARTICLES_BY_ID: '/articles/getOneArticle/{articleId}',
     CREATE_ARTICLE: '/articles/createArticle',
     UPDATE_ARTICLE: '/articles/updateArticle/',
     DELETE_ARTICLE: '/articles/deleteArticle/',
@@ -30,6 +30,7 @@ export const API_ENDPOINTS = {
     // localisation
     GET_ALL_LOCALISATIONS: '/localisations/getAllLocalisations',
     GET_LOCALISATION_BY_ID: '/localisations/getOneLocalisation/',
+    GET_LOCALISATION_BY_ADRESS_ID: '/localisations/getLocalisationByAdressId/{adressId}',
     CREATE_LOCALISATION: '/localisations/createLocalisation',
     UPDATE_LOCALISATION: '/localisations/updateLocalisation/',
     DELETE_LOCALISATION: '/localisations/deleteLocalisation/',
@@ -71,7 +72,7 @@ export const API_ENDPOINTS = {
     CREATE_USER: '/users/createUser',
     UPDATE_USER: '/users/updateUser/{userId}',
     DELETE_USER: '/users/deleteUser/{userId}',
-    UPDATE_PASSWORD: '/updatePassword/{userId}',
+    UPDATE_PASSWORD: '/users/updatePassword/{userId}',
 
     // Auth
     LOGIN: '/users/login',

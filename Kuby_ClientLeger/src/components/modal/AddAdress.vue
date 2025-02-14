@@ -3,7 +3,7 @@
       <template v-slot:activator="{ props: activatorProps }">
         <v-tooltip location="left">
           <template v-slot:activator="{ props: tooltipProps }">
-            <div class="d-flex justify-end mr-2 add-address-container">
+            <div class="d-flex justify-end mr-2 mb-4 add-address-container">
               <v-btn 
                 icon 
                 v-bind="{ ...activatorProps, ...tooltipProps }" 

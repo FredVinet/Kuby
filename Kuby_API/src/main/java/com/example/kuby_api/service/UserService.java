@@ -66,6 +66,17 @@ public class UserService {
         return passwordEncoder.matches(rawPassword, encodedPassword);
     }
 
+    public void updatePassword(Long userId, String newPassword) {
+        Optional<User> userOptional = userRepository.findById(userId);
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            user.setUser_password(hashPassword(newPassword));
+            userRepository.save(user);
+        } else {
+            throw new RuntimeException("Utilisateur non trouvé");
+        }
+    }
+
     public List<Orders> getOrdersByUserId(Integer userId) {
         return ordersRepository.findByUserId(userId);
     }
