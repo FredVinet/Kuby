@@ -87,7 +87,7 @@ export default class UserService {
   static async updateUser(id: number, details_user: Partial<User>): Promise<User> {
     try {
       const endpoint = API_ENDPOINTS.UPDATE_USER.replace(':id', id.toString())
-      const response = await apiClient.put(endpoint, { ...details_user, id: id }) // Envoie un objet plat
+      const response = await apiClient.put(endpoint, { ...details_user, id: id }) 
       return response.data
     } catch (error: any) {
       throw new Error(`Error updating user: ${error.response?.data?.message || error.message}`)

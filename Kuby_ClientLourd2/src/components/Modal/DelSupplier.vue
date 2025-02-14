@@ -34,6 +34,8 @@ import { ref, defineProps, defineEmits } from 'vue';
 
 const dialog = ref(false)
 
+const emits = defineEmits(['refresh']);
+
 const props = defineProps<{
     user: User 
 }>();
@@ -51,6 +53,9 @@ async function confirmDelete() {
     try {
         await UserService.deleteUser(props.user.user_id);
         console.log("Utilisateur supprimé avec succès");
+
+        emits('refresh');
+
         dialog.value = false;
     } catch (error) {
         console.error("Erreur lors de la suppression de l'utilisateur", error);

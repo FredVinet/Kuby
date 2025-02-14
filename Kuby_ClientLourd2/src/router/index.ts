@@ -36,13 +36,7 @@ const routes = [
     name: 'connexion',
     component: () => import('../views/Connexion.vue'),
     meta: { requiresAuth: true }
-  },
-  {
-    path: '/test',
-    name: 'test',
-    component: () => import('../views/test.vue'),
-    meta: { requiresAuth: true }
-  },
+  }
 ]
 
 const router = createRouter({

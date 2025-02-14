@@ -3,8 +3,8 @@ export const API_ENDPOINTS = {
     GET_ALL_ADRESSES: '/adresses/getAllAdresses',
     GET_ADRESSE_BY_ID: '/adresses/getOneAdress/',
     CREATE_ADRESSES: '/adresses/createAdress',
-    UPDATE_ADRESSES: '/adresses/updateAdress/',
-    DELETE_ADRESSES: '/adresses/deleteAdress/',
+    UPDATE_ADRESSES: '/adresses/updateAdress/:id',
+    DELETE_ADRESSES: '/adresses/deleteAdress/:id',
 
     // article
     GET_ALL_ARTICLES: '/articles/getAllArticles',
@@ -67,7 +67,7 @@ export const API_ENDPOINTS = {
     GET_USER_BY_ID: '/users/getOneUser/',
     GET_USERS_BY_TYPE: '/users/getUsersByType',
     CREATE_USER: '/users/createUser',
-    UPDATE_USER: '/users/updateUser/',
+    UPDATE_USER: '/users/updateUser/:id',
     DELETE_USER: '/users/deleteUser/:id',
 
     // Auth

@@ -6,13 +6,13 @@
                 color="primary"
                 class="mx-5"
             >
-                Ajouter un Fournisseur
+                Modifier le fournisseur
             </v-btn>
         </template>
 
         <template v-slot:default="{ isActive }">
             <v-card>
-                <h3 class="mt-5 text-accent text-center">Ajouter un Fournisseur</h3>
+                <h3 class="mt-5 text-accent text-center">Modifier un Fournisseur</h3>
                 <v-card-text>
                     <v-row dense>
                         <v-col cols="12" md="6">
@@ -107,11 +107,11 @@
                     </v-btn>
                     <v-btn
                         class="bg-primary mb-2"
-                        text="Ajouter"
+                        text="Modifier"
                         variant="tonal"
-                        @click="addUser"
+                        @click="updateUser"
                     >
-                        Ajouter
+                        Modifier
                     </v-btn>
                 </v-card-actions>
 
@@ -121,29 +121,33 @@
 </template>
 
 <script setup lang="ts">
-
 import type { User } from '@/api/interfaces/User';
 import type { Address } from '@/api/interfaces/Adress';
-import LocalisationService from '@/api/services/LocalisationService';
 import AddressService from '@/api/services/AdressService';
 import UserService from '@/api/services/UserService';
-import { ref, reactive, defineEmits} from 'vue'
+import { ref, reactive, defineProps, watch, defineEmits } from 'vue';
 
-const dialog = ref(false)
+const dialog = ref(false);
 
 const emits = defineEmits(['refresh']);
 
+const props = defineProps<{
+    user: User;
+}>();
+
 const newUser = reactive<User>({
+    user_id: 0,
     user_firstname: '',
     user_name: '',
     user_phone: '',
     userMail: '',
     user_password: '',
-    userType:  2,
-    user_admin:  false,
+    userType: 2,
+    user_admin: false,
 });
 
 const newAddress = reactive<Address>({
+    adress_id:0,
     adress_number: 0,
     adress_country: '',
     adress_state: '',
@@ -152,30 +156,59 @@ const newAddress = reactive<Address>({
     adress_code: '',
 });
 
+watch(
+    () => props.user,
+    (newSupplier) => {
+        newUser.user_id = newSupplier.user_id;
+        newUser.user_firstname = newSupplier.user_firstname;
+        newUser.user_name = newSupplier.user_name;
+        newUser.user_phone = newSupplier.user_phone;
+        newUser.userMail = newSupplier.userMail;
+        newUser.user_password = newSupplier.user_password;
+        newUser.userType = newSupplier.userType;
+        newUser.user_admin = newSupplier.user_admin;
 
-async function addUser() {
+        newAddress.adress_id = newSupplier.address.adress_id;
+        newAddress.adress_number = newSupplier.address.adress_number;
+        newAddress.adress_country = newSupplier.address.adress_country;
+        newAddress.adress_state = newSupplier.address.adress_state;
+        newAddress.adress_name = newSupplier.address.adress_name;
+        newAddress.adress_city = newSupplier.address.adress_city;
+        newAddress.adress_code = newSupplier.address.adress_code;
+    },
+    { immediate: true }
+);
+
+async function updateUser() {
     try {
-        const createdUser = await UserService.createUser(newUser);
+        await UserService.updateUser(newUser.user_id, {
+            user_firstname: newUser.user_firstname,
+            user_name: newUser.user_name,
+            user_phone: newUser.user_phone,
+            userMail: newUser.userMail,
+            user_password: newUser.user_password,
+            userType: newUser.userType,
+            user_admin: newUser.user_admin,
+        });
 
-        const createdAddress = await AddressService.createAddress(newAddress);
-
-        const localisationData = {
-            id_user: createdUser.user_id,
-            id_adress: createdAddress.adress_id, 
-        };
-
-        await LocalisationService.createLocalisation(localisationData);
+        await AddressService.updateAddress(newAddress.adress_id, {
+            adress_number: newAddress.adress_number,
+            adress_name: newAddress.adress_name,
+            adress_city: newAddress.adress_city,
+            adress_state: newAddress.adress_state,
+            adress_code: newAddress.adress_code,
+            adress_country: newAddress.adress_country,
+        });
 
         emits('refresh');
 
+        
+
         dialog.value = false;
-        console.log('Nouvelle User', createdUser);
-        console.log('Nouvelle Adresse', createdAddress);
+        console.log('Utilisateur mis à jour', newUser);
+        console.log('Adresse mise à jour', newAddress);
     } catch (error) {
-        console.error('Erreur lors de la création de l\'utilisateur, de l\'adresse ou de la localisation', error);
+        console.error('Erreur lors de la mise à jour de l\'utilisateur', error);
     }
 }
-
-
-
 </script>

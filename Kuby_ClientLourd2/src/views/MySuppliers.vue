@@ -2,9 +2,9 @@
   <v-container>
     <BigTitle :title="title" />
     <FilterClient @filterClients="filterClients" />
-    <SupplierList  :suppliers="filteredSuppliers" @updateSelectedSupplier="updateSelectedSupplier"/>
+    <SupplierList  :suppliers="filteredSuppliers" @updateSelectedSupplier="updateSelectedSupplier" @refresh="refresh"/>
     <div v-if="selectedSupplier">
-      <SupplierCard :supplier="selectedSupplier"/>
+      <SupplierCard :supplier="selectedSupplier" @refresh="refresh"/>
     </div>
     <div v-else class="text-center text-muted py-4">
       Veuillez sélectionner un supplier.
@@ -42,6 +42,10 @@ const getSupplier = async () => {
 onMounted(() => {
   getSupplier();
 });
+
+const refresh = () => {
+  getSupplier();
+};
 
 const filterClients = (searchTerm: string) => {
   if (!searchTerm) {
