@@ -19,7 +19,7 @@ public class OrderItem {
     private int id_order;
 
     @Column(name = "id_article")
-    private int id_article;
+    private long id_article;
 
     @Column(name = "order_items_quantity")
     private int order_items_quantity;
