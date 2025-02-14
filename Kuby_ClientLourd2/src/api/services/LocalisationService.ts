@@ -20,6 +20,14 @@ export default class LocalisationService {
     } catch (error: any) {
       throw new Error(`Erreur lors de la récupération de la localisation: ${error.response?.data?.message || error.message}`);
     }
+
   }
-  
+    static async createLocalisation(localisation: Localisation): Promise<Localisation> {
+      try {
+        const response = await apiClient.post(API_ENDPOINTS.CREATE_LOCALISATION, localisation);
+        return response.data;
+      } catch (error: any) {
+        throw new Error(`Erreur lors de la création de la localisation: ${error.response?.data?.message || error.message}`);
+      }
+    }
 }

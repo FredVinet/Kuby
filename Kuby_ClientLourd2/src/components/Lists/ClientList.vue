@@ -61,18 +61,11 @@
         <p class="text-center text-muted">Aucun client trouvé.</p>
       </div>
     </v-card>
-
-    <div class="d-flex justify-center my-10">
-            <v-btn
-            color="primary"
-            class=""
-            >Ajouter un client</v-btn>
-        </div>
   </template>
   
   <script setup lang="ts">
   import { defineEmits, defineProps } from 'vue'
-  import { User } from '@/api/interfaces/user.ts';
+  import { User } from '@/api/interfaces/user';
 
   defineProps<{
     clients?: []
