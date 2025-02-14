@@ -19,6 +19,10 @@ public class SupplierArticleService {
         return supplierArticleRepository.findById(id);
     }
 
+    public SupplierArticle createSupplierArticle(SupplierArticle supplierArticle) {
+        return supplierArticleRepository.save(supplierArticle);
+    }
+
     public Iterable<SupplierArticle> getSupplierArticles() {
         return supplierArticleRepository.findAll();
     }

@@ -14,18 +14,18 @@ export const API_ENDPOINTS = {
     DELETE_ARTICLE: '/articles/deleteArticle/',
 
     // family
-    GET_ALL_FAMILIES: '/articles/getAllFamilies',
-    GET_FAMILY_BY_ID: '/articles/getOneFamily/',
-    CREATE_FAMILY: '/articles/createFamily',
-    UPDATE_FAMILY: '/articles/updateFamily/',
-    DELETE_FAMILY: '/articles/deleteFamily/',
+    GET_ALL_FAMILIES: '/families/getAllFamilies',
+    GET_FAMILY_BY_ID: '/families/getOneFamily/',
+    CREATE_FAMILY: '/families/createFamily',
+    UPDATE_FAMILY: '/families/updateFamily/',
+    DELETE_FAMILY: '/families/deleteFamily/',
 
     // grape
-    GET_ALL_GRAPES: '/articles/getAllGrapes',
-    GET_GRAPE_BY_ID: '/articles/getOneGrape/',
-    CREATE_GRAPE: '/articles/createGrape',
-    UPDATE_GRAPE: '/articles/updateGrape/',
-    DELETE_GRAPE: '/articles/deleteGrape/',
+    GET_ALL_GRAPES: '/grapes/getAllGrapes',
+    GET_GRAPE_BY_ID: '/grapes/getOneGrape/',
+    CREATE_GRAPE: '/grapes/createGrape',
+    UPDATE_GRAPE: '/grapes/updateGrape/',
+    DELETE_GRAPE: '/grapes/deleteGrape/',
 
     // localisation
     GET_ALL_LOCALISATIONS: '/localisations/getAllLocalisations',
@@ -56,11 +56,11 @@ export const API_ENDPOINTS = {
     DELETE_STOCK: '/articles/deleteStock/',
 
     // supplier_article
-    GET_ALL_SUPPLIER_ARTICLES: '/articles/getAllSupplierArticles',
-    GET_SUPPLIER_ARTICLE_BY_ID: '/articles/getOneSupplierArticle/',
-    CREATE_SUPPLIER_ARTICLE: '/articles/createSupplierArticle',
-    UPDATE_SUPPLIER_ARTICLE: '/articles/updateSupplierArticle/',
-    DELETE_SUPPLIER_ARTICLE: '/articles/deleteSupplierArticle/',
+    GET_ALL_SUPPLIER_ARTICLES: '/supplierarticles/getAllSupplierArticles',
+    GET_SUPPLIER_ARTICLE_BY_ID: '/supplierarticles/getOneSupplierArticle/',
+    CREATE_SUPPLIER_ARTICLE: '/supplierarticles/createSupplierArticle',
+    UPDATE_SUPPLIER_ARTICLE: '/supplierarticles/updateSupplierArticle/',
+    DELETE_SUPPLIER_ARTICLE: '/supplierarticles/deleteSupplierArticle/',
 
     // users
     GET_ALL_USERS: '/users/getAllUsers',
@@ -68,7 +68,7 @@ export const API_ENDPOINTS = {
     GET_USERS_BY_TYPE: '/users/getUsersByType',
     CREATE_USER: '/users/createUser',
     UPDATE_USER: '/users/updateUser/',
-    DELETE_USER: '/users/deleteUser/',
+    DELETE_USER: '/users/deleteUser/:id',
 
     // Auth
     LOGIN: '/users/login',

@@ -13,7 +13,7 @@ app.whenReady().then(() => {
 
   // Charge l'application Vue en mode développement ou production
   const devServerURL = "http://localhost:5173"; // Vite en dev
-  const prodAppPath = `file://${__dirname}/dist/index.html`; // Build en prod
+  const prodAppPath = `file://${__dirname}/dist/index.html`; // Build en prod on verra a ce moment 
 
   mainWindow.loadURL(devServerURL);
 

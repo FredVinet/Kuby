@@ -21,4 +21,5 @@ export default class LocalisationService {
       throw new Error(`Erreur lors de la récupération de la localisation: ${error.response?.data?.message || error.message}`);
     }
   }
+  
 }

@@ -26,14 +26,14 @@ CREATE TABLE `article` (
 );
 
 CREATE TABLE `users` (
-                         `user_id` integer PRIMARY KEY NOT NULL AUTO_INCREMENT,
-                         `user_firstname` varchar(50),
-                         `user_name` varchar(50) NOT NULL,
-                         `user_phone` varchar(50),
-                         `user_mail` varchar(50) NOT NULL,
-                         `user_password` char(255),
-                         `user_type` int NOT NULL,
-                         `user_admin` boolean NOT NULL
+    `user_id` integer PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    `user_firstname` varchar(50),
+    `user_name` varchar(50) NOT NULL,
+    `user_phone` varchar(50),
+    `user_mail` varchar(50) NOT NULL,
+    `user_password` char(255),
+    `user_type` int NOT NULL,
+    `user_admin` boolean NOT NULL
 );
 
 CREATE TABLE `adress` (
@@ -47,11 +47,11 @@ CREATE TABLE `adress` (
 );
 
 CREATE TABLE `localisation` (
-                                `localisation_id` integer PRIMARY KEY NOT NULL AUTO_INCREMENT,
-                                `id_user` integer NOT NULL,
-                                `id_adress` integer NOT NULL,
-                                FOREIGN KEY (`id_user`) REFERENCES `users` (`user_id`),
-                                FOREIGN KEY (`id_adress`) REFERENCES `adress` (`adress_id`)
+    `localisation_id` integer PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    `id_user` integer NOT NULL,
+    `id_adress` integer NOT NULL,
+    FOREIGN KEY (`id_user`) REFERENCES `users` (`user_id`) ON DELETE CASCADE,
+    FOREIGN KEY (`id_adress`) REFERENCES `adress` (`adress_id`) ON DELETE CASCADE
 );
 
 CREATE TABLE `stock` (
@@ -65,12 +65,12 @@ CREATE TABLE `stock` (
 );
 
 CREATE TABLE `orders` (
-                          `orders_id` integer PRIMARY KEY NOT NULL AUTO_INCREMENT,
-                          `orders_date` timestamp NOT NULL,
-                          `orders_status` integer DEFAULT 1 NOT NULL,
-                          `orders_amount` DECIMAL(10,2) NOT NULL,
-                          `id_localisation` integer NOT NULL,
-                          FOREIGN KEY (`id_localisation`) REFERENCES `localisation` (`localisation_id`)
+    `orders_id` integer PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    `orders_date` timestamp NOT NULL,
+    `orders_status` integer DEFAULT 1 NOT NULL,
+    `orders_amount` DECIMAL(10,2) NOT NULL,
+    `id_localisation` integer NOT NULL,
+    FOREIGN KEY (`id_localisation`) REFERENCES `localisation` (`localisation_id`) ON DELETE CASCADE
 );
 
 
@@ -81,16 +81,16 @@ CREATE TABLE `order_items` (
                                `id_article` integer NOT NULL,
                                `order_items_quantity` integer NOT NULL,
                                `unit_price` DECIMAL(10,6) NOT NULL,
-                               FOREIGN KEY (`id_order`) REFERENCES `orders` (`orders_id`),
+                               FOREIGN KEY (`id_order`) REFERENCES `orders` (`orders_id`) ON DELETE CASCADE,
                                FOREIGN KEY (`id_article`) REFERENCES `article` (`article_id`)
 );
 
 CREATE TABLE `supplier_article` (
-                                    `supplier_article_id` integer PRIMARY KEY NOT NULL AUTO_INCREMENT,
-                                    `id_user` integer NOT NULL,
-                                    `id_article` integer NOT NULL,
-                                    FOREIGN KEY (`id_user`) REFERENCES `users` (`user_id`),
-                                    FOREIGN KEY (`id_article`) REFERENCES `article` (`article_id`)
+    `supplier_article_id` integer PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    `id_user` integer NOT NULL,
+    `id_article` integer NOT NULL,
+    FOREIGN KEY (`id_user`) REFERENCES `users` (`user_id`) ON DELETE CASCADE,
+    FOREIGN KEY (`id_article`) REFERENCES `article` (`article_id`)
 );
 
 

@@ -6,7 +6,7 @@ export default class ArticleService {
   private static parseArticlesDetails(article: any): Article {
     return {
       ...article,
-      article_price: article.article_price, // Conversion en nombre
+      article_price: article.article_price, 
     };
   }
 
@@ -18,4 +18,14 @@ export default class ArticleService {
       throw new Error(`Error fetching products: ${error.response?.data?.message || error.message}`);
     }
   }
+
+  static async createArticle(article: Article): Promise<Article> {
+    try {
+      const response = await apiClient.post(API_ENDPOINTS.CREATE_ARTICLE, article)
+      return response.data
+    } catch (error: any) {
+      throw new Error(`Error creating article: ${error.response?.data?.message || error.message}`)
+    }
+  }
+
 }
