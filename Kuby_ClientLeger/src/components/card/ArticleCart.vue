@@ -10,7 +10,7 @@
         </v-col>
         <v-col cols="4" class="d-flex align-center justify-space-evenly">
           <v-text-field
-            v-model="localQuantity"
+            v-model.number="localQuantity"
             type="number"
             min="0"
             max-width="60%"
@@ -43,7 +43,7 @@
   const localQuantity = ref(props.quantity);
   
   const onQuantityChange = () => {
-    emit('update-quantity', props.product.article_id, localQuantity.value);
+    emit('update-quantity', props.product.article_id, Number(localQuantity.value));
   };
   
   const onRemove = () => {

@@ -36,7 +36,7 @@ export const useMyAccountStore = defineStore('MyAccount', () => {
 
   return {
     user,
-    addresses,
+    adresses,
     loading,
     fetchUserData,
     setAddresses,

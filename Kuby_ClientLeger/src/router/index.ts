@@ -30,10 +30,11 @@ const routes = [
     component: () => import('../views/Connexion.vue'),
   },
   {
-    path: '/product',
-    name: 'Product',
+    path: '/product/:id',
+    name: 'ProductDetail', // Changer le nom pour éviter le conflit
     component: () => import('../views/Product.vue'),
-  }
+    props: true,
+  },
 ];
 
 const router = createRouter({

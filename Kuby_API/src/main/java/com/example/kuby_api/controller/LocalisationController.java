@@ -30,6 +30,11 @@ public class LocalisationController {
         return localisationService.saveLocalisation(localisation);
     }
 
+    @GetMapping("/getLocalisationByAdressId/{adressId}")
+    public Localisation getLocalisationByAdressId(@PathVariable Long adressId) {
+        return localisationService.getLocalisationByAdressId(adressId);
+    }
+
     @PutMapping("/updateLocalisation/{id}")
     public Localisation updateLocalisation(@PathVariable Long id, @RequestBody Localisation localisation) {
         localisation.setLocalisation_id(id);

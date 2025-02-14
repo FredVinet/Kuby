@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.Data;
+
+import java.util.List;
 import java.util.Optional;
 
 @Data
@@ -30,4 +32,10 @@ public class LocalisationService {
     public Localisation saveLocalisation(Localisation localisation){
         return localisationRepository.save(localisation);
     }
+
+    public Localisation getLocalisationByAdressId(Long adressId) {
+        List<Localisation> localisations = localisationRepository.findByIdAdress(adressId);
+        return localisations.isEmpty() ? null : localisations.get(0); // Prend la première localisation trouvée
+    }
+
 }

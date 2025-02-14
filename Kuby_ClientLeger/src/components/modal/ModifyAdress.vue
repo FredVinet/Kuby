@@ -94,6 +94,8 @@ import { ref, reactive, watch } from 'vue';
 
 const dialog = ref(false);
 
+const emit = defineEmits(['refreshAddresses']);
+
 const props = defineProps<{
   address?: Address;
 }>();
@@ -120,6 +122,7 @@ async function updateAddress(address: Address) {
     try {
       await AdressService.updateAddress(address.adress_id, address);
       dialog.value = false;
+      emit('refreshAddresses');
     } catch (error) {
       console.error('Erreur lors de la mise à jour de l\'adresse :', error);
     }

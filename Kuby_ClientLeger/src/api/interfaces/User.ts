@@ -3,9 +3,9 @@ export interface User {
     user_firstname: string
     user_name: string
     user_phone: string
-    user_mail: string
+    userMail: string
     user_password: string
-    user_type: number
+    userType: number
     user_admin: boolean
   }
   

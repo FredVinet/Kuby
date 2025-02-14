@@ -5,11 +5,6 @@
     style="border-radius: 12px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1)"
     border="opacity-50 md info"
   >
-    <!-- Titre et service -->
-    <v-card-title class="text-lg font-semibold text-center mb-4">
-      {{ title }}
-    </v-card-title>
-
     <!-- Contenu de l'adresse -->
     <v-card-text v-if="address" class="text-center text-body-1">
       <div>{{ address.adress_name }}</div>
@@ -30,13 +25,13 @@
     <v-divider class="my-2"></v-divider>
     <v-card-actions class="d-flex justify-end gap-2">
       <template v-if="editable">
-        <ModifyAdress :address="address">
+        <ModifyAdress :address="address" @refreshAddresses="$emit('refreshAddresses')">
           <v-btn>
             Modifier
           </v-btn>
         </ModifyAdress>
 
-        <DeleteAddress :adress="address?.adress_id ?? 0">
+        <DeleteAddress :adress="address?.adress_id ?? 0" @refreshAddresses="$emit('refreshAddresses')">
           <v-btn>
             Supprimer
           </v-btn>
@@ -51,6 +46,8 @@ import { defineProps } from 'vue';
 import type { Adress } from '@/api/interfaces/Adress';
 import ModifyAdress from '../modal/ModifyAdress.vue';
 import DeleteAddress from '../modal/DeleteAddress.vue';
+
+const emit = defineEmits(['refreshAddresses']);
 
 // Définir la prop address
 const props = defineProps<{

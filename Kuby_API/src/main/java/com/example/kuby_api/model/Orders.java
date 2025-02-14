@@ -21,7 +21,7 @@ public class Orders {
     private String orders_status;
 
     @Column(name = "orders_amount")
-    private int orders_amount;
+    private float orders_amount;
 
     @Column(name = "id_localisation")
     private int id_localisation;

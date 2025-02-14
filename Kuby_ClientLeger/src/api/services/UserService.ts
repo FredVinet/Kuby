@@ -26,10 +26,6 @@ export default class UserService {
     }
   }
 
-  
-
-  
-
   static async createUser(user: User): Promise<User> {
     try {
       const response = await apiClient.post(API_ENDPOINTS.CREATE_USER, user)
@@ -48,6 +44,31 @@ export default class UserService {
       throw new Error(`Error updating user: ${error.response?.data?.message || error.message}`)
     }
   }
+
+  static async updatePassword(
+    userId: number,
+    newPassword: string
+  ): Promise<boolean> {
+    try {
+      const endpoint = API_ENDPOINTS.UPDATE_PASSWORD.replace('{userId}', userId.toString());
+      
+      // Envoyer la requête POST avec le nouveau mot de passe
+      const response = await apiClient.post(endpoint, {
+        newPassword: newPassword // Assurez-vous que le nom de la clé correspond à ce que l'API attend
+      });
+  
+      if (response.data === "Mot de passe mis à jour avec succès") {
+        return true;
+      } else {
+        throw new Error(response.data.message || "Une erreur est survenue.");
+      }
+    } catch (error: any) {
+      throw new Error(
+        `Erreur lors de la mise à jour du mot de passe : ${error.response?.data?.message || error.message}`
+      );
+    }
+  }
+  
 
   static async deleteUser(userId: number): Promise<void> {
     try {

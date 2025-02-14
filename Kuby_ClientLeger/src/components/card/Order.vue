@@ -1,61 +1,64 @@
 <template>
-    <div>
-      <h1 class="text-left text-accent mb-1">
-        Liste des commandes
-      </h1>
-      <p class="text-muted text-sm italic mb-4">
-        Cliquez sur un titre de colonne pour trier les données.
-      </p>
-  
-      <!-- Afficher un message si aucune commande n'est disponible -->
-      <div v-if="!orders || orders.length === 0" class="text-center">
-        Aucune commande trouvée.
-      </div>
-  
-      <!-- Afficher le tableau si des commandes sont disponibles -->
-      <v-table v-else class="table-with-border" ref="orderTable">
-        <thead>
-          <tr>
-            <th class="font-weight-bold text-center" @click="sortBy('orders_id')">
-              N° de commande
-              <v-icon v-if="sortColumn === 'orders_id'" size="16">{{
-                sortOrder === 'asc' ? 'mdi-arrow-up' : 'mdi-arrow-down'
-              }}</v-icon>
-            </th>
-            <th class="font-weight-bold text-center" @click="sortBy('orders_date')">
-              Date de commande
-              <v-icon v-if="sortColumn === 'orders_date'" size="16">{{
-                sortOrder === 'asc' ? 'mdi-arrow-up' : 'mdi-arrow-down'
-              }}</v-icon>
-            </th>
-            <th class="font-weight-bold text-center" @click="sortBy('orders_status')">
-              Statut
-              <v-icon v-if="sortColumn === 'orders_status'" size="16">{{
-                sortOrder === 'asc' ? 'mdi-arrow-up' : 'mdi-arrow-down'
-              }}</v-icon>
-            </th>
-            <th class="font-weight-bold text-center" @click="sortBy('orders_amount')">
-              Montant
-              <v-icon v-if="sortColumn === 'orders_amount'" size="16">{{
-                sortOrder === 'asc' ? 'mdi-arrow-up' : 'mdi-arrow-down'
-              }}</v-icon>
-            </th>
-          </tr>
-        </thead>
-        <tbody class="text-center">
-          <tr v-for="order in paginatedOrders" :key="order.orders_id">
-            <td>{{ order.orders_id }}</td>
-            <td>{{ formatDate(order.orders_date) }}</td> <!-- Utilisation de formatDate -->
-            <td>{{ order.orders_status }}</td>
-            <td>{{ formatAmount(order.orders_amount) }}</td>
-          </tr>
-        </tbody>
-      </v-table>
-  
-      <!-- Afficher la pagination uniquement si des commandes sont disponibles -->
-      <Pagination v-if="orders && orders.length > 0" v-model="page" :length="totalPages" />
+  <div>
+    <!-- Titre "Vos commandes" -->
+    <h3 class="text-h6 font-weight-bold mb-2 d-flex align-center">
+      <v-icon class="ml-2">mdi-shopping</v-icon> Vos commandes :
+    </h3>
+
+    <!-- Message de tri -->
+    <p class="text-muted text-sm italic mb-4">
+      Cliquez sur un titre de colonne pour trier les données.
+    </p>
+
+    <!-- Afficher un message si aucune commande n'est disponible -->
+    <div v-if="!orders || orders.length === 0" class="text-center">
+      Aucune commande trouvée.
     </div>
-  </template>
+
+    <!-- Afficher le tableau si des commandes sont disponibles -->
+    <v-table v-else class="table-with-border" ref="orderTable">
+      <thead>
+        <tr>
+          <th class="font-weight-bold text-center" @click="sortBy('orders_id')">
+            N° de commande
+            <v-icon v-if="sortColumn === 'orders_id'" size="16">{{
+              sortOrder === 'asc' ? 'mdi-arrow-up' : 'mdi-arrow-down'
+            }}</v-icon>
+          </th>
+          <th class="font-weight-bold text-center" @click="sortBy('orders_date')">
+            Date de commande
+            <v-icon v-if="sortColumn === 'orders_date'" size="16">{{
+              sortOrder === 'asc' ? 'mdi-arrow-up' : 'mdi-arrow-down'
+            }}</v-icon>
+          </th>
+          <th class="font-weight-bold text-center" @click="sortBy('orders_status')">
+            Statut
+            <v-icon v-if="sortColumn === 'orders_status'" size="16">{{
+              sortOrder === 'asc' ? 'mdi-arrow-up' : 'mdi-arrow-down'
+            }}</v-icon>
+          </th>
+          <th class="font-weight-bold text-center" @click="sortBy('orders_amount')">
+            Montant
+            <v-icon v-if="sortColumn === 'orders_amount'" size="16">{{
+              sortOrder === 'asc' ? 'mdi-arrow-up' : 'mdi-arrow-down'
+            }}</v-icon>
+          </th>
+        </tr>
+      </thead>
+      <tbody class="text-center">
+        <tr v-for="order in paginatedOrders" :key="order.orders_id">
+          <td>{{ order.orders_id }}</td>
+          <td>{{ formatDate(order.orders_date) }}</td>
+          <td>{{ order.orders_status }}</td>
+          <td>{{ formatAmount(order.orders_amount) }}</td>
+        </tr>
+      </tbody>
+    </v-table>
+
+    <!-- Afficher la pagination uniquement si des commandes sont disponibles -->
+    <Pagination v-if="orders && orders.length > 0" v-model="page" :length="totalPages" />
+  </div>
+</template>
   
   <script setup lang="ts">
   import { ref, computed, type PropType } from 'vue';
