@@ -76,12 +76,12 @@
             </td>
             <td>
               <h3 class="font-weight-regular text-center">
-                {{ wine.family?.family_name }}
+                {{ wine.family_name }}
               </h3>
             </td>
             <td>
               <h3 class="font-weight-regular text-center">
-                {{ wine.grape?.grape_name }}
+                {{ wine.grape_name }}
               </h3>
             </td>
             <td>
@@ -96,7 +96,7 @@
             </td>
             <td>
               <h3 class="font-weight-regular text-center">
-                {{ wine.supplierArticle?.supplier?.user_name || 'Non renseigné' }}              
+                {{ wine.user_name || 'Non renseigné' }}              
               </h3>
             </td>
             <td>
@@ -113,7 +113,7 @@
     </v-card>
 
     <div class="d-flex justify-center my-10">
-            <AddArticle :families="props.families" :grapes="props.grapes" :suppliers="props.suppliers" />            
+            <AddArticle :families="props.families" :grapes="props.grapes" :suppliers="suppliers" @refresh="refresh"/>            
             <v-btn
             color="primary"
             class="mx-5"
@@ -122,26 +122,35 @@
   </template>
   
   <script setup lang="ts">
-  import { defineEmits, defineProps,ref} from 'vue'
+  import { defineEmits, defineProps,onMounted,ref} from 'vue'
   import type {Article} from '@/api/interfaces/Article'
   import type { Family } from '@/api/interfaces/Family';
   import type { Grape } from '@/api/interfaces/Grape';
-  import type { SupplierArticle } from '@/api/interfaces/Supplier';
+  import type { User } from '@/api/interfaces/User';
   import AddArticle from '../Modal/AddArticle.vue';
 
   const props = defineProps<{
     wines: Article[];
     families: Family[];
     grapes: Grape[];
-    suppliers: SupplierArticle[];
+    suppliers: User[];
 }>();
-  
+
+  const emits = defineEmits(['updateSelectedWine','refresh'])
+
+
+  onMounted(() => {
+    console.log(':', props.suppliers);
+  });
 
   const calculateTotalQuantity = (wine: Article) => {
     return (wine.article_quantity_in ?? 0) - (wine.article_quantity_out ?? 0)
   }
 
-  const emits = defineEmits(['updateSelectedWine'])
+
+  const refresh = () => {
+        emits('refresh')
+    };
   
   const selectWine = (wine: Article) => {
     emits('updateSelectedWine', wine)

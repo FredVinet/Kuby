@@ -62,8 +62,9 @@
                             <v-select 
                                 label="Fournisseur" 
                                 :items="suppliers" 
-                                item-title="supplier.user_name" 
-                                item-value="supplier.user_id"
+                                v-model="newArticle.user_id"
+                                item-title="user_name" 
+                                item-value="user_id"
                             ></v-select>
                         </v-col>
                         <v-col cols="12" >
@@ -113,18 +114,23 @@
 import type { Article } from '@/api/interfaces/Article';
 import type { Family } from '@/api/interfaces/Family';
 import type { Grape } from '@/api/interfaces/Grape';
-import type { SupplierArticle } from '@/api/interfaces/Supplier';
+import type { User } from '@/api/interfaces/User';
 import ArticleService from '@/api/services/ArticlesService';
-import { ref, reactive} from 'vue'
+import { ref, reactive, onMounted} from 'vue'
 
 const dialog = ref(false)
 
 const props = defineProps<{
     families: Family[];
     grapes: Grape[];
-    suppliers: SupplierArticle[];
+    suppliers: User[];
 }>();
 
+
+onMounted(() => {
+    console.log('Suppliers at mount:', props.suppliers);
+  });
+  
 const newArticle = reactive<Article>({
     article_name: '',
     article_description: '',
@@ -134,22 +140,15 @@ const newArticle = reactive<Article>({
     id_grape: 0,
     article_quantity_in: 0,  
     article_quantity_out: 0,
-    family: undefined, 
-    grape: undefined  
+    user_id:0,
+
 });
 
 
 async function addArticle(){
     try {
-        newArticle.family = props.families.find(familie => familie.family_id === newArticle.id_family); //Renvoie les objets de Family et Grape car lié 
-        newArticle.grape = props.grapes.find(grape => grape.grape_id === newArticle.id_grape);
 
-        if (!newArticle.family || !newArticle.grape) {
-            console.error('Famille ou variété manquante');
-            return;
-        }
-
-        await ArticleService.createArticle(newArticle);
+        await ArticleService.createArticle(newArticle.user_id,newArticle);
         dialog.value = false;
         console.log('Nouvelle Article', newArticle);
     } catch (error) {

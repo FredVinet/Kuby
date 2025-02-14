@@ -15,10 +15,10 @@
 
                     <div class="py-3"><h2>ID : <span class="font-weight-medium">{{wine.article_id}} </span></h2></div>
                     <div class="py-3"><h2>Nom : <span class="font-weight-medium">{{wine.article_name}}</span></h2></div>
-                    <div class="py-3"><h2>Famille : <span class="font-weight-medium">{{wine.family.family_name}} </span></h2></div>
-                    <div class="py-3"><h2>Variété : <span class="font-weight-medium">{{wine.grape.grape_name}}</span></h2></div>
+                    <div class="py-3"><h2>Famille : <span class="font-weight-medium">{{wine.family_name}} </span></h2></div>
+                    <div class="py-3"><h2>Variété : <span class="font-weight-medium">{{wine.grape_name}}</span></h2></div>
                     <div class="py-3"><h2>Année : <span class="font-weight-medium">{{wine.article_yearprod}}</span></h2></div>
-                    <div class="py-3"><h2>Fournisseur : <span class="font-weight-medium"> {{ wine.supplierArticle?.supplier?.user_name || 'Non renseigné' }}              
+                    <div class="py-3"><h2>Fournisseur : <span class="font-weight-medium"> {{ wine.user_name || 'Non renseigné' }}              
                     </span></h2></div>
 
                 </v-card-text>
@@ -43,25 +43,29 @@
             </v-col>
         </v-row>
         <div class="d-flex justify-center my-10">
-            <v-btn
-            color="primary"
-            class="mx-5"
-            >Modifier Produit</v-btn>
-            <v-btn
-            color="primary"
-            class="mx-5"
-            >Supprimer Produit</v-btn>
+            <UpdateArticle :article="wine" @refresh="refresh" />
+            <DelArticle :article="wine" @refresh="refresh"/>
         </div>
     </v-card>
 </template>
 
 <script setup lang="ts">
-    import { defineProps } from 'vue'
+    import type { Article } from '@/api/interfaces/Article';
+    import { defineProps, defineEmits } from 'vue'
+    import DelArticle from '../Modal/DelArticle.vue';
+    import UpdateArticle from '../Modal/UpdateArticle.vue';
+
+    const emits = defineEmits(['refresh']);
+
 
     defineProps<{
-        wine: User | null
+        wine: Article | null
 
     }>()
+    
+    const refresh = () => {
+        emits('refresh')
+    };
 
     const calculateTotalQuantity = (wine: Article) => {
     return (wine.article_quantity_in ?? 0) - (wine.article_quantity_out ?? 0)
