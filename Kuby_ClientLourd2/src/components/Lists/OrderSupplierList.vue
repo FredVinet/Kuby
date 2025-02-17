@@ -32,11 +32,6 @@
           </th>
           <th class="text-center">
             <v-btn variant="text">
-              <h2 class="text-primary" style="text-transform: none">Qté Article</h2>
-            </v-btn>
-          </th>
-          <th class="text-center">
-            <v-btn variant="text">
               <h2 class="text-primary" style="text-transform: none">Nom Fournisseur</h2>
             </v-btn>
           </th>
@@ -54,7 +49,7 @@
       </thead>
       <tbody>
         <tr
-        v-for="order in orders.filter(order => order.localisation?.user?.userType === 2)"            
+        v-for="order in orders.filter(order => order.userType === 2)"            
         :key="order.id"
           class="clickable-row"
           @click="selectOrder(order)"
@@ -76,17 +71,12 @@
           </td>
           <td>
             <h3 class="font-weight-regular text-center">
-              {{ order.items.length }}
+              {{ order.user_name }}
             </h3>
           </td>
           <td>
             <h3 class="font-weight-regular text-center">
-              {{ order.localisation.user.user_name }}
-            </h3>
-          </td>
-          <td>
-            <h3 class="font-weight-regular text-center">
-              {{ order.localisation.address.adress_city}}
+              {{ order.adress_city}}
             </h3>
           </td>
           <td>
@@ -108,7 +98,7 @@ import type { Orders } from '@/api/interfaces/Orders';
 import { defineEmits, defineProps } from 'vue'
 
 defineProps<{
-  orders?: []
+  orders?: Orders[]
 }>()
 
 const emits = defineEmits(['updateSelectedOrder'])

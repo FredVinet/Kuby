@@ -17,7 +17,7 @@
     import FilterOrder from '@/components/Search/FilterOrder.vue';
     import OrderClientList from '@/components/Lists/OrderClientList.vue';
     import OrderCard from '@/components/Cards/OrderCard.vue';
-    import OrdersService from '@/api/services/OrdersService.ts';
+    import OrdersService from '@/api/services/OrdersService';
     import type { Orders } from '@/api/interfaces/Orders.ts';
 
     const orders = ref<Orders[]>([]);
@@ -29,6 +29,7 @@
       try {
         orders.value = await OrdersService.getAllOrders();
         filtereOrder.value = orders.value;
+        console.log('order sélectionné :', orders.value)
 
       } catch (error) {
         console.error('Erreur lors de la récupération des commandes:', error);
@@ -49,9 +50,9 @@
       filtereOrder.value = orders.value;  
     } else {
       filtereOrder.value = orders.value.filter((order: Orders) => 
-        order.localisation.user?.user_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        order.localisation.address.adress_city.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        order.localisation.user?.user_firstname.toLowerCase().includes(searchTerm.toLowerCase()) 
+        order.user_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        order.adress_city.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        order.user_firstname.toLowerCase().includes(searchTerm.toLowerCase()) 
       );
     }
   };

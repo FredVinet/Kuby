@@ -53,9 +53,9 @@
       console.log("filtereOrder", filtereOrder.value);
     } else {
       filtereOrder.value = orders.value.filter((order: Orders) => 
-        order.localisation.user?.user_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        order.localisation.address.adress_city.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        order.localisation.user?.user_firstname.toLowerCase().includes(searchTerm.toLowerCase()) 
+        order.user_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        order.adress_city.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        order.user?.user_firstname.toLowerCase().includes(searchTerm.toLowerCase()) 
       );
       console.log("filtereOrder", filtereOrder.value);
     }

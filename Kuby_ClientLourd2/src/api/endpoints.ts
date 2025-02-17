@@ -37,10 +37,11 @@ export const API_ENDPOINTS = {
 
     // orders 
     GET_ALL_ORDERS: '/orders/getAllOrders',
+    GET_ALL_ORDERS_DETAILS: '/orders/getAllOrdersDetails',
     GET_ORDER_BY_ID: '/orders/getOneOrder/',
     CREATE_ORDER: '/orders/createOrder',
     UPDATE_ORDER: '/orders/updateOrder/',
-    DELETE_ORDER: '/orders/deleteOrder/',
+    DELETE_ORDER: '/orders/deleteOrder/:id',
 
     // order_items
     GET_ALL_ORDER_ITEMS: '/orderItems/getAllOrderItems',
