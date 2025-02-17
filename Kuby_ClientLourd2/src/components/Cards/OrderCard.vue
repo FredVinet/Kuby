@@ -12,11 +12,11 @@
         <v-row align="center" no-gutters>
             <v-col class="text-left px-3" :cols="12" :md="8">
                 <v-card-text class="font-weight-bold text-accent">
-                    <div class="py-3"><h2>Pour le client: <span class="font-weight-medium">{{order.localisation.user.user_name}} {{order.localisation.user.user_firstname}} </span></h2></div>
+                    <div class="py-3"><h2>Pour le client: <span class="font-weight-medium">{{order.user_name}} {{order.user_firstname}} </span></h2></div>
                     <div class="py-3"><h2>Statut: : <span class="font-weight-medium">{{order.orders_status}} </span></h2></div>
                     <div class="py-3"><h2>Montant de la commande : <span class="font-weight-medium">{{order.orders_amount}} € </span></h2></div>
-                    <div class="py-3"><h2>Date de la commande : <span class="font-weight-medium">{{order.orders_date}}</span></h2></div>
-                    <div class="py-3"><h2>Adresse de livraison : <span class="font-weight-medium">{{order.localisation.address.adress_number}} {{order.localisation.address.adress_name}} {{order.localisation.address.adress_code}} {{order.localisation.address.adress_city}}, {{order.localisation.address.adress_country}} </span></h2></div>
+                    <div class="py-3"><h2>Date de la commande : <span class="font-weight-medium">{{formatDate(order.orders_date)}}</span></h2></div>
+                    <div class="py-3"><h2>Adresse de livraison : <span class="font-weight-medium">{{order.adress_number}} {{order.adress_name}} {{order.adress_code}} {{order.adress_city}}, {{order.adress_country}} </span></h2></div>
 
                 </v-card-text>
             </v-col>
@@ -33,22 +33,31 @@
             color="primary"
             class="mx-5"
             >Modifier Commande</v-btn>
-            <v-btn
-            color="primary"
-            class="mx-5"
-            >Supprimer Commande</v-btn>
+            <DelOrder :order="orderRef"/>
         </div>
     </v-card>
 </template>
 
 <script setup lang="ts">
-import {Order} from '@/api/interfaces/Order';
-import { defineProps } from 'vue'
+import DelOrder from '../Modal/DelOrder.vue';
+import type {Orders} from '@/api/interfaces/Orders';
+import { computed, defineProps } from 'vue'
 
-defineProps<{
-    order: Order
+const props = defineProps<{
+    order: Orders
 
 }>()
+
+const formatDate = (dateString: string) => {
+  const date = new Date(dateString);
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const year = date.getFullYear();
+  return `${day}/${month}/${year}`;
+}
+
+const orderRef = computed(() => props.order)
+
 
 </script>
 

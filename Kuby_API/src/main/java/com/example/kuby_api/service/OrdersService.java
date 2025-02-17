@@ -28,13 +28,25 @@ public class OrdersService {
             orderData.put("orders_status", row[2]);
             orderData.put("orders_amount", row[3]);
             orderData.put("id_localisation", row[4]);
-            orderData.put("order_items_id", row[5]);
-            orderData.put("order_items_quantity", row[6]);
+            orderData.put("id_user", row[5]);
+            orderData.put("id_adress", row[6]);  
+            orderData.put("adress_number", row[7]);
+            orderData.put("adress_country", row[8]);
+            orderData.put("adress_state", row[9]);
+            orderData.put("adress_name", row[10]);
+            orderData.put("adress_city", row[11]);
+            orderData.put("adress_code", row[12]);
+            orderData.put("user_id", row[13]);  // ✅ Correspond maintenant à la requête SQL
+            orderData.put("user_name", row[14]);
+            orderData.put("user_firstname", row[15]);
+            orderData.put("userType", row[16]);  // ✅ Correspond maintenant à la requête SQL
 
             ordersWithDetails.add(orderData);
         }
+
         return ordersWithDetails;
     }
+
 
     public Optional<Orders> getOrders(final Long id){
         return orderRepository.findById(id);

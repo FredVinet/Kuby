@@ -44,22 +44,23 @@
             color="primary"
             class="mx-5"
             >Modifier Client</v-btn>
-            <v-btn
-            color="primary"
-            class="mx-5"
-            >Supprimer Client</v-btn>
+            <DelClient :user="clientRef" />
         </div>
     </v-card>
 </template>
 
 <script setup lang="ts">
     import { User } from '@/api/interfaces/User';
-    import { defineProps } from 'vue'
+    import { computed, defineProps } from 'vue'
+import DelClient from '../Modal/DelClient.vue';
 
-    defineProps<{
+    const props = defineProps<{
         client: User | null
 
     }>()
+
+    const clientRef = computed(() => props.client)
+
 
 </script>
 

@@ -13,11 +13,14 @@ import java.util.List;
 public interface OrdersRepository extends CrudRepository<Orders, Long> {
 
     @Query("SELECT o.orders_id, o.orders_date, o.orders_status, o.orders_amount, o.id_localisation, " +
-            "oi.order_items_id, oi.order_items_quantity, oi.unit_price, " +
-            "ar.article_id, ar.article_name, ar.article_price " +
+            "lo.id_user, " +
+            "ad.adress_id, ad.adress_number, ad.adress_country, ad.adress_state, ad.adress_name, ad.adress_city, ad.adress_code, " +
+            "us.user_id, us.user_name, us.user_firstname, us.userType " +
             "FROM Orders o " +
-            "JOIN OrderItem oi ON o.orders_id = oi.id_order " +
-            "JOIN Article ar ON oi.id_article = ar.article_id")
+            "JOIN Localisation lo ON o.id_localisation = lo.localisation_id " +
+            "JOIN Adress ad ON lo.id_adress = ad.adress_id " +
+            "JOIN User us ON lo.id_user = us.user_id ")
+
     List<Object[]> findAllOrdersWithDetails();
 
     @Query("SELECT o FROM Orders o JOIN Localisation l ON o.id_localisation = l.localisation_id WHERE l.id_user = :userId")
