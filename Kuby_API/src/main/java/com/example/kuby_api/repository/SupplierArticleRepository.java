@@ -17,6 +17,12 @@ public interface SupplierArticleRepository extends CrudRepository<SupplierArticl
     @Query("DELETE FROM SupplierArticle sa WHERE sa.id_article = :articleId")
     void deleteByArticleId(Long articleId);
 
+    @Modifying
+    @Transactional
+    @Query("UPDATE SupplierArticle sa SET sa.id_user = :userId WHERE sa.id_article = :articleId")
+    void updateUserForArticle(@Param("articleId") Long articleId, @Param("userId") Long userId);
+
+
     @Query("SELECT s FROM SupplierArticle s WHERE s.id_article = :articleId")
     List<SupplierArticle> findByArticleId(@Param("articleId") Long articleId);
 

@@ -28,6 +28,28 @@ export default class ArticleService {
     }
   }
 
+  static async updateArticle(id: number, details_article: Partial<Article>, userId: number): Promise<Article> {
+    try {
+        const endpoint = API_ENDPOINTS.UPDATE_ARTICLE.replace(':id', id.toString());
+        
+        const response = await apiClient.put(endpoint, 
+            { 
+                ...details_article, 
+                id: id 
+            }, 
+            {
+                params: { userId } 
+            }
+        );
+        
+        return response.data;
+    } catch (error: any) {
+        throw new Error(`Erreur lors de la mise à jour de l'article: ${error.response?.data?.message || error.message}`);
+    }
+}
+
+  
+
   static async deleteArticle(article_id: number): Promise<void> {
     try {
       const endpoint = API_ENDPOINTS.DELETE_ARTICLE.replace(':id', article_id.toString());

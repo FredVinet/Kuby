@@ -1,4 +1,4 @@
-import type { Supplier } from "./Supplier";
+import type { Supplier } from "./SupplierArticle";
 
 export interface Article {
     article_id?: number; 

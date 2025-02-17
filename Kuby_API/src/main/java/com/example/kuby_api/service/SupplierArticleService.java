@@ -24,6 +24,10 @@ public class SupplierArticleService {
         supplierArticleRepository.deleteByArticleId(articleId);
     }
 
+    public void updateSupplierArticleUser(Long articleId, Long userId) {
+        supplierArticleRepository.updateUserForArticle(articleId, userId);
+    }
+
     public List<SupplierArticle> getSupplierArticlesByUserId(Long userId) {
         return supplierArticleRepository.findByUserId(userId);
     }

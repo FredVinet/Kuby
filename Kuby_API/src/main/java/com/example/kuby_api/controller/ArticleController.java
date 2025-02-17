@@ -43,10 +43,8 @@ public class ArticleController {
     @PostMapping("/createArticle/{userId}")
     public ResponseEntity<Map<String, Object>> createArticle(@PathVariable Long userId, @RequestBody Article article) {
 
-        // Créer l'article
         Article savedArticle = articleService.createArticle(article);
 
-        // Créer le SupplierArticle pour lier l'article à l'utilisateur
         SupplierArticle supplierArticle = new SupplierArticle();
         supplierArticle.setId_article(savedArticle.getArticle_id());
         supplierArticle.setId_user(userId);
@@ -61,9 +59,13 @@ public class ArticleController {
     }
 
     @PutMapping("/updateArticle/{id}")
-    public Article updateArticle(@PathVariable Long id, @RequestBody Article article) {
-        return articleService.updateArticle(id, article);
+    public Article updateArticle(@PathVariable Long id,
+                                 @RequestBody Article article,
+                                 @RequestParam Long userId) {
+        return articleService.updateArticle(id, article, userId);
     }
+
+
 
     @DeleteMapping("/deleteArticle/{id}")
     public void deleteArticle(@PathVariable Long id) {

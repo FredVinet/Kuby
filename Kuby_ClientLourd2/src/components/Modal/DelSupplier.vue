@@ -40,10 +40,8 @@ const props = defineProps<{
     user: User 
 }>();
 
-console.log('user', props.user);
 
 async function confirmDelete() {
-    console.log("ID utilisateur à supprimer :", props.user?.user_id);
 
     if (!props.user?.user_id) {
         console.error("Erreur: ID utilisateur non défini !");
@@ -52,7 +50,6 @@ async function confirmDelete() {
 
     try {
         await UserService.deleteUser(props.user.user_id);
-        console.log("Utilisateur supprimé avec succès");
 
         emits('refresh');
 

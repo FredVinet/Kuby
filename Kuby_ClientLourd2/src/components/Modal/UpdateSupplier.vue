@@ -205,8 +205,7 @@ async function updateUser() {
         
 
         dialog.value = false;
-        console.log('Utilisateur mis à jour', newUser);
-        console.log('Adresse mise à jour', newAddress);
+
     } catch (error) {
         console.error('Erreur lors de la mise à jour de l\'utilisateur', error);
     }

@@ -32,7 +32,6 @@ const getClient = async () => {
     const users = await UserService.getUsersByType(1);
     clients.value = users; 
     filteredClients.value = users;  
-    console.log(clients.value);
   } catch (error) {
     console.error('Erreur lors de la récupération des utilisateurs:', error);
   }
@@ -56,6 +55,5 @@ const filterClients = (searchTerm: string) => {
 
 const updateSelectedClient = (client: User) => {
   selectedClient.value = client;
-  console.log('Partenaire sélectionné :', client);
 };
 </script>

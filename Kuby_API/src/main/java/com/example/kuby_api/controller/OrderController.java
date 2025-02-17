@@ -5,6 +5,8 @@ import com.example.kuby_api.service.OrdersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -17,6 +19,11 @@ public class OrderController {
     @GetMapping("/getAllOrders")
     public Iterable<Orders> getOrders() {
         return ordersService.getOrders();
+    }
+
+    @GetMapping("/getAllOrdersDetails")
+    public List<Map<String, Object>> getAllOrdersWithDetails() {
+        return ordersService.getAllOrdersWithDetails();
     }
 
     @GetMapping("/getOneOrder/{id}")

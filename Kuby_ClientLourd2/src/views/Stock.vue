@@ -4,7 +4,7 @@
     <Filter @filterStock="filterStock" />
     <StockList :wines="filteredWine" :families="families" :grapes="grapes" :suppliers="suppliers" @updateSelectedWine="updateSelectedWine" @refresh="refresh"/>    
     <div v-if="selectedWine">
-      <StockCard :wine="selectedWine" @refresh="refresh"/>
+      <StockCard :wine="selectedWine" :families="families" :grapes="grapes" :suppliers="suppliers" @refresh="refresh"/>
     </div>
       <div v-else class="text-center text-muted py-4">
         Veuillez sélectionner un vin.

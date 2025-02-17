@@ -33,7 +33,6 @@ const getSupplier = async () => {
     const users = await UserService.getUsersByType(2);
     suppliers.value = users; 
     filteredSuppliers.value = users;  
-    console.log(suppliers.value);
   } catch (error) {
     console.error('Erreur lors de la récupération des utilisateurs:', error);
   }
@@ -60,7 +59,6 @@ const filterClients = (searchTerm: string) => {
 
 const updateSelectedSupplier = (supplier: User) => {
   selectedSupplier.value = supplier
-  console.log('Partenaire sélectionné :', supplier)
 }
 
 </script>
