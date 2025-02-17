@@ -1,5 +1,5 @@
 import apiClient from '../index';
-import type { SupplierArticle } from '@/api/interfaces/Supplier'
+import type { SupplierArticle } from '@/api/interfaces/SupplierArticle'
 import { API_ENDPOINTS } from '../endpoints';
 
 export default class SupplierService {
@@ -20,6 +20,16 @@ export default class SupplierService {
       return response.data
     } catch (error: any) {
       throw new Error(`Error creating supplierArticle: ${error.response?.data?.message || error.message}`)
+    }
+  }
+
+  static async updateSupplierArticle(id: number, details_supplier: Partial<SupplierArticle>): Promise<SupplierArticle> {
+    try {
+      const endpoint = API_ENDPOINTS.CREATE_SUPPLIER_ARTICLE.replace(':id', id.toString())
+      const response = await apiClient.put(endpoint, { ...details_supplier, id: id }) 
+      return response.data
+    } catch (error: any) {
+      throw new Error(`Error updating article: ${error.response?.data?.message || error.message}`)
     }
   }
 

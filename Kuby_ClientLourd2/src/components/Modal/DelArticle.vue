@@ -40,7 +40,6 @@ const props = defineProps<{
     article: Article 
 }>();
 
-console.log('vin', props.article);
 
 async function confirmDelete() {
     console.log("ID Article à supprimer :", props.article?.article_id);

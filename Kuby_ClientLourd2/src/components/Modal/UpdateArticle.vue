@@ -17,79 +17,69 @@
                     <v-row dense>
                         <v-col cols="12" md="6">
                             <v-text-field
-                                label="Prénom"
-                                required
-                                v-model="newArticle.user_firstname"
-                            ></v-text-field>
-                        </v-col>
-                        <v-col cols="12" md="6">
-                            <v-text-field
                                 label="Nom"
                                 required
-                                v-model="newArticle.user_name"
+                                v-model="newArticle.article_name"
+                            ></v-text-field>
+                        </v-col>
+                        <v-col cols="12" md="3">
+                            <v-text-field
+                                label="Prix de vente"
+                                required
+                                v-model="newArticle.article_price"
+                            ></v-text-field>
+                        </v-col>
+                        <v-col cols="12" md="3">
+                            <v-text-field
+                                label="Année"
+                                required
+                                v-model="newArticle.article_yearprod"
+                            ></v-text-field>
+                        </v-col>
+                        <v-col cols="12" md="4">
+                            <v-select 
+                                label="Famille" 
+                                required 
+                                v-model="newArticle.id_family" 
+                                :items="families" 
+                                item-title="family_name" 
+                                item-value="family_id"
+                            ></v-select>
+                        </v-col>
+                        <v-col cols="12" md="4">
+                            <v-select 
+                                label="Variété" 
+                                required 
+                                v-model="newArticle.id_grape" 
+                                :items="grapes" 
+                                item-title="grape_name" 
+                                item-value="grape_id"
+                            ></v-select>
+                        </v-col>
+                        <v-col cols="12" md="4">
+                            <v-select 
+                                label="Fournisseur" 
+                                :items="suppliers" 
+                                v-model="newArticle.user_id"
+                                item-title="user_name" 
+                                item-value="user_id"
+                            ></v-select>
+                        </v-col>
+                        <v-col cols="12" md="6">
+                            <v-text-field
+                                label="Quantité entrer"
+                                required
+                                v-model="newArticle.article_quantity_in"
                             ></v-text-field>
                         </v-col>
                         <v-col cols="12" md="6">
                             <v-text-field
-                                label="Phone"
+                                label="Quantité sortie"
                                 required
-                                v-model="newArticle.user_phone"
+                                v-model="newArticle.article_quantity_out"
                             ></v-text-field>
                         </v-col>
-                        <v-col cols="12" md="6">
-                            <v-text-field
-                                label="Mail"
-                                required
-                                v-model="newArticle.userMail"
-                            ></v-text-field>
-                        </v-col>
-                    </v-row>
-
-                    <v-divider></v-divider>
-                    <h4 class="mt-4 text-center">Adresse</h4>
-                    <v-row dense>
-                        <v-col cols="12" md="6">
-                            <v-text-field
-                                label="Numéro"
-                                required
-                                v-model="newAddress.adress_number"
-                            ></v-text-field>
-                        </v-col>
-                        <v-col cols="12" md="6">
-                            <v-text-field
-                                label="Nom de rue"
-                                required
-                                v-model="newAddress.adress_name"
-                            ></v-text-field>
-                        </v-col>
-                        <v-col cols="12" md="6">
-                            <v-text-field
-                                label="Ville"
-                                required
-                                v-model="newAddress.adress_city"
-                            ></v-text-field>
-                        </v-col>
-                        <v-col cols="12" md="6">
-                            <v-text-field
-                                label="État"
-                                required
-                                v-model="newAddress.adress_state"
-                            ></v-text-field>
-                        </v-col>
-                        <v-col cols="12" md="6">
-                            <v-text-field
-                                label="Code Postal"
-                                required
-                                v-model="newAddress.adress_code"
-                            ></v-text-field>
-                        </v-col>
-                        <v-col cols="12" md="6">
-                            <v-text-field
-                                label="Pays"
-                                required
-                                v-model="newAddress.adress_country"
-                            ></v-text-field>
-                        </v-col>
+                        
                     </v-row>
                 </v-card-text>
 
@@ -109,7 +99,7 @@
                         class="bg-primary mb-2"
                         text="Modifier"
                         variant="tonal"
-                        @click="updateUser"
+                        @click="updateArticle"
                     >
                         Modifier
                     </v-btn>
@@ -126,6 +116,9 @@ import type { Address } from '@/api/interfaces/Adress';
 import AddressService from '@/api/services/AdressService';
 import ArticlesService from '@/api/services/ArticlesService';
 import { ref, reactive, defineProps, watch, defineEmits } from 'vue';
+import type { Family } from '@/api/interfaces/Family';
+import type { Grape } from '@/api/interfaces/Grape';
+import type { User } from '@/api/interfaces/User';
 
 const dialog = ref(false);
 
@@ -133,61 +126,67 @@ const emits = defineEmits(['refresh']);
 
 const props = defineProps<{
     wine: Article;
+    families: Family[];
+    grapes: Grape[];
+    suppliers: User[];
 }>();
 
 const newArticle = reactive<Article>({
+    article_id: 0, 
+    article_name: '',
+    article_description: '',
+    article_yearprod: 0,
+    article_price: 0,
+    article_quantity_in: 0,
+    article_quantity_out: 0,
+    id_family: 0,
+    id_grape: 0,
     user_id: 0,
+    grape_name: '',
+    family_name: '',
     user_name: '',
-    user_phone: '',
-
 });
 
-const newAddress = reactive<Address>({
-    adress_id:0,
-    adress_number: 0,
-    adress_country: '',
-    adress_state: '',
-    adress_name: '',
-    adress_city: '',
-    adress_code: '',
-});
+
 
 watch(
     () => props.wine,
-    (newSupplier) => {
-        newArticle.user_id = newSupplier.user_id;
+    (newWine) => {
+        newArticle.article_id = newWine.article_id;
+        newArticle.article_name = newWine.article_name;
+        newArticle.article_description = newWine.article_description;
+        newArticle.article_yearprod = newWine.article_yearprod;
+        newArticle.article_price = newWine.article_price;
+        newArticle.article_quantity_in = newWine.article_quantity_in;
+        newArticle.article_quantity_out = newWine.article_quantity_out;
+
+        newArticle.id_family = newWine.id_family;
+        newArticle.id_grape = newWine.id_grape;
+        newArticle.grape_name = newWine.family_name;
+        newArticle.user_id = newWine.user_id;
+        newArticle.user_name = newWine.user_name;
+
     },
     { immediate: true }
 );
 
-async function updateUser() {
+async function updateArticle() {
     try {
         await ArticlesService.updateArticle(newArticle.article_id, {
-            user_firstname: newArticle.user_firstname,
-            user_name: newArticle.user_name,
-            user_phone: newArticle.user_phone,
-            userMail: newArticle.userMail,
-            user_password: newArticle.user_password,
-            userType: newArticle.userType,
-            user_admin: newArticle.user_admin,
-        });
+            article_name: newArticle.article_name,
+            article_description: newArticle.article_description,
+            article_yearprod: newArticle.article_yearprod,
+            article_price: newArticle.article_price,
+            article_quantity_in: newArticle.article_quantity_in,
+            article_quantity_out: newArticle.article_quantity_out,
 
-        await AddressService.updateAddress(newAddress.adress_id, {
-            adress_number: newAddress.adress_number,
-            adress_name: newAddress.adress_name,
-            adress_city: newAddress.adress_city,
-            adress_state: newAddress.adress_state,
-            adress_code: newAddress.adress_code,
-            adress_country: newAddress.adress_country,
-        });
+            id_family: newArticle.id_family,
+            id_grape: newArticle.id_grape,
+        }, newArticle.user_id);
 
         emits('refresh');
 
-        
-
         dialog.value = false;
-        console.log('Utilisateur mis à jour', newArticle);
-        console.log('Adresse mise à jour', newAddress);
     } catch (error) {
         console.error('Erreur lors de la mise à jour de l\'utilisateur', error);
     }

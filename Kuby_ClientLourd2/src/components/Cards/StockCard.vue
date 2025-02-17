@@ -43,7 +43,7 @@
             </v-col>
         </v-row>
         <div class="d-flex justify-center my-10">
-            <UpdateArticle :article="wine" @refresh="refresh" />
+            <UpdateArticle :wine="wine" :families="families" :grapes="grapes" :suppliers="suppliers" @refresh="refresh" />
             <DelArticle :article="wine" @refresh="refresh"/>
         </div>
     </v-card>
@@ -54,13 +54,18 @@
     import { defineProps, defineEmits } from 'vue'
     import DelArticle from '../Modal/DelArticle.vue';
     import UpdateArticle from '../Modal/UpdateArticle.vue';
+    import type { Family } from '@/api/interfaces/Family';
+    import type { Grape } from '@/api/interfaces/Grape';
+    import type { User } from '@/api/interfaces/User';
 
     const emits = defineEmits(['refresh']);
 
 
     defineProps<{
-        wine: Article | null
-
+        wine: Article;
+        families: Family[];
+        grapes: Grape[];
+        suppliers: User[];
     }>()
     
     const refresh = () => {

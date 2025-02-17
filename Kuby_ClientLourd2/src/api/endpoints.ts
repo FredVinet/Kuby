@@ -11,7 +11,7 @@ export const API_ENDPOINTS = {
     GET_ALL_ARTICLES_DETAILS: '/articles/getAllArticlesDetails',
     GET_ARTICLES_BY_ID: '/articles/getOneArticle/',
     CREATE_ARTICLE: '/articles/createArticle/:id',
-    UPDATE_ARTICLE: '/articles/updateArticle/',
+    UPDATE_ARTICLE: '/articles/updateArticle/:id',
     DELETE_ARTICLE: '/articles/deleteArticle/:id',
 
     // family

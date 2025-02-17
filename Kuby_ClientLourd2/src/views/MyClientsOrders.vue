@@ -28,7 +28,6 @@
     const getOrders = async () => {
       try {
         orders.value = await OrdersService.getAllOrders();
-        console.log("Commandes enrichies :", orders.value);
         filtereOrder.value = orders.value;
 
       } catch (error) {
@@ -43,21 +42,17 @@
 
   const updateSelectedOrder = (order: Orders) => {
     selectedOrder.value = order
-    console.log('order sélectionné :', order)
-    console.log('selectedOrder.value', selectedOrder.value)
   }
 
   const filterOrder = (searchTerm: string) => {
     if (!searchTerm) {
       filtereOrder.value = orders.value;  
-      console.log("filtereOrder", filtereOrder.value);
     } else {
       filtereOrder.value = orders.value.filter((order: Orders) => 
         order.localisation.user?.user_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         order.localisation.address.adress_city.toLowerCase().includes(searchTerm.toLowerCase()) ||
         order.localisation.user?.user_firstname.toLowerCase().includes(searchTerm.toLowerCase()) 
       );
-      console.log("filtereOrder", filtereOrder.value);
     }
   };
 

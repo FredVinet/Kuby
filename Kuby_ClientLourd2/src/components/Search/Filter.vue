@@ -76,7 +76,6 @@ const emit = defineEmits<{
 const searchTerm = ref('');
 
 const onSearchChange = () => {
-  console.log('Recherche en cours:', searchTerm.value); 
   emit('filterStock', searchTerm.value);
 };
 

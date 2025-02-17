@@ -77,8 +77,9 @@ public class ArticleService {
         return articleRepository.save(article);
     }
 
-    public Article updateArticle(Long id, Article article) {
+    public Article updateArticle(Long id, Article article, Long userId) {
         article.setArticle_id(id);
+        supplierArticleService.updateSupplierArticleUser(id, userId);
         return articleRepository.save(article);
     }
 

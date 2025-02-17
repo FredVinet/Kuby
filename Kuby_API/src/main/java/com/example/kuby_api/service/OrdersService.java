@@ -6,7 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.Data;
-import java.util.Optional;
+
+import java.util.*;
 
 @Data
 @Service
@@ -14,6 +15,26 @@ public class OrdersService {
 
     @Autowired
     private OrdersRepository orderRepository;
+
+    public List<Map<String, Object>> getAllOrdersWithDetails() {
+        List<Object[]> results = orderRepository.findAllOrdersWithDetails();
+        List<Map<String, Object>> ordersWithDetails = new ArrayList<>();
+
+        // Pour chaque résultat de la requête, on transforme les données en un Map
+        for (Object[] row : results) {
+            Map<String, Object> orderData = new HashMap<>();
+            orderData.put("orders_id", row[0]);
+            orderData.put("orders_date", row[1]);
+            orderData.put("orders_status", row[2]);
+            orderData.put("orders_amount", row[3]);
+            orderData.put("id_localisation", row[4]);
+            orderData.put("order_items_id", row[5]);
+            orderData.put("order_items_quantity", row[6]);
+
+            ordersWithDetails.add(orderData);
+        }
+        return ordersWithDetails;
+    }
 
     public Optional<Orders> getOrders(final Long id){
         return orderRepository.findById(id);
