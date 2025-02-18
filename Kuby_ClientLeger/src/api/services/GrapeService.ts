@@ -17,4 +17,14 @@ export default class GrapeService {
       throw new Error(`Error fetching article: ${error.response?.data?.message || error.message}`);
     }
   }
+
+  static async getAllGrapes(): Promise<Grape[]> {
+    try {
+      const response = await apiClient.get(API_ENDPOINTS.GET_ALL_GRAPES)
+      return response.data
+    } catch (error: any) {
+      throw new Error(`Error fetching users: ${error.response?.data?.message || error.message}`)
+    }
+  }
+
 }
