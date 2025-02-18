@@ -35,7 +35,13 @@
         <v-row align="center" no-gutters>
             <v-col class="text-left px-3" :cols="12" :md="6">
                 <v-card-text class="font-weight-bold text-accent">
-                    <div class="py-3"><h2>Liste d'adresse : <span class="font-weight-medium">{{supplier.address.adress_number}} {{supplier.address.adress_name}} {{supplier.address.adress_code}} {{supplier.address.adress_city}}, {{supplier.address.adress_country}}</span></h2></div>
+                    <div class="py-3"><h2>Liste d'adresse : <span class="font-weight-medium">
+                        {{ supplier.address 
+                            ? (supplier.address.adress_number && supplier.address.adress_name && supplier.address.adress_code && supplier.address.adress_city && supplier.address.adress_country 
+                                ? `${supplier.address.adress_number} ${supplier.address.adress_name} ${supplier.address.adress_code} ${supplier.address.adress_city}, ${supplier.address.adress_country}`
+                                : 'Non défini') 
+                            : 'Non défini' }}
+                    </span></h2></div>
                 </v-card-text>
             </v-col>
         </v-row>

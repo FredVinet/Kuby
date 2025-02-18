@@ -33,4 +33,15 @@ export default class OrderService {
     }
   }
   
+  static async updateOrder(order: Orders): Promise<Orders> {
+    try {
+      const endpoint = API_ENDPOINTS.UPDATE_ORDER.replace(':id', order.orders_id.toString());
+      const response = await apiClient.put(endpoint, order);
+      return response.data;
+    } catch (error: any) {
+      throw new Error(`Error updating order: ${error.response?.data?.message || error.message}`);
+    }
+  }
+  
+
 }

@@ -11,7 +11,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/kubydata
     username: root
-    password:
+    password: root
   jpa:
     database-platform: org.hibernate.dialect.MySQLDialect
     hibernate:
