@@ -29,11 +29,8 @@
         </v-row>
 
         <div class="d-flex justify-center my-10">
-            <v-btn
-            color="primary"
-            class="mx-5"
-            >Modifier Commande</v-btn>
-            <DelOrder :order="orderRef"/>
+            <UpdateOrder :order="orderRef" @refresh="refresh"/>
+            <DelOrder :order="orderRef" @refresh="refresh"/>
         </div>
     </v-card>
 </template>
@@ -41,12 +38,15 @@
 <script setup lang="ts">
 import DelOrder from '../Modal/DelOrder.vue';
 import type {Orders} from '@/api/interfaces/Orders';
-import { computed, defineProps } from 'vue'
+import { computed, defineProps, defineEmits } from 'vue'
+import UpdateOrder from '../Modal/UpdateOrder.vue';
 
 const props = defineProps<{
     order: Orders
 
 }>()
+
+const emits = defineEmits(['refresh']);
 
 const formatDate = (dateString: string) => {
   const date = new Date(dateString);
@@ -57,6 +57,10 @@ const formatDate = (dateString: string) => {
 }
 
 const orderRef = computed(() => props.order)
+
+const refresh = () => {
+        emits('refresh')
+    };
 
 
 </script>

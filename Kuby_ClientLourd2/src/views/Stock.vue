@@ -35,10 +35,7 @@ import { useUserConnectedStore } from '@/stores/userConnected';
   const userConnectedStore = useUserConnectedStore()
 const userRole = userConnectedStore.userRole
 const userDetails = userConnectedStore.userDetails
-console.log("User connecter :",userRole)
-console.log("User details :",userDetails)
-
-  const selectedWine= ref<{} | null>(null)
+  let selectedWine= ref<{} | null>(null)
   const wines = ref<Article[]>([]);
   const filteredWine = ref<Article[]>([]);
   const families = ref<Family[]>([]);
@@ -94,6 +91,7 @@ function update(){
 });
 
 const refresh = () => {
+  selectedWine.value = null;
   update();
 };
 

@@ -4,7 +4,7 @@
     <FilterClient @filterClients="filterClients" />
     <ClientList :clients="filteredClients" @updateSelectedClient="updateSelectedClient"/>
     <div v-if="selectedClient">
-      <ClientCard :client="selectedClient"/>
+      <ClientCard :client="selectedClient" @refresh="refresh"/>
     </div>
     <div v-else class="text-center text-muted py-4">
       Veuillez sélectionner un client.
@@ -40,6 +40,15 @@ const getClient = async () => {
 onMounted(() => {
   getClient();
 });
+
+function update(){
+  getClient();
+};
+
+const refresh = () => {
+  selectedClient.value = null;
+  update();
+};
 
 
 const filterClients = (searchTerm: string) => {
