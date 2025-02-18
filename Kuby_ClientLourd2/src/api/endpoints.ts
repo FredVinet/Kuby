@@ -10,7 +10,7 @@ export const API_ENDPOINTS = {
     // article
     GET_ALL_ARTICLES: '/articles/getAllArticles',
     GET_ALL_ARTICLES_DETAILS: '/articles/getAllArticlesDetails',
-    GET_ARTICLES_BY_ID: '/articles/getOneArticle/',
+    GET_ARTICLES_BY_ID: '/articles/getOneArticle/{articleId}',
     CREATE_ARTICLE: '/articles/createArticle/:id',
     UPDATE_ARTICLE: '/articles/updateArticle/:id',
     DELETE_ARTICLE: '/articles/deleteArticle/:id',
@@ -62,6 +62,7 @@ export const API_ENDPOINTS = {
     // supplier_article
     GET_ALL_SUPPLIER_ARTICLES: '/supplierarticles/getAllSupplierArticles',
     GET_SUPPLIER_ARTICLE_BY_ID: '/supplierarticles/getOneSupplierArticle/',
+    GET_SUPPLIER_ARTICLE_BY_USER_ID: '/supplierarticles/byUser/{userId}',
     CREATE_SUPPLIER_ARTICLE: '/supplierarticles/createSupplierArticle',
     UPDATE_SUPPLIER_ARTICLE: '/supplierarticles/updateSupplierArticle/',
     DELETE_SUPPLIER_ARTICLE: '/supplierarticles/deleteSupplierArticle/',

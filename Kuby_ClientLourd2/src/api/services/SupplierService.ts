@@ -1,6 +1,8 @@
 import apiClient from '../index';
 import type { SupplierArticle } from '@/api/interfaces/SupplierArticle'
 import { API_ENDPOINTS } from '../endpoints';
+import ArticleService from './ArticlesService';
+import type { Article } from '../interfaces/Article';
 
 export default class SupplierService {
 
@@ -30,6 +32,16 @@ export default class SupplierService {
       return response.data
     } catch (error: any) {
       throw new Error(`Error updating article: ${error.response?.data?.message || error.message}`)
+    }
+  }
+
+  static async getArticlesBySupplierId(userId: number): Promise<SupplierArticle> {
+    try {
+      const endpoint = API_ENDPOINTS.GET_SUPPLIER_ARTICLE_BY_USER_ID.replace('{userId}', userId.toString());
+      const supplierArticles = await apiClient.get(endpoint);
+      return supplierArticles.data;
+    } catch (error: any) {
+      throw new Error(`Error fetching articles for supplier: ${error.response?.data?.message || error.message}`);
     }
   }
 

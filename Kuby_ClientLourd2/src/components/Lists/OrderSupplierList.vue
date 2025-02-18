@@ -91,21 +91,29 @@
       <p class="text-center text-muted">Aucune commande trouvée.</p>
     </div>
   </v-card>
+  <div class="d-flex justify-center my-10">
+    <AddSupplierOrder @refresh="handleRefresh" />
+  </div>
 </template>
 
 <script setup lang="ts">  
 import type { Orders } from '@/api/interfaces/Orders';
 import { defineEmits, defineProps } from 'vue'
+import AddSupplierOrder from '../Modal/AddSupplierOrder.vue';
 
 defineProps<{
   orders?: Orders[]
 }>()
 
-const emits = defineEmits(['updateSelectedOrder'])
+const emits = defineEmits(['updateSelectedOrder', 'refresh']);
 
 const selectOrder = (order: Orders) => {
   emits('updateSelectedOrder', order)
 }
+
+const handleRefresh = () => {
+  emits('refresh'); // Propager l'événement refresh au parent
+};
 
 const formatDate = (dateString: string) => {
   const date = new Date(dateString);

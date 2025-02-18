@@ -4,7 +4,7 @@
       <FilterOrder @filterOrder="filterOrder"/>
       <OrderList :orders="filtereOrder" @updateSelectedOrder="updateSelectedOrder"/>
       <div v-if="selectedOrder">
-        <OrderCard :order="selectedOrder" @refresh="refresh"/>
+        <OrderCard :order="selectedOrder" @refresh="refresh" />
       </div>
       <div v-else class="text-center text-muted py-4">
         Veuillez sélectionner une commande.
@@ -25,6 +25,7 @@
     const orders = ref<Orders[]>([]);
     const selectedOrder = ref<Orders | null>(null);
     const filtereOrder = ref<Orders[]>([]);
+    
 
     const getOrders = async () => {
       try {
@@ -43,7 +44,7 @@
 
     const refresh = () => {
       selectedOrder.value = null;
-      getOrders();
+      getOrders(); // Recharger les commandes
     };
 
 
