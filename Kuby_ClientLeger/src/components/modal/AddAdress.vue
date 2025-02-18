@@ -33,7 +33,7 @@
               <v-col cols="12" md="4">
                 <v-text-field
                   label="Nom"
-                  v-model="newAddress.adress_country"
+                  v-model="newAddress.adress_name"
                 ></v-text-field>
               </v-col>
               <!-- Ville -->
@@ -41,7 +41,7 @@
                 <v-text-field
                   label="Ville"
                   required
-                  v-model="newAddress.adress_name"
+                  v-model="newAddress.adress_city"
                 ></v-text-field>
               </v-col>
               <!-- Code postal -->
@@ -49,7 +49,7 @@
                 <v-text-field
                   label="Code postal"
                   required
-                  v-model="newAddress.adress_city"
+                  v-model="newAddress.adress_code"
                 ></v-text-field>
               </v-col>
               <!-- État ou département -->
@@ -64,7 +64,7 @@
                 <v-text-field
                   label="Pays"
                   required
-                  v-model="newAddress.adress_code"
+                  v-model="newAddress.adress_country"
                 ></v-text-field>
               </v-col>
             </v-row>

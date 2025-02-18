@@ -89,8 +89,7 @@ const newUser = ref<User>({
     user_phone: '',
     userMail: '',
     user_password: '',
-    userType: 1,
-    user_admin: false,
+    userType: 1
 });
 
 // Fonction pour créer une nouvelle adresse et une localisation
@@ -105,8 +104,7 @@ const createAccount = async () => {
         user_phone: '',
         userMail: '',
         user_password: '',
-        userType: 1,
-        user_admin: false,
+        userType: 1
     };
     // Fermer le modal
     dialog.value = false;

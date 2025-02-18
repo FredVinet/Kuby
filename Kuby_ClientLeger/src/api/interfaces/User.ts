@@ -6,6 +6,5 @@ export interface User {
     userMail: string
     user_password: string
     userType: number
-    user_admin: boolean
   }
   
