@@ -28,9 +28,13 @@
 
 
   import { ref, onMounted } from 'vue';
+import { useUserConnectedStore } from '@/stores/userConnected';
 
   const title = ref('Stock');
 
+  const userConnectedStore = useUserConnectedStore()
+const userRole = userConnectedStore.userRole
+const userDetails = userConnectedStore.userDetails
   let selectedWine= ref<{} | null>(null)
   const wines = ref<Article[]>([]);
   const filteredWine = ref<Article[]>([]);

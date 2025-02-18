@@ -1,7 +1,7 @@
 <template>
     <v-dialog v-model="dialog" max-width="800" overlay-color="transparent">
 
-        <template v-slot:activator="{ props: activatorProps }">
+        <template v-if="userRole == 'admin'" v-slot:activator="{ props: activatorProps }">
             <v-btn
                 v-bind="activatorProps"
                 color="primary"
@@ -30,11 +30,14 @@
 
 import type { Orders } from '@/api/interfaces/Orders';
 import OrdersService from '@/api/services/OrdersService';
+import { useUserConnectedStore } from '@/stores/userConnected';
 import { ref, defineProps, defineEmits } from 'vue';
 
 const dialog = ref(false)
 
 const emits = defineEmits(['refresh']);
+const userConnectedStore = useUserConnectedStore()
+const userRole = userConnectedStore.userRole
 
 const props = defineProps<{
     order: Orders 
