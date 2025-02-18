@@ -30,4 +30,16 @@ export default class LocalisationService {
         throw new Error(`Erreur lors de la création de la localisation: ${error.response?.data?.message || error.message}`);
       }
     }
+
+    static async getLocalisationByAdressId(adressId: number): Promise<Localisation | null> {
+      try {
+        console.log('test');
+        const endpoint = API_ENDPOINTS.GET_LOCALISATION_BY_ADRESS_ID.replace('{adressId}', adressId.toString());
+        const response = await apiClient.get(endpoint);
+        return response.data;
+      } catch (error: any) {
+        console.error('Erreur lors de la récupération de la localisation :', error);
+        return null;
+      }
+    }
 }

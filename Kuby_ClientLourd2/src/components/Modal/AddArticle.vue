@@ -116,9 +116,11 @@ import type { Family } from '@/api/interfaces/Family';
 import type { Grape } from '@/api/interfaces/Grape';
 import type { User } from '@/api/interfaces/User';
 import ArticleService from '@/api/services/ArticlesService';
-import { ref, reactive, onMounted} from 'vue'
+import { ref, reactive, onMounted, defineEmits} from 'vue'
 
 const dialog = ref(false)
+
+const emits = defineEmits(['refresh']);
 
 const props = defineProps<{
     families: Family[];
@@ -131,7 +133,7 @@ onMounted(() => {
     console.log('Suppliers at mount:', props.suppliers);
   });
   
-const newArticle = reactive<Article>({
+const newArticle = reactive <Article>({
     article_name: '',
     article_description: '',
     article_yearprod: 0,
@@ -151,6 +153,7 @@ async function addArticle(){
         await ArticleService.createArticle(newArticle.user_id,newArticle);
         dialog.value = false;
         console.log('Nouvelle Article', newArticle);
+        emits('refresh');
     } catch (error) {
         console.error('Erreur lors de la création de Article', error);
     }

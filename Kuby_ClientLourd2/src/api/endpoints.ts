@@ -2,6 +2,7 @@ export const API_ENDPOINTS = {
     // address
     GET_ALL_ADRESSES: '/adresses/getAllAdresses',
     GET_ADRESSE_BY_ID: '/adresses/getOneAdress/',
+    GET_ADRESSES_BY_USER_ID: '/users/{userId}/adresses',
     CREATE_ADRESSES: '/adresses/createAdress',
     UPDATE_ADRESSES: '/adresses/updateAdress/:id',
     DELETE_ADRESSES: '/adresses/deleteAdress/:id',
@@ -34,13 +35,14 @@ export const API_ENDPOINTS = {
     CREATE_LOCALISATION: '/localisations/createLocalisation',
     UPDATE_LOCALISATION: '/localisations/updateLocalisation/',
     DELETE_LOCALISATION: '/localisations/deleteLocalisation/',
+    GET_LOCALISATION_BY_ADRESS_ID: '/localisations/getLocalisationByAdressId/{adressId}',
 
     // orders 
     GET_ALL_ORDERS: '/orders/getAllOrders',
     GET_ALL_ORDERS_DETAILS: '/orders/getAllOrdersDetails',
     GET_ORDER_BY_ID: '/orders/getOneOrder/',
     CREATE_ORDER: '/orders/createOrder',
-    UPDATE_ORDER: '/orders/updateOrder/',
+    UPDATE_ORDER: '/orders/updateOrder/:id',
     DELETE_ORDER: '/orders/deleteOrder/:id',
 
     // order_items

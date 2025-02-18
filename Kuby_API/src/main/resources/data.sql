@@ -66,7 +66,7 @@ CREATE TABLE `stock` (
 CREATE TABLE `orders` (
     `orders_id` integer PRIMARY KEY NOT NULL AUTO_INCREMENT,
     `orders_date` timestamp NOT NULL,
-    `orders_status` integer DEFAULT 1 NOT NULL,
+    `orders_status` ENUM('Payée', 'En cours de livraison', 'Livrée','Sortie stock') DEFAULT 'Payée' NOT NULL,
     `orders_amount` DECIMAL(10,2) NOT NULL,
     `id_localisation` integer NOT NULL,
     FOREIGN KEY (`id_localisation`) REFERENCES `localisation` (`localisation_id`) ON DELETE CASCADE

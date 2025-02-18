@@ -39,16 +39,13 @@ public class AdressController {
     @PostMapping("/createUserAdress/{userId}")
     public ResponseEntity<Map<String, Object>> createUserAdress(@PathVariable Long userId, @RequestBody Adress adress) {
 
-        // Créer l'adresse
         Adress savedAdress = adressService.saveAdress(adress);
 
-        // Créer la localisation associée
         Localisation localisation = new Localisation();
         localisation.setId_user(userId);
         localisation.setId_adress(savedAdress.getAdress_id());
         Localisation savedLocalisation = localisationService.saveLocalisation(localisation);
 
-        // Retourner les deux objets créés
         Map<String, Object> response = new HashMap<>();
         response.put("adress", savedAdress);
         response.put("localisation", savedLocalisation);

@@ -43,6 +43,7 @@ onMounted(() => {
 });
 
 const refresh = () => {
+  selectedSupplier.value = null;
   getSupplier();
 };
 

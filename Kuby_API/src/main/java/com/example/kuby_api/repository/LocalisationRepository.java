@@ -16,4 +16,7 @@ public interface LocalisationRepository extends CrudRepository<Localisation, Lon
 
     @Query("SELECT l FROM Localisation l WHERE l.id_adress = :idAdress")
     List<Localisation> findByIdAdress(@Param("idAdress") Long idAdress);
+
+    @Query("SELECT l FROM Localisation l WHERE l.id_user = :userId AND l.id_adress = :adressId")
+    List<Localisation> findByUserAndAdress(@Param("userId") Long userId, @Param("adressId") Long adressId);
 }

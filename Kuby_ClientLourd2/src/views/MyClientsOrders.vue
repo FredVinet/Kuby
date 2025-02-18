@@ -4,7 +4,7 @@
       <FilterOrder @filterOrder="filterOrder"/>
       <OrderClientList :orders="filtereOrder" @updateSelectedOrder="updateSelectedOrder"/>
       <div v-if="selectedOrder">
-        <OrderCard :order="selectedOrder"/>
+        <OrderCard :order="selectedOrder" @refresh="refresh"/>
       </div>
       <div v-else class="text-center text-muted py-4">
         Veuillez sélectionner une commande.
@@ -40,6 +40,10 @@
       getOrders();
     });
 
+    const refresh = () => {
+      selectedOrder.value = null;
+      getOrders();
+    };
 
   const updateSelectedOrder = (order: Orders) => {
     selectedOrder.value = order

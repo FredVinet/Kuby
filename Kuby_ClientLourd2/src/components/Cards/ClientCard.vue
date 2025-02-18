@@ -40,19 +40,23 @@
             </v-col>
         </v-row>
         <div class="d-flex justify-center my-10">
-            <v-btn
-            color="primary"
-            class="mx-5"
-            >Modifier Client</v-btn>
-            <DelClient :user="clientRef" />
+            <UpdateClient :user="clientRef"  @refresh="refresh"/>
+            <DelClient :user="clientRef"  @refresh="refresh"/>
         </div>
     </v-card>
 </template>
 
 <script setup lang="ts">
     import { User } from '@/api/interfaces/User';
-    import { computed, defineProps } from 'vue'
-import DelClient from '../Modal/DelClient.vue';
+    import { computed, defineProps, defineEmits } from 'vue'
+    import DelClient from '../Modal/DelClient.vue';
+    import UpdateClient from '../Modal/UpdateClient.vue';
+
+    const emits = defineEmits(['refresh']);
+
+    const refresh = () => {
+        emits('refresh')
+    };
 
     const props = defineProps<{
         client: User | null
