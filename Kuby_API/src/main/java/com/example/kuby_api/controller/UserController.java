@@ -77,13 +77,14 @@ public class UserController {
         Optional<User> user = userService.findByuserMail(userMail);
 
         if (user.isPresent() && userService.checkPassword(password, user.get().getUser_password())) {
-            // Générer un token JWT
-            String token = generateToken(user.get());
+            // Générer un token JWT avec le rôle "client"
+            String token = generateToken(user.get(), "client");
 
             // Retourner le token et les informations de l'utilisateur
             return ResponseEntity.ok(Map.of(
-                    "user", user.get(), // Assurez-vous que l'objet User est bien renvoyé
-                    "token", token      // Assurez-vous que le token est bien renvoyé
+                    "user", user.get(),
+                    "token", token,
+                    "role", "client"
             ));
         } else {
             Map<String, String> response = new HashMap<>();
@@ -92,19 +93,52 @@ public class UserController {
         }
     }
 
-    private String generateToken(User user) {
-        // Définir la date d'expiration du token
+    @PostMapping("/loginAdmin")
+    public ResponseEntity<?> loginAdmin(@RequestBody Map<String, String> credentials) {
+        String userMail = credentials.get("email");
+        String password = credentials.get("password");
+
+        Optional<User> user = userService.findByuserMail(userMail);
+
+        if (user.isPresent() && userService.checkPassword(password, user.get().getUser_password())) {
+            // Vérifier si l'utilisateur est un admin (userType == 3)
+            if (user.get().getUserType() == 3) {
+                // Générer un token JWT avec le rôle "admin"
+                String token = generateToken(user.get(), "admin");
+
+                // Retourner le token et les informations de l'utilisateur
+                return ResponseEntity.ok(Map.of(
+                        "user", user.get(),
+                        "token", token,
+                        "role", "admin"
+                ));
+            } else {
+                // L'utilisateur n'est pas un admin
+                Map<String, String> response = new HashMap<>();
+                response.put("message", "Accès refusé : vous n'êtes pas un administrateur");
+                return ResponseEntity.status(403).body(response);
+            }
+        } else {
+            // Email ou mot de passe incorrect
+            Map<String, String> response = new HashMap<>();
+            response.put("message", "Email ou mot de passe incorrect");
+            return ResponseEntity.status(401).body(response);
+        }
+    }
+
+    private String generateToken(User user, String role) {
         Date expirationDate = new Date(System.currentTimeMillis() + EXPIRATION_TIME);
 
-        // Créer le token JWT
         return JWT.create()
-                .withSubject(user.getUserMail()) // Sujet du token (généralement l'email ou l'ID de l'utilisateur)
-                .withClaim("userId", user.getUser_id()) // Ajouter des claims personnalisés
+                .withSubject(user.getUserMail())
+                .withClaim("userId", user.getUser_id())
                 .withClaim("email", user.getUserMail())
-                .withIssuedAt(new Date()) // Date de création du token
-                .withExpiresAt(expirationDate) // Date d'expiration du token
-                .sign(Algorithm.HMAC256(SECRET_KEY)); // Signer le token avec la clé secrète
+                .withClaim("role", role) // Ajouter le rôle dans le token
+                .withIssuedAt(new Date())
+                .withExpiresAt(expirationDate)
+                .sign(Algorithm.HMAC256(SECRET_KEY));
     }
+
 
     @PostMapping("/updatePassword/{id}")
     public ResponseEntity<?> updatePassword(@PathVariable Long id, @RequestBody Map<String, String> request) {

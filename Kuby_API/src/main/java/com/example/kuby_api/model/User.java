@@ -32,7 +32,4 @@ public class User {
 
     @Column(name = "user_type")
     private int userType;
-
-    @Column(name = "user_admin")
-    private boolean user_admin;
 }

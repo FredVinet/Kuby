@@ -32,8 +32,7 @@ CREATE TABLE `users` (
     `user_phone` varchar(50),
     `user_mail` varchar(50) NOT NULL,
     `user_password` char(255),
-    `user_type` int NOT NULL,
-    `user_admin` boolean NOT NULL
+    `user_type` int NOT NULL
 );
 
 CREATE TABLE `adress` (
@@ -111,14 +110,17 @@ INSERT INTO `article` (`article_name`, `article_description`, `article_yearprod`
     ('Chardonnay 2021', 'Un vin blanc fruité, idéal pour les apéritifs.', 2021, 22.00, 150, 0, 2, 2),
     ('Pinot Noir 2019', 'Un vin rouge léger et élégant, avec des notes de fruits rouges.', 2019, 28.00, 80, 0, 1, 3);
 
-INSERT INTO `users` (`user_firstname`, `user_name`, `user_phone`, `user_mail`, `user_password`, `user_type`, `user_admin`) VALUES
-    ('Pierre', 'Dupont', '0123456789', 'pierre.dupont@email.com', 'password_hashed', 1, FALSE),
-    ('Sophie', 'Lemoine', '0987654321', 'sophie.lemoine@email.com', 'password_hashed', 1, FALSE);
+INSERT INTO `users` (`user_firstname`, `user_name`, `user_phone`, `user_mail`, `user_password`, `user_type`) VALUES
+    ('Pierre', 'Dupont', '0123456789', 'pierre.dupont@email.com', 'password_hashed', 1),
+    ('Sophie', 'Lemoine', '0987654321', 'sophie.lemoine@email.com', 'password_hashed', 1);
 
 -- Insertion des fournisseurs (user_type = 2)
-INSERT INTO `users` (`user_firstname`, `user_name`, `user_phone`, `user_mail`, `user_password`, `user_type`, `user_admin`) VALUES
-    ('Jacques', 'Martin', '0612345678', 'jacques.martin@supplier.com', 'password_hashed', 2, FALSE),
-    ('Claire', 'Bernard', '0678901234', 'claire.bernard@supplier.com', 'password_hashed', 2, FALSE);
+INSERT INTO `users` (`user_firstname`, `user_name`, `user_phone`, `user_mail`, `user_password`, `user_type`) VALUES
+    ('Jacques', 'Martin', '0612345678', 'jacques.martin@supplier.com', 'password_hashed', 2),
+    ('Claire', 'Bernard', '0678901234', 'claire.bernard@supplier.com', 'password_hashed', 2);
+
+INSERT INTO `users` (`user_firstname`, `user_name`, `user_phone`, `user_mail`, `user_password`, `user_type`) VALUES
+    ('Admin', 'istrateur', '077777777', 'admin.istrateur@admin.com', 'password_hashed_admin', 3);
 
 INSERT INTO `adress` (`adress_number`, `adress_country`, `adress_state`, `adress_name`, `adress_city`, `adress_code`) VALUES
     (12, 'France', 'Île-de-France', 'Rue de Paris', 'Paris', '75001'),
