@@ -43,28 +43,6 @@ public class ArticleService {
         return articlesWithDetails;
     }
 
-
-        for (Object[] row : results) {
-            Map<String, Object> articleData = new HashMap<>();
-            articleData.put("article_id", row[0]);
-            articleData.put("article_name", row[1]);
-            articleData.put("article_description", row[2]);
-            articleData.put("article_yearprod", row[3]);
-            articleData.put("article_price", row[4]);
-            articleData.put("article_quantity_in", row[5]);
-            articleData.put("article_quantity_out", row[6]);
-            articleData.put("id_family", row[7]);
-            articleData.put("id_grape", row[8]);
-            articleData.put("family_name", row[9]);
-            articleData.put("grape_name", row[10]);
-            articleData.put("user_id", row[11]);
-            articleData.put("user_name", row[13]);
-
-            articlesWithDetails.add(articleData);
-        }
-        return articlesWithDetails;
-    }
-
     public Optional<Article> getArticle(final Long id) {
         return articleRepository.findById(id);
     }
