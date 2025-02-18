@@ -19,6 +19,20 @@ export default class ArticleService {
     }
   }
 
+  static async getArticleById(articleId: number): Promise<Article> {
+    try {
+      const endpoint = API_ENDPOINTS.GET_ARTICLES_BY_ID.replace('{articleId}', articleId.toString());
+      const response = await apiClient.get(endpoint);
+  
+      console.log("Article récupéré :", response.data);
+  
+      return this.parseArticlesDetails(response.data);
+    } catch (error: any) {
+      console.error("Erreur lors de la récupération de l'article :", error);
+      throw new Error(`Error fetching article: ${error.response?.data?.message || error.message}`);
+    }
+  }
+
   static async createArticle(id: number,article: Article): Promise<Article> {
     try {
       const response = await apiClient.post(API_ENDPOINTS.CREATE_ARTICLE.replace(':id', id.toString()), article)

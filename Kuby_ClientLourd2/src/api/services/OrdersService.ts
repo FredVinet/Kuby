@@ -24,6 +24,15 @@ export default class OrderService {
     }
   }
 
+  static async createOrder(orders: Orders): Promise<Orders> {
+    try {
+      const response = await apiClient.post(API_ENDPOINTS.CREATE_ORDER, orders)
+      return response.data
+    } catch (error: any) {
+      throw new Error(`Error creating order: ${error.response?.data?.message || error.message}`)
+    }
+  }
+
   static async deleteOrder(orders_id: number): Promise<void> {
     try {
       const endpoint = API_ENDPOINTS.DELETE_ORDER.replace(':id', orders_id.toString());
