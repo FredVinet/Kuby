@@ -50,7 +50,7 @@ import { useUserConnectedStore } from '@/stores/userConnected';
 import type { Adress } from '@/api/interfaces/Adress';
 import OrderService from '@/api/services/OrdersService';
 import type { Orders } from '@/api/interfaces/Orders';
-import AddAddress from '@/components/Modal/AddAdress.vue'
+import AddAddress from '@/components/modal/AddAdress.vue'
 import UserInfos from '@/components/card/UserInfos.vue'
 
 const title = ref('Votre compte');

@@ -17,4 +17,13 @@ export default class FamilyService {
       throw new Error(`Error fetching article: ${error.response?.data?.message || error.message}`);
     }
   }
+
+  static async getAllFamilies(): Promise<Family[]> {
+    try {
+      const response = await apiClient.get(API_ENDPOINTS.GET_ALL_FAMILIES)
+      return response.data
+    } catch (error: any) {
+      throw new Error(`Error fetching users: ${error.response?.data?.message || error.message}`)
+    }
+  }
 }

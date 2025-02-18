@@ -44,7 +44,7 @@ import TitleComponent from '@/components/title/TitleComponent.vue'
 import { ref } from 'vue'
 import { jwtDecode } from 'jwt-decode'
 import AuthService from '@/api/services/AuthService'
-import AddUser from '@/components/Modal/AddUser.vue'
+import AddUser from '@/components/modal/AddUser.vue'
 import { useUserConnectedStore } from '@/stores/userConnected' // Importez le store
 import { useRouter } from 'vue-router'
 import { getIds } from '@/utils/auth'
