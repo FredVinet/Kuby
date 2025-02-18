@@ -1,9 +1,7 @@
 <template>
   <v-card
     elevation="16"
-    max-width="40%"
-    border="opacity-50 md info"
-    rounded="lg"
+    max-width="80%"
     class="mx-auto my-8"
   >
     <v-card-title class="text-center text-accent my-2 font-weight-bold">
@@ -13,7 +11,7 @@
     <v-card-text v-if="userDetails">
       <v-row class="align-start">
         <v-col :cols="12" :md="6" class="text-left px-2">
-          <v-card-text class="text-accent">
+          <v-card-text class="">
             <div class="py-1">
               <h2 class="text-md">
                 Vous :

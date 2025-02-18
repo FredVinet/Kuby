@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mb-4" elevation="5" max-width="100%" border="opacity-25 md info">
+  <v-card class="mb-4" elevation="5" max-width="100%">
     <v-card-title class="font-weight-bold mb-3">
       <h4 class="text-info">Résumé de la commande</h4>
     </v-card-title>

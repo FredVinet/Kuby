@@ -1,11 +1,19 @@
 <template>
-    <v-card class="mb-4 mx-auto" elevation="5" max-width="90%" border="opacity-50 md info" rounded="">
+    <v-card class="mb-4 mx-auto" elevation="5" max-width="90%"  rounded="">
       <v-row align="center" justify="space-between">
+        <v-col>
+          <img
+            class="mx-2 my-2"
+            src="../../assets/images/Bottle.png"
+            style="height: 15rem; width: 100%; object-fit: cover; "
+            alt="Product Image"
+          />
+        </v-col>
         <v-col cols="5">
-          <div class="my-5">
-            <h3 class="product-name">{{ product.article_name }}</h3>
-            <p class="product-description">{{ product.article_description }}</p>
-            <h2 class="product-price">{{ product.article_price }}€</h2>
+          <div class="my-2 ms-5">
+            <h3 class="product-name my-2 ">{{ product.article_name }}</h3>
+            <p class="product-description my-2 ">{{ product.article_description }}</p>
+            <h2 class="product-price my-2 ">{{ product.article_price }}€</h2>
           </div>
         </v-col>
         <v-col cols="4" class="d-flex align-center justify-space-evenly">

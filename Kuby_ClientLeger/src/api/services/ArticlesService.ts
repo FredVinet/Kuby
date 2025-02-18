@@ -19,6 +19,15 @@ export default class ArticleService {
     }
   }
 
+  static async getAllArticlesDetails(): Promise<Article[]> {
+    try {
+      const response = await apiClient.get(API_ENDPOINTS.GET_ALL_ARTICLES_DETAILS);
+      return response.data.map(this.parseArticlesDetails);
+    } catch (error: any) {
+      throw new Error(`Error fetching products: ${error.response?.data?.message || error.message}`);
+    }
+  }
+
   static async getArticleById(articleId: number): Promise<Article> {
     try {
       const endpoint = API_ENDPOINTS.GET_ARTICLES_BY_ID.replace('{articleId}', articleId.toString());

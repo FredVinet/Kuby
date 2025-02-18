@@ -27,11 +27,11 @@ const vuetify = createVuetify({
         colors: {
           primary: '#d1a671', // Dorée
           secondary: '#F0E3D3', //Dorée fond main 
-          accent: '#eae3de',  
-          error: '#FF5252',    
+          accent: '#7f8c8d',  
+          error: '#b81830',    
           info: '#100E0E', //Noir Footer
           success: '#4CAF50',  
-          warning: '#700b15',  //Rouge
+          warning: '#b81830',  //Rouge
         },
       },
       dark: {

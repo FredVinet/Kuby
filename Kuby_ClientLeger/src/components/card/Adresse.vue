@@ -1,15 +1,13 @@
 <template>
   <v-card
     elevation="6"
-    class="pa-4 d-flex flex-column justify-space-between align-center mt-6"
-    style="border-radius: 12px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1)"
-    border="opacity-50 md info"
+    class="pa-4 d-flex flex-column   mt-6"
   >
     <!-- Contenu de l'adresse -->
-    <v-card-text v-if="address" class="text-center text-body-1">
-      <div>{{ address.adress_name }}</div>
+    <v-card-text v-if="address" class="text-start text-h5">
       <div>{{ address.adress_number }}</div>
-      <div>{{ address.adress_city }}, {{ address.adress_code }}</div>
+      <div>{{ address.adress_name }}</div>
+      <div>{{ address.adress_code }}, {{ address.adress_city }} </div>
       <div v-if="address.adress_state">
         {{ address.adress_state }}
       </div>

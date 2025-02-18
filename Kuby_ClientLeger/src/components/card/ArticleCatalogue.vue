@@ -1,39 +1,39 @@
 <template>
-  <div class="card-container ml-4 mb-4" style="width: 350px; border: 1px solid #e0e0e0; border-radius: 8px; padding: 12px;">
-    <v-row no-gutters align="start">
+  <v-col cols="3" class="card-container" style="border: 1px solid #e0e0e0;">
+    <v-row >
       <v-col cols="4">
         <router-link :to="`/product/${product.article_id}`" style="text-decoration: none; color: inherit;">
           <img
             src="../../assets/images/Bottle.png"
-            style="height: 200px; border-radius: 8px; width: 100%; object-fit: cover;"
+            style="height: 15rem; width: 100%; object-fit: cover; "
             alt="Product Image"
           />
         </router-link>
       </v-col>
       <v-col cols="8" class="pl-4">
-        <div class="text-h6 font-weight-bold" style="color: #2c3e50;">
+        <div class="text-h6 font-weight-bold overflow-hidden" style="color: #2c3e50; height: 3.5rem;">
           {{ product.article_name }}
         </div>
   
-        <div class="text-body-1 font-weight-medium" style="color: #7f8c8d;">
+        <div class="text-body-1 font-weight-medium mt-2 accent">
           {{ product.article_yearprod }}
         </div>
   
         <!-- Affichage conditionnel de la grape -->
-        <div v-if="grape" class="text-body-1 font-weight-medium" style="color: #7f8c8d;">
+        <div v-if="grape" class="text-body-1 font-weight-medium mt-1" style="color: #7f8c8d;">
           {{ grape.grape_name }}
         </div>
   
         <!-- Affichage conditionnel de la famille -->
-        <div v-if="family" class="text-body-1 font-weight-medium" style="color: #7f8c8d;">
+        <div v-if="family" class="text-body-1 font-weight-medium mt-1" style="color: #7f8c8d;">
           {{ family.family_name }}
         </div>
   
-        <div class="text-body-1 font-weight-bold mt-4" style="color: #27ae60;">
+        <div class="text-body-1 font-weight-bold mt-2">
           {{ product.article_price }} €
         </div>
   
-        <v-row align="center">
+        <v-row align="center" class="mt-1">
           <v-col cols="8">
             <v-text-field
               v-model.number="quantity"
@@ -59,8 +59,7 @@
         </v-row>
       </v-col>
     </v-row>
-  </div>
-  
+</v-col>
   <v-snackbar v-model="alertCart.show" :timeout="3000" color="primary" location="bottom right">
     {{ alertCart.message }}
     <template #actions>

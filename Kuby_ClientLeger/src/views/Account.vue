@@ -3,7 +3,7 @@
     <TitleComponent :title="title" />
     <UserInfos />
     
-    <v-sheet elevation="2" class="pa-4 rounded-lg mb-6">
+    <v-sheet class="pa-4 mb-6">
       <v-row class="align-center justify-space-between">
         <h3 class="text-h6 font-weight-bold mb-2 d-flex align-center">
           <v-icon class="ml-2">mdi-truck-delivery</v-icon> Vos adresses :
@@ -11,7 +11,7 @@
         <AddAddress @refreshAddresses="fetchAddress" />
       </v-row>
 
-      <v-row dense class="gap-4">
+      <v-row dense class="">
         <v-col
           v-for="(address, index) in adresses"
           :key="'delivery-' + index"
@@ -19,7 +19,7 @@
           sm="6"
           md="4"
           lg="3"
-          class="d-flex justify-center mx-auto "
+          class=""
         >
           <Adresse
             :address="address"
