@@ -47,22 +47,24 @@
 </template>
 
 <script setup lang="ts">
-    import { User } from '@/api/interfaces/User';
-    import { defineProps,computed,defineEmits } from 'vue'
-    import DelSupplier from '@/components/Modal/DelSupplier.vue';
-    import UpdateSupplier from '../Modal/UpdateSupplier.vue';
+import { User } from '@/api/interfaces/User';
+import { defineProps,computed,defineEmits } from 'vue'
+import DelSupplier from '@/components/Modal/DelSupplier.vue';
+import UpdateSupplier from '../Modal/UpdateSupplier.vue';
+import { useUserConnectedStore } from '@/stores/userConnected';
 
-    const emits = defineEmits(['refresh']);
+const emits = defineEmits(['refresh']);
 
-    const props = defineProps<{
-        supplier: User 
-    }>()
 
-    const refresh = () => {
-      emits('refresh')
-    };
+const props = defineProps<{
+    supplier: User 
+}>()
 
-    const supplierRef = computed(() => props.supplier)
+const refresh = () => {
+    emits('refresh')
+};
+
+const supplierRef = computed(() => props.supplier)
 
 </script>
 

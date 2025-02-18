@@ -74,6 +74,7 @@ export const API_ENDPOINTS = {
 
     // Auth
     LOGIN: '/users/login',
+    LOGIN_ADMIN: '/users/loginAdmin',
     CHECK_FIRST_LOGIN: '/auth/checkFirstLogin.php',
     SET_NEW_PASSWORD: '/auth/setNewPassword.php',
     UPDATE_PASSWORD: '/auth/updatePassword.php',

@@ -11,7 +11,14 @@
 import Menu from '@/components/Utils/Menu.vue'
 import { computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
+import { useUserConnectedStore } from './stores/userConnected'
 
 const route = useRoute()
+
+const userConnectedStore = useUserConnectedStore()
+
+onMounted(() => {
+  userConnectedStore.initializeFromToken()
+})
 
 </script>
