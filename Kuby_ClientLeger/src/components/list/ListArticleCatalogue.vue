@@ -55,13 +55,15 @@
     </v-row>
 
     <!-- Affichage des produits -->
-    <div v-for="n in Math.ceil(filteredProducts.length / 5)" :key="'group-' + n" class="d-flex justify-center mx-5">
+    <v-row>
       <ArticleCatalogue
-        v-for="(product, index) in filteredProducts.slice((n - 1) * 5, n * 5)"
-        :key="product.article_id"
-        :product="product"
-      />
-    </div>
+            v-for="(product, index) in filteredProducts"
+            :key="product.article_id"
+            :product="product"
+          />
+    </v-row>
+
+
   </v-container>
 </template>
 
