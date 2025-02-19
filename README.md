@@ -138,6 +138,26 @@ mysql -u [votre_utilisateur] -p kubydata < [chemin_vers]/Kuby/Kuby_API/src/main/
    http://localhost:5173
    ```
 
+### **5. Configuration du client lourd**
+
+1. Placez-vous dans le dossier `Kuby_ClientLourd2` :
+
+   ```bash
+   cd Kuby_ClientLourd2
+   ```
+
+2. Installez les dépendances Node.js :
+
+   ```bash
+   npm install
+   ```
+
+3. Lancez le serveur de développement :
+
+   ```bash
+   npm run dev
+   ```
+
 ---
 
 ## **Scripts utiles**
@@ -149,7 +169,6 @@ mysql -u [votre_utilisateur] -p kubydata < [chemin_vers]/Kuby/Kuby_API/src/main/
 | `npm install`   | Installe les dépendances Node.js.    |
 | `npm run dev`   | Lance le serveur de développement.   |
 | `npm run build` | Génère le build pour la production.  |
-| `npm run lint`  | Analyse et corrige le code (ESLint). |
 
 ---
 
