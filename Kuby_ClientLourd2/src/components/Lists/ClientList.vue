@@ -65,7 +65,7 @@
   
   <script setup lang="ts">
   import { defineEmits, defineProps } from 'vue'
-  import { User } from '@/api/interfaces/user';
+  import type { User } from '@/api/interfaces/User';
 
   defineProps<{
     clients?: []

@@ -47,7 +47,7 @@
 </template>
 
 <script setup lang="ts">
-    import { User } from '@/api/interfaces/User';
+    import type { User } from '@/api/interfaces/User';
     import { computed, defineProps, defineEmits } from 'vue'
     import DelClient from '../Modal/DelClient.vue';
     import UpdateClient from '../Modal/UpdateClient.vue';

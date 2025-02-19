@@ -53,7 +53,7 @@
 </template>
 
 <script setup lang="ts">
-import { User } from '@/api/interfaces/User';
+import type { User } from '@/api/interfaces/User';
 import { defineProps,computed,defineEmits } from 'vue'
 import DelSupplier from '@/components/Modal/DelSupplier.vue';
 import UpdateSupplier from '../Modal/UpdateSupplier.vue';

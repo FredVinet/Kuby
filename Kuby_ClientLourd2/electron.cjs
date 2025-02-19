@@ -11,15 +11,10 @@ app.whenReady().then(() => {
     },
   });
 
-  // Charge l'application Vue en mode développement ou production
-  const devServerURL = "http://localhost:5173"; // Vite en dev
-  const prodAppPath = `file://${__dirname}/dist/index.html`; // Build en prod on verra a ce moment 
+  const ServerURL = "http://localhost:5173"; 
 
-  mainWindow.loadURL(devServerURL);
+  mainWindow.loadURL(ServerURL);
 
-  if (!app.isPackaged) {
-    mainWindow.webContents.openDevTools(); // Ouvre la console dev en mode dev
-  }
 });
 
 app.on('window-all-closed', () => {

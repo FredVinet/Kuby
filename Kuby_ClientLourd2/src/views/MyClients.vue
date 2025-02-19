@@ -17,8 +17,8 @@ import ClientCard from '@/components/Cards/ClientCard.vue';
 import ClientList from '@/components/Lists/ClientList.vue';
 import FilterClient from '@/components/Search/FilterClient.vue';
 import BigTitle from '@/components/Titles/BigTitle.vue';
-import UserService from '@/api/services/UserService.ts'; 
-import { User } from '@/api/interfaces/user.ts';
+import UserService from '@/api/services/UserService'; 
+import type { User } from '@/api/interfaces/User';
 
 import { ref, onMounted } from 'vue';
 
