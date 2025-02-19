@@ -123,7 +123,7 @@ const confirmAddress = async () => {
 
 const newOrder = reactive<Orders>({
   orders_date: new Date(),
-  orders_status: 'placed',
+  orders_status: 'Payée',
   orders_amount: 0,
   id_localisation: 0, // Stockera localisation_id
 });
