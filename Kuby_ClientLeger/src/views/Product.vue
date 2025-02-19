@@ -6,9 +6,7 @@
       <TitleComponentProduct :title="title2" />
     
       <div class="d-flex justify-center align-center bg-secondary" style="height: 75vh;">
-        <ArticleMain />
-        <ArticleMain />
-        <ArticleMain />
+        <ArticleMain v-for="article in randomArticles" :key="article.article_id" :article="article" v-if="randomArticles.length > 0" />
       </div>
     
       <div class="my-15 pt-3 pb-15">
@@ -37,6 +35,8 @@ import TitleComponentProduct from '@/components/title/TitleComponentProduct.vue'
 import ArticlesService from '@/api/services/ArticlesService';
 import GrapeService from '@/api/services/GrapeService';
 import FamilyService from '@/api/services/FamilyService';
+import ArticleService from '@/api/services/ArticlesService';
+import type { Article } from '@/api/interfaces/Article';
 
 const route = useRoute();
 const product = ref<any>(null);
@@ -46,6 +46,14 @@ const family = ref<any>(null);
 const title = ref('Description');
 const title2 = ref('Les vins dans le même genre');
 const title3 = ref('D’autres vins vous attendent');
+
+const articles = ref<Article[]>([]);
+
+const randomArticles = ref<Article[]>([]);
+
+function shuffleArray(array: Article[]) {
+  return array.sort(() => Math.random() - 0.5);
+}
 
 onMounted(async () => {
   try {
@@ -64,6 +72,14 @@ onMounted(async () => {
     }
   } catch (error) {
     console.error("Erreur lors de la récupération du produit :", error);
+  }
+
+  try {
+    articles.value = await ArticleService.getAllArticlesDetails();
+    randomArticles.value = shuffleArray(articles.value).slice(0, 3); 
+    console.log(randomArticles.value)
+  } catch (error) {
+    console.error("Erreur lors de la récupération des articles :", error);
   }
 });
 
