@@ -1,6 +1,6 @@
 ﻿# Kuby
 
-Bienvenue dans le projet **Kuby**, une application web développée avec un backend en **JAVA/MySQL** et un frontend en **Vue.js** avec **TypeScript**.
+Bienvenue dans le projet **Kuby**, une application web et logiciel développée avec un backend en **JAVA/MySQL** et un client léger en **Vue.js** avec **TypeScript** et lourd en **Vue.js** avec **TypeScript** et **Electron**.
 
 ---
 
